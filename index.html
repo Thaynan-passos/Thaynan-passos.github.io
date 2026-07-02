@@ -1,33 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thaynan Passos — Dev & Suporte TI</title>
-  <meta name="description"
-    content="Portfólio de Thaynan Passos, estudante de ADS no IFPE, bolsista de suporte técnico na UFPE e desenvolvedor em formação.">
+  <meta name="description" content="Portfólio de Thaynan Passos, estudante de ADS no IFPE, bolsista de suporte técnico na UFPE e desenvolvedor em formação.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     /* ── TOKENS ─────────────────────────────────────────── */
     :root {
-      --bg: #0d0f14;
-      --surface: #151820;
-      --border: #1f2430;
+      --bg:        #0d0f14;
+      --surface:   #151820;
+      --border:    #1f2430;
       --border-hi: #2e3548;
-      --text: #e2e6f0;
-      --muted: #7b849a;
-      --accent: #f97316;
-      /* vibrant orange */
-      --accent-2: #3b82f6;
-      /* electric blue  */
-      --accent-glow: rgba(249, 115, 22, .18);
+      --text:      #e2e6f0;
+      --muted:     #7b849a;
+      --accent:    #f97316;      /* vibrant orange */
+      --accent-2:  #3b82f6;     /* electric blue  */
+      --accent-glow: rgba(249,115,22,.18);
       --mono: 'DM Mono', monospace;
       --sans: 'Inter', sans-serif;
       --display: 'Syne', sans-serif;
@@ -35,18 +29,8 @@
     }
 
     /* ── RESET ──────────────────────────────────────────── */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       background: var(--bg);
       color: var(--text);
@@ -56,32 +40,13 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    ul {
-      list-style: none;
-    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
 
     /* ── LAYOUT ─────────────────────────────────────────── */
-    .wrap {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    section {
-      padding: 96px 0;
-    }
-
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 96px 0; }
     .section-label {
       font-family: var(--mono);
       font-size: 11px;
@@ -93,7 +58,6 @@
       align-items: center;
       gap: 10px;
     }
-
     .section-label::after {
       content: '';
       display: block;
@@ -102,7 +66,6 @@
       background: var(--accent);
       opacity: .5;
     }
-
     h2 {
       font-family: var(--display);
       font-size: clamp(2rem, 4vw, 2.8rem);
@@ -116,22 +79,18 @@
     /* ── NAV ─────────────────────────────────────────────── */
     header {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(13, 15, 20, .85);
+      background: rgba(13,15,20,.85);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
-
     nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 60px;
     }
-
     .logo {
       font-family: var(--mono);
       font-size: 14px;
@@ -140,16 +99,11 @@
       align-items: center;
       gap: 4px;
     }
-
-    .logo .bracket {
-      color: var(--accent);
-    }
-
+    .logo .bracket { color: var(--accent); }
     .nav-links {
       display: flex;
       gap: 32px;
     }
-
     .nav-links a {
       font-family: var(--mono);
       font-size: 12px;
@@ -157,11 +111,7 @@
       color: var(--muted);
       transition: color .2s;
     }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
+    .nav-links a:hover { color: var(--text); }
     .nav-cta {
       font-family: var(--mono);
       font-size: 12px;
@@ -171,10 +121,119 @@
       border-radius: 4px;
       transition: background .2s, color .2s;
     }
+    .nav-cta:hover { background: var(--accent); color: #fff; }
 
-    .nav-cta:hover {
-      background: var(--accent);
+    /* ── LANGUAGE SWITCHER ──────────────────────────────────── */
+    .lang-switch { position: relative; }
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .04em;
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid var(--border-hi);
+      border-radius: 6px;
+      padding: 7px 12px;
+      cursor: pointer;
+      transition: border-color .2s, color .2s;
+    }
+    .lang-btn:hover { color: var(--text); border-color: var(--muted); }
+    .lang-btn svg { flex-shrink: 0; }
+    .lang-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 172px;
+      background: var(--surface);
+      border: 1px solid var(--border-hi);
+      border-radius: 10px;
+      box-shadow: 0 12px 32px rgba(0,0,0,.45);
+      padding: 6px;
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 200;
+    }
+    .lang-menu.open { display: flex; }
+    .lang-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text);
+      padding: 9px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .lang-option:hover { background: var(--border); }
+    .lang-option.active { background: rgba(249,115,22,.12); color: var(--accent); }
+    .lang-flag { font-size: 16px; line-height: 1; }
+    .lang-code {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ── WHATSAPP FLOATING BUTTON ───────────────────────────── */
+    .whatsapp-fab {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      z-index: 150;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .whatsapp-bubble {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border-hi);
+      padding: 8px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+      box-shadow: 0 6px 18px rgba(0,0,0,.35);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity .3s ease .15s, transform .3s ease .15s;
+      pointer-events: none;
+    }
+    .whatsapp-fab.show .whatsapp-bubble { opacity: 1; transform: translateX(0); }
+    .whatsapp-btn {
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: #fff;
+      box-shadow: 0 8px 24px rgba(37,211,102,.4);
+      cursor: pointer;
+      border: none;
+      flex-shrink: 0;
+      animation: wa-pulse 2.4s infinite;
+    }
+    .whatsapp-btn:hover { background: #1ebe5a; }
+    @keyframes wa-pulse {
+      0%, 100% { box-shadow: 0 8px 24px rgba(37,211,102,.4); }
+      50% { box-shadow: 0 8px 28px rgba(37,211,102,.7), 0 0 0 8px rgba(37,211,102,.12); }
+    }
+    @media (max-width: 768px) {
+      .whatsapp-fab { bottom: 20px; left: 20px; }
+      .whatsapp-bubble { display: none; }
+      #back-top { bottom: 20px; right: 20px; }
     }
 
     /* hamburger */
@@ -194,26 +253,21 @@
       position: relative;
       overflow: hidden;
     }
-
     /* diagonal accent strip */
     .hero::before {
       content: '';
       position: absolute;
-      right: -200px;
-      top: -100px;
-      width: 560px;
-      height: 560px;
+      right: -200px; top: -100px;
+      width: 560px; height: 560px;
       background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
       pointer-events: none;
     }
-
     .hero-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 64px;
       align-items: center;
     }
-
     .hero-eyebrow {
       font-family: var(--mono);
       font-size: 12px;
@@ -224,30 +278,17 @@
       align-items: center;
       gap: 10px;
     }
-
     .dot-live {
-      width: 7px;
-      height: 7px;
+      width: 7px; height: 7px;
       border-radius: 50%;
       background: #22c55e;
       box-shadow: 0 0 6px #22c55e;
       animation: pulse-live 2s infinite;
     }
-
     @keyframes pulse-live {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: .6;
-        transform: scale(1.3);
-      }
+      0%,100% { opacity:1; transform: scale(1); }
+      50% { opacity:.6; transform: scale(1.3); }
     }
-
     .hero h1 {
       font-family: var(--display);
       font-size: clamp(2.8rem, 6vw, 4.4rem);
@@ -257,12 +298,10 @@
       color: var(--text);
       margin-bottom: 24px;
     }
-
     .hero h1 em {
       font-style: normal;
       color: var(--accent);
     }
-
     .hero-lead {
       font-size: 17px;
       color: var(--muted);
@@ -270,13 +309,11 @@
       margin-bottom: 36px;
       max-width: 480px;
     }
-
     .hero-btns {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
     }
-
     .btn {
       display: inline-flex;
       align-items: center;
@@ -288,27 +325,18 @@
       transition: all .2s;
       cursor: pointer;
     }
-
     .btn-primary {
       background: var(--accent);
       color: #fff;
       border: 1px solid var(--accent);
     }
-
-    .btn-primary:hover {
-      background: #ea6a08;
-      border-color: #ea6a08;
-    }
-
+    .btn-primary:hover { background: #ea6a08; border-color: #ea6a08; }
     .btn-secondary {
       background: transparent;
       color: var(--text);
       border: 1px solid var(--border-hi);
     }
-
-    .btn-secondary:hover {
-      border-color: var(--muted);
-    }
+    .btn-secondary:hover { border-color: var(--muted); }
 
     /* Terminal card */
     .terminal-card {
@@ -316,9 +344,8 @@
       border: 1px solid var(--border-hi);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 0 48px rgba(0, 0, 0, .5);
+      box-shadow: 0 0 48px rgba(0,0,0,.5);
     }
-
     .terminal-bar {
       display: flex;
       align-items: center;
@@ -327,32 +354,11 @@
       background: #1a1d27;
       border-bottom: 1px solid var(--border);
     }
-
-    .t-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
-
-    .t-dot.r {
-      background: #ff5f57;
-    }
-
-    .t-dot.y {
-      background: #febc2e;
-    }
-
-    .t-dot.g {
-      background: #28c840;
-    }
-
-    .terminal-title {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--muted);
-      margin-left: auto;
-    }
-
+    .t-dot { width:12px; height:12px; border-radius:50%; }
+    .t-dot.r { background:#ff5f57; }
+    .t-dot.y { background:#febc2e; }
+    .t-dot.g { background:#28c840; }
+    .terminal-title { font-family:var(--mono); font-size:12px; color:var(--muted); margin-left:auto; }
     .terminal-body {
       padding: 20px 20px 24px;
       font-family: var(--mono);
@@ -360,41 +366,19 @@
       line-height: 1.9;
       min-height: 220px;
     }
-
-    .t-prompt {
-      color: var(--accent-2);
-    }
-
-    .t-cmd {
-      color: var(--text);
-    }
-
-    .t-out {
-      color: var(--muted);
-    }
-
-    .t-key {
-      color: var(--accent);
-    }
-
-    .t-val {
-      color: #22c55e;
-    }
-
+    .t-prompt { color: var(--accent-2); }
+    .t-cmd { color: var(--text); }
+    .t-out { color: var(--muted); }
+    .t-key { color: var(--accent); }
+    .t-val { color: #22c55e; }
     .cursor {
       display: inline-block;
-      width: 8px;
-      height: 15px;
+      width: 8px; height: 15px;
       background: var(--accent);
       animation: blink 1s steps(1) infinite;
       vertical-align: middle;
     }
-
-    @keyframes blink {
-      50% {
-        opacity: 0;
-      }
-    }
+    @keyframes blink { 50% { opacity:0; } }
 
     /* ── ABOUT ─────────────────────────────────────────────── */
     .about-grid {
@@ -403,13 +387,7 @@
       gap: 64px;
       align-items: start;
     }
-
-    .photo-wrap {
-      position: relative;
-      width: 260px;
-      flex-shrink: 0;
-    }
-
+    .photo-wrap { position: relative; width: 260px; flex-shrink: 0; }
     .photo-wrap img {
       width: 260px;
       height: 290px;
@@ -417,11 +395,9 @@
       border-radius: 12px;
       filter: grayscale(20%);
     }
-
     .photo-tag {
       position: absolute;
-      bottom: -14px;
-      right: -14px;
+      bottom: -14px; right: -14px;
       background: var(--accent);
       color: #fff;
       font-family: var(--mono);
@@ -429,23 +405,14 @@
       padding: 6px 12px;
       border-radius: 6px;
     }
-
-    .about-text p {
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
-
-    .about-text p:last-child {
-      margin-bottom: 0;
-    }
-
+    .about-text p { color: var(--muted); margin-bottom: 20px; }
+    .about-text p:last-child { margin-bottom: 0; }
     .facts {
       display: flex;
       flex-direction: column;
       gap: 12px;
       margin-top: 32px;
     }
-
     .fact {
       display: flex;
       align-items: center;
@@ -454,23 +421,15 @@
       font-size: 12px;
       color: var(--muted);
     }
-
-    .fact svg {
-      color: var(--accent);
-      flex-shrink: 0;
-    }
+    .fact svg { color: var(--accent); flex-shrink: 0; }
 
     /* ── SKILLS ─────────────────────────────────────────────── */
-    .skills-section {
-      background: var(--surface);
-    }
-
+    .skills-section { background: var(--surface); }
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
       gap: 20px;
     }
-
     .skill-card {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -478,12 +437,10 @@
       padding: 24px;
       transition: border-color .2s, box-shadow .2s;
     }
-
     .skill-card:hover {
       border-color: var(--border-hi);
-      box-shadow: 0 0 24px rgba(249, 115, 22, .08);
+      box-shadow: 0 0 24px rgba(249,115,22,.08);
     }
-
     .skill-card h3 {
       font-family: var(--display);
       font-size: 14px;
@@ -494,17 +451,8 @@
       align-items: center;
       gap: 8px;
     }
-
-    .skill-card h3 svg {
-      color: var(--accent);
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
+    .skill-card h3 svg { color: var(--accent); }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .tag {
       font-family: var(--mono);
       font-size: 11px;
@@ -514,16 +462,8 @@
       color: var(--muted);
       transition: background .2s, color .2s;
     }
-
-    .tag:hover {
-      background: var(--border-hi);
-      color: var(--text);
-    }
-
-    .tag.hi {
-      background: rgba(249, 115, 22, .15);
-      color: var(--accent);
-    }
+    .tag:hover { background: var(--border-hi); color: var(--text); }
+    .tag.hi { background: rgba(249,115,22,.15); color: var(--accent); }
 
     /* ── PROJECTS ─────────────────────────────────────────── */
     .projects-grid {
@@ -531,7 +471,6 @@
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 20px;
     }
-
     .project-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -542,50 +481,40 @@
       gap: 12px;
       transition: border-color .25s, transform .25s;
     }
-
     .project-card:hover {
       border-color: var(--accent);
       transform: translateY(-3px);
     }
-
     .project-header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
     }
-
     .project-header h3 {
       font-family: var(--display);
       font-size: 16px;
       font-weight: 700;
       color: var(--text);
     }
-
     .project-link {
       color: var(--muted);
       transition: color .2s;
       flex-shrink: 0;
     }
-
-    .project-link:hover {
-      color: var(--accent);
-    }
-
+    .project-link:hover { color: var(--accent); }
     .project-desc {
       font-size: 14px;
       color: var(--muted);
       line-height: 1.6;
       flex: 1;
     }
-
     .project-meta {
       display: flex;
       align-items: center;
       gap: 16px;
       margin-top: 4px;
     }
-
     .project-lang {
       display: flex;
       align-items: center;
@@ -594,14 +523,11 @@
       font-size: 11px;
       color: var(--muted);
     }
-
     .lang-dot {
-      width: 8px;
-      height: 8px;
+      width: 8px; height: 8px;
       border-radius: 50%;
       background: var(--accent-2);
     }
-
     .project-stars {
       display: flex;
       align-items: center;
@@ -610,9 +536,7 @@
       font-size: 11px;
       color: var(--muted);
     }
-
-    .projects-loading,
-    .projects-error {
+    .projects-loading, .projects-error {
       grid-column: 1/-1;
       text-align: center;
       font-family: var(--mono);
@@ -620,58 +544,37 @@
       color: var(--muted);
       padding: 40px;
     }
-
     .projects-footer {
       margin-top: 32px;
       text-align: center;
     }
 
     /* ── EXPERIENCE ─────────────────────────────────────────── */
-    .exp-section {
-      background: var(--surface);
-    }
-
-    .timeline {
-      position: relative;
-      padding-left: 28px;
-    }
-
+    .exp-section { background: var(--surface); }
+    .timeline { position: relative; padding-left: 28px; }
     .timeline::before {
       content: '';
       position: absolute;
-      left: 0;
-      top: 8px;
-      bottom: 8px;
+      left: 0; top: 8px; bottom: 8px;
       width: 1px;
       background: var(--border-hi);
     }
-
-    .tl-item {
-      position: relative;
-      margin-bottom: 52px;
-    }
-
-    .tl-item:last-child {
-      margin-bottom: 0;
-    }
-
+    .tl-item { position: relative; margin-bottom: 52px; }
+    .tl-item:last-child { margin-bottom: 0; }
     .tl-dot {
       position: absolute;
       left: -36px;
       top: 6px;
-      width: 16px;
-      height: 16px;
+      width: 16px; height: 16px;
       border-radius: 50%;
       background: var(--border);
       border: 2px solid var(--border-hi);
     }
-
     .tl-item.current .tl-dot {
       background: var(--accent);
       border-color: var(--accent);
       box-shadow: 0 0 10px var(--accent-glow);
     }
-
     .tl-period {
       font-family: var(--mono);
       font-size: 11px;
@@ -679,7 +582,6 @@
       letter-spacing: .05em;
       margin-bottom: 6px;
     }
-
     .tl-org {
       font-family: var(--display);
       font-size: 19px;
@@ -687,18 +589,13 @@
       color: var(--text);
       margin-bottom: 2px;
     }
-
     .tl-role {
       font-family: var(--mono);
       font-size: 12px;
       color: var(--accent);
       margin-bottom: 14px;
     }
-
-    .tl-bullets {
-      padding-left: 0;
-    }
-
+    .tl-bullets { padding-left: 0; }
     .tl-bullets li {
       font-size: 14px;
       color: var(--muted);
@@ -706,7 +603,6 @@
       padding-left: 18px;
       position: relative;
     }
-
     .tl-bullets li::before {
       content: '→';
       position: absolute;
@@ -721,14 +617,12 @@
       grid-template-columns: 1fr 1fr;
       gap: 20px;
     }
-
     .edu-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--r);
       padding: 22px 24px;
     }
-
     .edu-card h3 {
       font-family: var(--display);
       font-weight: 700;
@@ -737,43 +631,168 @@
       margin-bottom: 6px;
       line-height: 1.4;
     }
-
     .edu-card .meta {
       font-family: var(--mono);
       font-size: 11px;
       color: var(--muted);
       margin-bottom: 10px;
     }
-
     .pill {
       display: inline-block;
       font-family: var(--mono);
       font-size: 10px;
       padding: 3px 10px;
       border-radius: 20px;
-      background: rgba(249, 115, 22, .15);
+      background: rgba(249,115,22,.15);
       color: var(--accent);
     }
 
-    /* ── CONTACT ─────────────────────────────────────────── */
-    .contact-section {
-      background: var(--surface);
+    /* ── CERTIFICATES CAROUSEL ──────────────────────────────── */
+    .cert-section { background: var(--surface); }
+    .cert-intro {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 640px;
+      margin-top: -28px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+    .cert-intro code {
+      background: var(--border);
+      color: var(--accent);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    .cert-carousel { display: flex; flex-direction: column; gap: 20px; }
+    .cert-track-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cert-viewport {
+      flex: 1;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+    .cert-track {
+      display: flex;
+      transition: transform .4s cubic-bezier(.65,0,.35,1);
+      align-items: stretch;
+    }
+    .cert-loading, .cert-error {
+      width: 100%;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--muted);
+      padding: 60px 20px;
+    }
+    .cert-error a { color: var(--accent); }
+    .cert-slide {
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 0 4px;
+    }
+    .cert-card {
+      background: var(--bg);
+      border: 1px solid var(--border-hi);
+      border-radius: 14px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 320px;
+    }
+    .cert-card-media {
+      background: #06070a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      min-height: 220px;
+    }
+    .cert-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .cert-card-media.is-pdf {
+      flex-direction: column;
+      gap: 12px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    .cert-card-media.is-pdf svg { color: var(--accent); }
+    .cert-card-body {
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+    .cert-card-body h3 {
+      font-family: var(--display);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+    }
+    .cert-card-body .cert-meta {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .04em;
+    }
+    .cert-card-body .btn { align-self: flex-start; }
+    .cert-nav {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid var(--border-hi);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: border-color .2s, color .2s;
+    }
+    .cert-nav:hover { border-color: var(--accent); color: var(--accent); }
+    .cert-nav:disabled { opacity: .35; cursor: not-allowed; }
+    .cert-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .cert-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--border-hi);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background .2s, transform .2s;
+    }
+    .cert-dot.active { background: var(--accent); transform: scale(1.25); }
+    @media (max-width: 768px) {
+      .cert-card { grid-template-columns: 1fr; }
+      .cert-card-media { min-height: 200px; }
+      .cert-card-body { padding: 22px 20px; }
+      .cert-nav { width: 38px; height: 38px; }
     }
 
+    /* ── CONTACT ─────────────────────────────────────────── */
+    .contact-section { background: var(--surface); }
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 64px;
       align-items: start;
     }
-
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 32px;
-    }
-
+    .contact-links { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
     .contact-link {
       display: flex;
       align-items: center;
@@ -784,21 +803,10 @@
       padding: 12px 0;
       border-bottom: 1px solid var(--border);
     }
-
-    .contact-link:hover {
-      color: var(--text);
-    }
-
-    .contact-link svg {
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-
+    .contact-link:hover { color: var(--text); }
+    .contact-link svg { color: var(--accent); flex-shrink: 0; }
     /* Form */
-    .form-group {
-      margin-bottom: 20px;
-    }
-
+    .form-group { margin-bottom: 20px; }
     label {
       display: block;
       font-family: var(--mono);
@@ -808,9 +816,7 @@
       text-transform: uppercase;
       margin-bottom: 8px;
     }
-
-    input,
-    textarea {
+    input, textarea {
       width: 100%;
       background: var(--bg);
       border: 1px solid var(--border-hi);
@@ -822,38 +828,22 @@
       outline: none;
       transition: border-color .2s;
     }
-
-    input:focus,
-    textarea:focus {
-      border-color: var(--accent);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
+    input:focus, textarea:focus { border-color: var(--accent); }
+    textarea { resize: vertical; min-height: 120px; }
     .form-status {
       margin-top: 12px;
       font-family: var(--mono);
       font-size: 13px;
       color: var(--muted);
     }
-
-    .form-status.ok {
-      color: #22c55e;
-    }
-
-    .form-status.err {
-      color: #ef4444;
-    }
+    .form-status.ok { color: #22c55e; }
+    .form-status.err { color: #ef4444; }
 
     /* ── FOOTER ─────────────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
       padding: 32px 0;
     }
-
     .footer-inner {
       display: flex;
       align-items: center;
@@ -861,42 +851,29 @@
       flex-wrap: wrap;
       gap: 12px;
     }
-
     .footer-text {
       font-family: var(--mono);
       font-size: 12px;
       color: var(--muted);
     }
-
-    .footer-links {
-      display: flex;
-      gap: 20px;
-    }
-
+    .footer-links { display: flex; gap: 20px; }
     .footer-links a {
       font-family: var(--mono);
       font-size: 12px;
       color: var(--muted);
       transition: color .2s;
     }
-
-    .footer-links a:hover {
-      color: var(--text);
-    }
+    .footer-links a:hover { color: var(--text); }
 
     /* back to top */
     #back-top {
       position: fixed;
-      bottom: 28px;
-      right: 28px;
-      width: 42px;
-      height: 42px;
+      bottom: 28px; right: 28px;
+      width: 42px; height: 42px;
       background: var(--surface);
       border: 1px solid var(--border-hi);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       color: var(--muted);
       cursor: pointer;
       opacity: 0;
@@ -904,258 +881,22 @@
       transition: opacity .3s, transform .3s, color .2s;
       pointer-events: none;
     }
-
-    #back-top.show {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    #back-top:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-    }
-
-    /* ── WHATSAPP CHAT WIDGET ─────────────────────────────── */
-    #wa-toggle {
-      position: fixed;
-      bottom: 28px;
-      left: 28px;
-      width: 56px;
-      height: 56px;
-      background: #25D366;
-      border: none;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, .35);
-      z-index: 101;
-      transition: transform .2s, box-shadow .2s;
-    }
-
-    #wa-toggle:hover {
-      transform: scale(1.08);
-      box-shadow: 0 6px 20px rgba(37, 211, 102, .5);
-    }
-
-    #wa-toggle svg.icon-close {
-      display: none;
-    }
-
-    #wa-toggle.open svg.icon-chat {
-      display: none;
-    }
-
-    #wa-toggle.open svg.icon-close {
-      display: block;
-    }
-
-    #wa-panel {
-      position: fixed;
-      bottom: 96px;
-      left: 28px;
-      width: 320px;
-      max-width: calc(100vw - 48px);
-      background: var(--surface);
-      border: 1px solid var(--border-hi);
-      border-radius: 14px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, .5);
-      overflow: hidden;
-      z-index: 100;
-      opacity: 0;
-      transform: translateY(12px) scale(.97);
-      pointer-events: none;
-      transition: opacity .22s, transform .22s;
-    }
-
-    #wa-panel.show {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: auto;
-    }
-
-    .wa-header {
-      background: #1f6e4a;
-      background: linear-gradient(135deg, #25D366, #128C4A);
-      padding: 16px 18px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .wa-avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-family: var(--display);
-      font-weight: 700;
-      font-size: 15px;
-      flex-shrink: 0;
-    }
-
-    .wa-header-text {
-      color: #fff;
-    }
-
-    .wa-header-text .name {
-      font-family: var(--display);
-      font-weight: 700;
-      font-size: 14px;
-    }
-
-    .wa-header-text .status {
-      font-family: var(--mono);
-      font-size: 11px;
-      opacity: .85;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .wa-header-text .status::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #4ade80;
-    }
-
-    .wa-body {
-      padding: 16px;
-      background: var(--bg);
-      max-height: 340px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .wa-bubble {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 13px;
-      line-height: 1.5;
-      padding: 10px 13px;
-      border-radius: 12px 12px 12px 2px;
-      max-width: 88%;
-      animation: wa-in .25s ease;
-    }
-
-    .wa-bubble.me {
-      align-self: flex-end;
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-      border-radius: 12px 12px 2px 12px;
-    }
-
-    @keyframes wa-in {
-      from {
-        opacity: 0;
-        transform: translateY(6px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .wa-options {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding: 4px 16px 16px;
-      background: var(--bg);
-    }
-
-    .wa-opt {
-      background: var(--surface);
-      border: 1px solid var(--border-hi);
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 13px;
-      text-align: left;
-      padding: 10px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: border-color .2s, background .2s;
-    }
-
-    .wa-opt:hover {
-      border-color: var(--accent);
-      background: rgba(249, 115, 22, .08);
-    }
-
-    .wa-footer {
-      padding: 12px 16px;
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      text-align: center;
-    }
-
-    .wa-footer a {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .wa-footer a:hover {
-      color: var(--accent);
-    }
+    #back-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    #back-top:hover { color: var(--accent); border-color: var(--accent); }
 
     /* ── LANG COLOR MAP ──────────────────────────────────── */
-    .lang-Python {
-      background: #3572A5;
-    }
-
-    .lang-Java {
-      background: #b07219;
-    }
-
-    .lang-HTML {
-      background: #e34c26;
-    }
-
-    .lang-JavaScript {
-      background: #f1e05a;
-    }
-
-    .lang-CSS {
-      background: #563d7c;
-    }
-
-    .lang-default {
-      background: #58a6ff;
-    }
+    .lang-Python { background:#3572A5; }
+    .lang-Java { background:#b07219; }
+    .lang-HTML { background:#e34c26; }
+    .lang-JavaScript { background:#f1e05a; }
+    .lang-CSS { background:#563d7c; }
+    .lang-default { background:#58a6ff; }
 
     /* ── RESPONSIVE ─────────────────────────────────────── */
     @media (max-width: 768px) {
-      section {
-        padding: 64px 0;
-      }
-
-      .hero-grid,
-      .about-grid,
-      .contact-grid,
-      .edu-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-links,
-      .nav-cta {
-        display: none;
-      }
-
+      section { padding: 64px 0; }
+      .hero-grid, .about-grid, .contact-grid, .edu-grid { grid-template-columns: 1fr; }
+      .nav-links, .nav-cta { display: none; }
       .nav-links.open {
         display: flex;
         flex-direction: column;
@@ -1166,583 +907,519 @@
         gap: 24px;
         border-top: 1px solid var(--border);
       }
-
-      .nav-links.open a {
-        font-size: 18px;
-      }
-
-      .menu-btn {
-        display: flex;
-      }
-
-      .photo-wrap {
-        width: 100%;
-      }
-
-      .photo-wrap img {
-        width: 100%;
-        height: 260px;
-      }
-
-      .about-grid {
-        gap: 40px;
-      }
+      .nav-links.open a { font-size: 18px; }
+      .menu-btn { display: flex; }
+      .photo-wrap { width: 100%; }
+      .photo-wrap img { width: 100%; height: 260px; }
+      .about-grid { gap: 40px; }
     }
-
     @media (prefers-reduced-motion: reduce) {
-
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-      }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- ═══ NAV ═══════════════════════════════════════════════ -->
-  <header>
-    <nav class="wrap">
-      <a href="#top" class="logo" aria-label="Thaynan Passos, início">
-        <span class="bracket">[</span>thaynan.dev<span class="bracket">]</span>
-      </a>
+<!-- ═══ NAV ═══════════════════════════════════════════════ -->
+<header>
+  <nav class="wrap">
+    <a href="#top" class="logo" aria-label="Thaynan Passos, início">
+      <span class="bracket">[</span>thaynan.dev<span class="bracket">]</span>
+    </a>
 
-      <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false">
-        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-          aria-hidden="true">
-          <line x1="3" y1="6" x2="21" y2="6" />
-          <line x1="3" y1="12" x2="21" y2="12" />
-          <line x1="3" y1="18" x2="21" y2="18" />
-        </svg>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="#sobre" data-i18n="nav.about">sobre</a></li>
+      <li><a href="#habilidades" data-i18n="nav.skills">skills</a></li>
+      <li><a href="#projetos" data-i18n="nav.projects">projetos</a></li>
+      <li><a href="#experiencia" data-i18n="nav.experience">experiência</a></li>
+      <li><a href="#certificados" data-i18n="nav.certificates">certificados</a></li>
+      <li><a href="#contato" data-i18n="nav.contact">contato</a></li>
+    </ul>
+
+    <div class="lang-switch">
+      <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Selecionar idioma">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span id="langBtnLabel">PT</span>
       </button>
-
-      <ul class="nav-links" id="navLinks" role="list">
-        <li><a href="#sobre">sobre</a></li>
-        <li><a href="#habilidades">skills</a></li>
-        <li><a href="#projetos">projetos</a></li>
-        <li><a href="#experiencia">experiência</a></li>
-        <li><a href="#contato">contato</a></li>
-      </ul>
-
-      <a href="THAYNANCurriculo.pdf" download class="nav-cta" aria-label="Baixar currículo PDF">currículo.pdf</a>
-    </nav>
-  </header>
-
-  <!-- ═══ HERO ═══════════════════════════════════════════════ -->
-  <section class="hero" id="top" aria-label="Apresentação">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="hero-eyebrow">
-          <span class="dot-live" aria-hidden="true"></span>
-          disponível para estágio em TI
-        </p>
-        <h1>Thaynan<br>Passos<br><em>ADS & Suporte</em></h1>
-        <p class="hero-lead">
-          Estudante de ADS no IFPE, bolsista de suporte técnico na UFPE desde 2022.
-          Da bancada de hardware ao código — construindo soluções práticas de verdade.
-        </p>
-        <div class="hero-btns">
-          <a href="#contato" class="btn btn-primary">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-              aria-hidden="true">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
-            Entrar em contato
-          </a>
-          <a href="#projetos" class="btn btn-secondary">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-              aria-hidden="true">
-              <path
-                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-            </svg>
-            Ver projetos
-          </a>
-        </div>
-      </div>
-
-      <div class="terminal-card" role="img" aria-label="Terminal simulando perfil técnico de Thaynan">
-        <div class="terminal-bar">
-          <span class="t-dot r" aria-hidden="true"></span>
-          <span class="t-dot y" aria-hidden="true"></span>
-          <span class="t-dot g" aria-hidden="true"></span>
-          <span class="terminal-title">bash — thaynan@portfolio</span>
-        </div>
-        <div class="terminal-body" id="terminalBody" aria-live="polite"></div>
+      <div class="lang-menu" id="langMenu" role="menu">
+        <button class="lang-option active" role="menuitem" data-lang="pt"><span class="lang-flag">🇧🇷</span> Português <span class="lang-code">pt</span></button>
+        <button class="lang-option" role="menuitem" data-lang="en"><span class="lang-flag">🇺🇸</span> English <span class="lang-code">en</span></button>
+        <button class="lang-option" role="menuitem" data-lang="es"><span class="lang-flag">🇪🇸</span> Español <span class="lang-code">es</span></button>
+        <button class="lang-option" role="menuitem" data-lang="zh"><span class="lang-flag">🇨🇳</span> 中文 <span class="lang-code">zh</span></button>
+        <button class="lang-option" role="menuitem" data-lang="fr"><span class="lang-flag">🇫🇷</span> Français <span class="lang-code">fr</span></button>
       </div>
     </div>
-  </section>
 
-  <!-- ═══ SOBRE ═══════════════════════════════════════════════ -->
-  <section id="sobre" aria-labelledby="sobre-h">
-    <div class="wrap">
-      <p class="section-label">whoami</p>
-      <div class="about-grid">
-        <div class="photo-wrap">
-          <img src="imagens/thaynan-foto.png"
-            alt="Thaynan Passos, homem de barba e óculos, braços cruzados com vista ao fundo" width="260" height="290"
-            loading="lazy">
-          <span class="photo-tag" aria-hidden="true">Paulista, PE 📍</span>
-        </div>
-        <div class="about-text">
-          <h2 id="sobre-h">Da bancada de<br>suporte ao código</h2>
-          <p>
-            Sou estudante de Análise e Desenvolvimento de Sistemas no IFPE e desde 2022
-            trabalho como bolsista de suporte técnico na UFPE (STI/NATI-CB). No dia a dia
-            resolvo chamados, faço manutenção de hardware e infraestrutura de redes — o
-            que me deu uma visão real de como sistemas funcionam por dentro.
-          </p>
-          <p>
-            Essa rotina me levou a estudar programação a sério. Tenho base em lógica,
-            Python e Git, e estou em busca de uma oportunidade de estágio para crescer
-            em desenvolvimento de software e automação de processos.
-          </p>
-          <ul class="facts" aria-label="Informações extras">
-            <li class="fact">
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                aria-hidden="true">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              Paulista, PE — CNH categoria B
-            </li>
-            <li class="fact">
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                aria-hidden="true">
-                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                <path d="M6 12v5c3 3 9 3 12 0v-5" />
-              </svg>
-              Tecnólogo em ADS — IFPE (em andamento)
-            </li>
-            <li class="fact">
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                aria-hidden="true">
-                <rect x="2" y="7" width="20" height="14" rx="2" />
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-              </svg>
-              4+ anos de experiência em suporte e infraestrutura TI
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+    <a href="THAYNANCurriculo.pdf" download class="nav-cta" data-i18n="nav.resume" aria-label="Baixar currículo PDF">currículo.pdf</a>
+  </nav>
+</header>
 
-  <!-- ═══ SKILLS ═══════════════════════════════════════════════ -->
-  <section class="skills-section" id="habilidades" aria-labelledby="skills-h">
-    <div class="wrap">
-      <p class="section-label">stack</p>
-      <h2 id="skills-h">Habilidades<br>técnicas</h2>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <h3>
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-              aria-hidden="true">
-              <polyline points="16 18 22 12 16 6" />
-              <polyline points="8 6 2 12 8 18" />
-            </svg>
-            Dev & Lógica
-          </h3>
-          <ul class="tags" aria-label="Habilidades de desenvolvimento">
-            <li class="tag hi">Python</li>
-            <li class="tag hi">Git & GitHub</li>
-            <li class="tag">Lógica de Programação</li>
-            <li class="tag">Java (estudo)</li>
-            <li class="tag">SQL</li>
-            <li class="tag">HTML & CSS</li>
-          </ul>
-        </div>
-        <div class="skill-card">
-          <h3>
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-              aria-hidden="true">
-              <rect x="2" y="3" width="20" height="14" rx="2" />
-              <line x1="8" y1="21" x2="16" y2="21" />
-              <line x1="12" y1="17" x2="12" y2="21" />
-            </svg>
-            Infraestrutura
-          </h3>
-          <ul class="tags" aria-label="Habilidades de infraestrutura">
-            <li class="tag hi">Windows</li>
-            <li class="tag hi">Linux</li>
-            <li class="tag">Redes (LAN)</li>
-            <li class="tag">Suporte Nível 1</li>
-            <li class="tag">Hardware</li>
-            <li class="tag">Help Desk</li>
-          </ul>
-        </div>
-        <div class="skill-card">
-          <h3>
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-              aria-hidden="true">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-            </svg>
-            Ferramentas
-          </h3>
-          <ul class="tags" aria-label="Ferramentas">
-            <li class="tag">SIPAC</li>
-            <li class="tag">Microsoft Office</li>
-            <li class="tag">VS Code</li>
-            <li class="tag">MySQL Workbench</li>
-          </ul>
-        </div>
-        <div class="skill-card">
-          <h3>
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-              aria-hidden="true">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
-            Soft Skills
-          </h3>
-          <ul class="tags" aria-label="Habilidades comportamentais">
-            <li class="tag">Comunicação técnica</li>
-            <li class="tag">Trabalho em equipe</li>
-            <li class="tag">Organização</li>
-            <li class="tag">Proatividade</li>
-            <li class="tag">Aprendizado rápido</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ PROJETOS (GitHub API) ══════════════════════════════ -->
-  <section id="projetos" aria-labelledby="proj-h">
-    <div class="wrap">
-      <p class="section-label">repositórios</p>
-      <h2 id="proj-h">Projetos no<br>GitHub</h2>
-      <div class="projects-grid" id="projectsGrid" aria-live="polite" aria-label="Projetos do GitHub">
-        <p class="projects-loading">
-          <span aria-hidden="true">⟳</span> Carregando projetos do GitHub…
-        </p>
-      </div>
-      <div class="projects-footer">
-        <a href="https://github.com/Thaynan-passos" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-            aria-hidden="true">
-            <path
-              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-          </svg>
-          Ver todos no GitHub
+<!-- ═══ HERO ═══════════════════════════════════════════════ -->
+<section class="hero" id="top" aria-label="Apresentação">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="hero-eyebrow">
+        <span class="dot-live" aria-hidden="true"></span>
+        <span data-i18n="hero.eyebrow">disponível para estágio em TI</span>
+      </p>
+      <h1 data-i18n="hero.title">Thaynan<br>Passos<br><em>ADS & Suporte</em></h1>
+      <p class="hero-lead" data-i18n="hero.lead">
+        Estudante de ADS no IFPE, bolsista de suporte técnico na UFPE desde 2022.
+        Da bancada de hardware ao código — construindo soluções práticas de verdade.
+      </p>
+      <div class="hero-btns">
+        <a href="#contato" class="btn btn-primary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span data-i18n="hero.btnContact">Entrar em contato</span>
+        </a>
+        <a href="#projetos" class="btn btn-secondary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          <span data-i18n="hero.btnProjects">Ver projetos</span>
         </a>
       </div>
     </div>
-  </section>
 
-  <!-- ═══ EXPERIÊNCIA ══════════════════════════════════════════ -->
-  <section class="exp-section" id="experiencia" aria-labelledby="exp-h">
-    <div class="wrap">
-      <p class="section-label">trajetória</p>
-      <h2 id="exp-h">Experiência<br>profissional</h2>
-      <ol class="timeline" aria-label="Linha do tempo profissional">
-        <li class="tl-item current">
-          <span class="tl-dot" aria-hidden="true"></span>
-          <p class="tl-period">Ago/2022 — Atual</p>
-          <h3 class="tl-org">UFPE — STI / NATI-CB</h3>
-          <p class="tl-role">Bolsista de Suporte Técnico em Informática</p>
-          <ul class="tl-bullets">
-            <li>Atendimento e resolução de chamados via SIPAC</li>
-            <li>Suporte técnico presencial e remoto a usuários</li>
-            <li>Instalação, formatação e configuração de sistemas operacionais</li>
-            <li>Manutenção e substituição de componentes de hardware</li>
-            <li>Apoio à infraestrutura de redes locais</li>
-          </ul>
-        </li>
-        <li class="tl-item">
-          <span class="tl-dot" aria-hidden="true"></span>
-          <p class="tl-period">Fev/2019 — Set/2020</p>
-          <h3 class="tl-org">Tratomaq Serviços e Peças</h3>
-          <p class="tl-role">Estagiário de TI</p>
-          <ul class="tl-bullets">
-            <li>Manutenção preventiva e corretiva de computadores</li>
-            <li>Instalação e reparo de sistemas operacionais e softwares</li>
-            <li>Criação de formulários digitais para ordens de serviço</li>
-          </ul>
-        </li>
-      </ol>
+    <div class="terminal-card" role="img" aria-label="Terminal simulando perfil técnico de Thaynan">
+      <div class="terminal-bar">
+        <span class="t-dot r" aria-hidden="true"></span>
+        <span class="t-dot y" aria-hidden="true"></span>
+        <span class="t-dot g" aria-hidden="true"></span>
+        <span class="terminal-title">bash — thaynan@portfolio</span>
+      </div>
+      <div class="terminal-body" id="terminalBody" aria-live="polite"></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══ FORMAÇÃO ════════════════════════════════════════════ -->
-  <section id="formacao" aria-labelledby="edu-h">
-    <div class="wrap">
-      <p class="section-label">estudos</p>
-      <h2 id="edu-h">Formação e<br>certificações</h2>
-      <div class="edu-grid">
-        <div class="edu-card">
-          <h3>Tecnólogo em Análise e Desenvolvimento de Sistemas</h3>
-          <p class="meta">Instituto Federal de Pernambuco — IFPE</p>
-          <span class="pill">Em andamento</span>
-        </div>
-        <div class="edu-card">
-          <h3>Técnico em Manutenção e Suporte em Informática</h3>
-          <p class="meta">IFPE — Paulista/PE</p>
-        </div>
-        <div class="edu-card">
-          <h3>Google IT Support</h3>
-          <p class="meta">Coursera</p>
-          <span class="pill">Em andamento</span>
-        </div>
-        <div class="edu-card">
-          <h3>Introdução à Programação com Python</h3>
-          <p class="meta">Fundação Bradesco</p>
-        </div>
-        <div class="edu-card">
-          <h3>Git e GitHub para Iniciantes</h3>
-          <p class="meta">Udemy</p>
-        </div>
-        <div class="edu-card">
-          <h3>Inglês Básico para Atendimento — A1</h3>
-          <p class="meta">SEST SENAT</p>
-        </div>
+<!-- ═══ SOBRE ═══════════════════════════════════════════════ -->
+<section id="sobre" aria-labelledby="sobre-h">
+  <div class="wrap">
+    <p class="section-label">whoami</p>
+    <div class="about-grid">
+      <div class="photo-wrap">
+        <img src="thaynan-foto.png"
+             alt="Thaynan Passos, homem de barba e óculos, braços cruzados com vista ao fundo"
+             width="260" height="290" loading="lazy">
+        <span class="photo-tag" aria-hidden="true">Paulista, PE 📍</span>
+      </div>
+      <div class="about-text">
+        <h2 id="sobre-h" data-i18n="about.title">Da bancada de<br>suporte ao código</h2>
+        <p data-i18n="about.p1">
+          Sou estudante de Análise e Desenvolvimento de Sistemas no IFPE e desde 2022
+          trabalho como bolsista de suporte técnico na UFPE (STI/NATI-CB). No dia a dia
+          resolvo chamados, faço manutenção de hardware e infraestrutura de redes — o
+          que me deu uma visão real de como sistemas funcionam por dentro.
+        </p>
+        <p data-i18n="about.p2">
+          Essa rotina me levou a estudar programação a sério. Tenho base em lógica,
+          Python e Git, e estou em busca de uma oportunidade de estágio para crescer
+          em desenvolvimento de software e automação de processos.
+        </p>
+        <ul class="facts" aria-label="Informações extras">
+          <li class="fact">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span data-i18n="about.fact1">Paulista, PE — CNH categoria B</span>
+          </li>
+          <li class="fact">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span data-i18n="about.fact2">Tecnólogo em ADS — IFPE (em andamento)</span>
+          </li>
+          <li class="fact">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <span data-i18n="about.fact3">4+ anos de experiência em suporte e infraestrutura TI</span>
+          </li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══ CONTATO ════════════════════════════════════════════ -->
-  <section class="contact-section" id="contato" aria-labelledby="contato-h">
-    <div class="wrap">
-      <p class="section-label">contato</p>
-      <h2 id="contato-h">Vamos<br>conversar</h2>
-      <div class="contact-grid">
-        <div>
-          <p style="color:var(--muted); margin-bottom:24px;">
-            Estou disponível para oportunidades de estágio em desenvolvimento de sistemas.
-            Pode mandar mensagem pelo formulário ou pelos canais abaixo.
-          </p>
-          <ul class="contact-links" aria-label="Canais de contato">
-            <li>
-              <a href="mailto:thaynan0davila@gmail.com" class="contact-link">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                  aria-hidden="true">
-                  <rect x="2" y="4" width="20" height="16" rx="2" />
-                  <path d="M22 7l-10 7L2 7" />
-                </svg>
-                thaynan0davila@gmail.com
-              </a>
-            </li>
-            <li>
-              <a href="tel:+5581991525664" class="contact-link">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                  aria-hidden="true">
-                  <path
-                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-                </svg>
-                (81) 99152-5664
-              </a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/thaynan-passos-91bb86181" target="_blank" rel="noopener noreferrer"
-                class="contact-link">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                  aria-hidden="true">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
-                  <rect x="2" y="9" width="4" height="12" />
-                  <circle cx="4" cy="4" r="2" />
-                </svg>
-                LinkedIn — thaynan-passos
-                <span style="font-size:11px; color:var(--muted)">(nova aba)</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/Thaynan-passos" target="_blank" rel="noopener noreferrer"
-                class="contact-link">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                  aria-hidden="true">
-                  <path
-                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                </svg>
-                GitHub — Thaynan-passos
-                <span style="font-size:11px; color:var(--muted)">(nova aba)</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <form id="contactForm" action="https://formspree.io/f/mjgpvweq" method="POST" novalidate>
-            <div class="form-group">
-              <label for="contactName">Nome <span aria-hidden="true">*</span></label>
-              <input type="text" id="contactName" name="nome" autocomplete="name" required
-                placeholder="Seu nome completo">
-            </div>
-            <div class="form-group">
-              <label for="contactEmail">E-mail <span aria-hidden="true">*</span></label>
-              <input type="email" id="contactEmail" name="email" autocomplete="email" required
-                placeholder="seu@email.com">
-            </div>
-            <div class="form-group">
-              <label for="contactMsg">Mensagem <span aria-hidden="true">*</span></label>
-              <textarea id="contactMsg" name="mensagem" required
-                placeholder="Olá, Thaynan! Tenho uma oportunidade…"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                aria-hidden="true">
-                <line x1="22" y1="2" x2="11" y2="13" />
-                <polygon points="22 2 15 22 11 13 2 9 22 2" />
-              </svg>
-              Enviar mensagem
-            </button>
-            <p id="formStatus" class="form-status" aria-live="polite"></p>
-          </form>
-        </div>
+<!-- ═══ SKILLS ═══════════════════════════════════════════════ -->
+<section class="skills-section" id="habilidades" aria-labelledby="skills-h">
+  <div class="wrap">
+    <p class="section-label">stack</p>
+    <h2 id="skills-h" data-i18n="skills.title">Habilidades<br>técnicas</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span data-i18n="skills.card1">Dev & Lógica</span>
+        </h3>
+        <ul class="tags" aria-label="Habilidades de desenvolvimento">
+          <li class="tag hi">Python</li>
+          <li class="tag hi">Git & GitHub</li>
+          <li class="tag" data-i18n="skills.logic">Lógica de Programação</li>
+          <li class="tag" data-i18n="skills.java">Java (estudo)</li>
+          <li class="tag">SQL</li>
+          <li class="tag">HTML & CSS</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span data-i18n="skills.card2">Infraestrutura</span>
+        </h3>
+        <ul class="tags" aria-label="Habilidades de infraestrutura">
+          <li class="tag hi">Windows</li>
+          <li class="tag hi">Linux</li>
+          <li class="tag" data-i18n="skills.networks">Redes (LAN)</li>
+          <li class="tag" data-i18n="skills.support1">Suporte Nível 1</li>
+          <li class="tag" data-i18n="skills.hardware">Hardware</li>
+          <li class="tag">Help Desk</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span data-i18n="skills.card3">Ferramentas</span>
+        </h3>
+        <ul class="tags" aria-label="Ferramentas">
+          <li class="tag">SIPAC</li>
+          <li class="tag">Microsoft Office</li>
+          <li class="tag">VS Code</li>
+          <li class="tag">MySQL Workbench</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span data-i18n="skills.card4">Soft Skills</span>
+        </h3>
+        <ul class="tags" aria-label="Habilidades comportamentais">
+          <li class="tag" data-i18n="skills.comm">Comunicação técnica</li>
+          <li class="tag" data-i18n="skills.team">Trabalho em equipe</li>
+          <li class="tag" data-i18n="skills.org">Organização</li>
+          <li class="tag" data-i18n="skills.proactive">Proatividade</li>
+          <li class="tag" data-i18n="skills.learn">Aprendizado rápido</li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══ FOOTER ════════════════════════════════════════════ -->
-  <footer>
-    <div class="wrap footer-inner">
-      <p class="footer-text">© <span id="yr"></span> Thaynan Passos — feito com HTML, CSS & JS</p>
-      <nav class="footer-links" aria-label="Links do rodapé">
-        <a href="https://github.com/Thaynan-passos" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/in/thaynan-passos-91bb86181" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="THAYNANCurriculo.pdf" download>Currículo</a>
-      </nav>
+<!-- ═══ PROJETOS (GitHub API) ══════════════════════════════ -->
+<section id="projetos" aria-labelledby="proj-h">
+  <div class="wrap">
+    <p class="section-label" data-i18n="projects.label">repositórios</p>
+    <h2 id="proj-h" data-i18n="projects.title">Projetos no<br>GitHub</h2>
+    <div class="projects-grid" id="projectsGrid" aria-live="polite" aria-label="Projetos do GitHub">
+      <p class="projects-loading">
+        <span aria-hidden="true">⟳</span> <span data-i18n="projects.loading">Carregando projetos do GitHub…</span>
+      </p>
     </div>
-  </footer>
-  <!-- ═══ WHATSAPP CHAT WIDGET ═══════════════════════════════ -->
-  <button id="wa-toggle" aria-label="Abrir chat do WhatsApp" aria-expanded="false">
-    <svg class="icon-chat" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path
-        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.148.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-      <path
-        d="M12.001 2C6.478 2 2 6.478 2 12c0 1.87.505 3.71 1.464 5.34L2.05 22l4.788-1.397A9.94 9.94 0 0012.001 22C17.523 22 22 17.523 22 12S17.523 2 12.001 2zm0 18.148a8.13 8.13 0 01-4.145-1.128l-.297-.176-3.086.9.94-2.999-.194-.309A8.14 8.14 0 013.85 12c0-4.492 3.657-8.148 8.15-8.148 4.493 0 8.148 3.656 8.148 8.148 0 4.493-3.655 8.148-8.148 8.148z" />
-    </svg>
-    <svg class="icon-close" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
-      viewBox="0 0 24 24" aria-hidden="true">
-      <line x1="18" y1="6" x2="6" y2="18" />
-      <line x1="6" y1="6" x2="18" y2="18" />
-    </svg>
-  </button>
-
-  <div id="wa-panel" role="dialog" aria-label="Chat rápido com Thaynan" aria-hidden="true">
-    <div class="wa-header">
-      <div class="wa-avatar" aria-hidden="true">TP</div>
-      <div class="wa-header-text">
-        <p class="name">Thaynan Passos</p>
-        <p class="status">costuma responder rápido</p>
-      </div>
-    </div>
-    <div class="wa-body" id="waBody" aria-live="polite"></div>
-    <div class="wa-options" id="waOptions"></div>
-    <div class="wa-footer">
-      <a href="https://wa.me/5581991525664" target="_blank" rel="noopener noreferrer">
-        ou fale direto pelo WhatsApp →
+    <div class="projects-footer">
+      <a href="https://github.com/Thaynan-passos" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        <span data-i18n="projects.viewAll">Ver todos no GitHub</span>
       </a>
     </div>
   </div>
-  <button id="back-top" aria-label="Voltar ao topo">
-    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-      aria-hidden="true">
-      <line x1="12" y1="19" x2="12" y2="5" />
-      <polyline points="5 12 12 5 19 12" />
+</section>
+
+<!-- ═══ EXPERIÊNCIA ══════════════════════════════════════════ -->
+<section class="exp-section" id="experiencia" aria-labelledby="exp-h">
+  <div class="wrap">
+    <p class="section-label" data-i18n="exp.label">trajetória</p>
+    <h2 id="exp-h" data-i18n="exp.title">Experiência<br>profissional</h2>
+    <ol class="timeline" aria-label="Linha do tempo profissional">
+      <li class="tl-item current">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <p class="tl-period" data-i18n="exp.period1">Ago/2022 — Atual</p>
+        <h3 class="tl-org">UFPE — STI / NATI-CB</h3>
+        <p class="tl-role" data-i18n="exp.role1">Bolsista de Suporte Técnico em Informática</p>
+        <ul class="tl-bullets">
+          <li data-i18n="exp.b1_1">Atendimento e resolução de chamados via SIPAC</li>
+          <li data-i18n="exp.b1_2">Suporte técnico presencial e remoto a usuários</li>
+          <li data-i18n="exp.b1_3">Instalação, formatação e configuração de sistemas operacionais</li>
+          <li data-i18n="exp.b1_4">Manutenção e substituição de componentes de hardware</li>
+          <li data-i18n="exp.b1_5">Apoio à infraestrutura de redes locais</li>
+        </ul>
+      </li>
+      <li class="tl-item">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <p class="tl-period" data-i18n="exp.period2">Fev/2019 — Set/2020</p>
+        <h3 class="tl-org">Tratomaq Serviços e Peças</h3>
+        <p class="tl-role" data-i18n="exp.role2">Estagiário de TI</p>
+        <ul class="tl-bullets">
+          <li data-i18n="exp.b2_1">Manutenção preventiva e corretiva de computadores</li>
+          <li data-i18n="exp.b2_2">Instalação e reparo de sistemas operacionais e softwares</li>
+          <li data-i18n="exp.b2_3">Criação de formulários digitais para ordens de serviço</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══ FORMAÇÃO ════════════════════════════════════════════ -->
+<section id="formacao" aria-labelledby="edu-h">
+  <div class="wrap">
+    <p class="section-label" data-i18n="edu.label">estudos</p>
+    <h2 id="edu-h" data-i18n="edu.title">Formação e<br>certificações</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <h3 data-i18n="edu.c1_title">Tecnólogo em Análise e Desenvolvimento de Sistemas</h3>
+        <p class="meta">Instituto Federal de Pernambuco — IFPE</p>
+        <span class="pill" data-i18n="edu.ongoing">Em andamento</span>
+      </div>
+      <div class="edu-card">
+        <h3 data-i18n="edu.c2_title">Técnico em Manutenção e Suporte em Informática</h3>
+        <p class="meta">IFPE — Paulista/PE</p>
+      </div>
+      <div class="edu-card">
+        <h3>Google IT Support</h3>
+        <p class="meta">Coursera</p>
+        <span class="pill" data-i18n="edu.ongoing">Em andamento</span>
+      </div>
+      <div class="edu-card">
+        <h3 data-i18n="edu.c4_title">Introdução à Programação com Python</h3>
+        <p class="meta">Fundação Bradesco</p>
+      </div>
+      <div class="edu-card">
+        <h3 data-i18n="edu.c5_title">Git e GitHub para Iniciantes</h3>
+        <p class="meta">Udemy</p>
+      </div>
+      <div class="edu-card">
+        <h3 data-i18n="edu.c6_title">Inglês Básico para Atendimento — A1</h3>
+        <p class="meta">SEST SENAT</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CERTIFICADOS (carrossel automático via pasta) ═══════ -->
+<section class="cert-section" id="certificados" aria-labelledby="cert-h">
+  <div class="wrap">
+    <p class="section-label" data-i18n="cert.label">certificados</p>
+    <h2 id="cert-h" data-i18n="cert.title">Certificados<br>e cursos</h2>
+    <p class="cert-intro" data-i18n="cert.intro">
+      Basta adicionar a imagem ou PDF do certificado na pasta <code>certificados/</code>
+      do repositório — ele aparece aqui automaticamente, sem precisar mexer no código.
+    </p>
+
+    <div class="cert-carousel" id="certCarousel">
+      <div class="cert-track-wrap">
+        <button class="cert-nav prev" id="certPrev" aria-label="Certificado anterior">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+
+        <div class="cert-viewport">
+          <div class="cert-track" id="certTrack" aria-live="polite">
+            <p class="cert-loading"><span aria-hidden="true">⟳</span> <span data-i18n="cert.loading">Carregando certificados…</span></p>
+          </div>
+        </div>
+
+        <button class="cert-nav next" id="certNext" aria-label="Próximo certificado">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <div class="cert-dots" id="certDots" role="tablist" aria-label="Selecionar certificado"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTATO ════════════════════════════════════════════ -->
+<section class="contact-section" id="contato" aria-labelledby="contato-h">
+  <div class="wrap">
+    <p class="section-label" data-i18n="contact.label">contato</p>
+    <h2 id="contato-h" data-i18n="contact.title">Vamos<br>conversar</h2>
+    <div class="contact-grid">
+      <div>
+        <p style="color:var(--muted); margin-bottom:24px;" data-i18n="contact.lead">
+          Estou disponível para oportunidades de estágio em desenvolvimento de sistemas.
+          Pode mandar mensagem pelo formulário ou pelos canais abaixo.
+        </p>
+        <ul class="contact-links" aria-label="Canais de contato">
+          <li>
+            <a href="mailto:thaynan0davila@gmail.com" class="contact-link">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+              thaynan0davila@gmail.com
+            </a>
+          </li>
+          <li>
+            <a href="tel:+5581991525664" class="contact-link">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              (81) 99152-5664
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/5581991525664?text=Ol%C3%A1%20Thaynan%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!" target="_blank" rel="noopener noreferrer" class="contact-link">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              WhatsApp — (81) 99152-5664
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/thaynan-passos-91bb86181" target="_blank" rel="noopener noreferrer" class="contact-link">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn — thaynan-passos
+              <span style="font-size:11px; color:var(--muted)" data-i18n="contact.newTab">(nova aba)</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/Thaynan-passos" target="_blank" rel="noopener noreferrer" class="contact-link">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub — Thaynan-passos
+              <span style="font-size:11px; color:var(--muted)" data-i18n="contact.newTab">(nova aba)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <form id="contactForm" action="https://formspree.io/f/mjgpvweq" method="POST" novalidate>
+          <div class="form-group">
+            <label for="contactName" data-i18n="contact.formName">Nome <span aria-hidden="true">*</span></label>
+            <input type="text" id="contactName" name="nome" autocomplete="name" required data-i18n-placeholder="contact.formNamePh" placeholder="Seu nome completo">
+          </div>
+          <div class="form-group">
+            <label for="contactEmail" data-i18n="contact.formEmail">E-mail <span aria-hidden="true">*</span></label>
+            <input type="email" id="contactEmail" name="email" autocomplete="email" required data-i18n-placeholder="contact.formEmailPh" placeholder="seu@email.com">
+          </div>
+          <div class="form-group">
+            <label for="contactMsg" data-i18n="contact.formMsg">Mensagem <span aria-hidden="true">*</span></label>
+            <textarea id="contactMsg" name="mensagem" required data-i18n-placeholder="contact.formMsgPh" placeholder="Olá, Thaynan! Tenho uma oportunidade…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <span data-i18n="contact.formSubmit">Enviar mensagem</span>
+          </button>
+          <p id="formStatus" class="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════ -->
+<footer>
+  <div class="wrap footer-inner">
+    <p class="footer-text">© <span id="yr"></span> <span data-i18n="footer.text">Thaynan Passos — feito com HTML, CSS & JS</span></p>
+    <nav class="footer-links" aria-label="Links do rodapé">
+      <a href="https://github.com/Thaynan-passos" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/thaynan-passos-91bb86181" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="THAYNANCurriculo.pdf" download data-i18n="footer.resume">Currículo</a>
+    </nav>
+  </div>
+</footer>
+
+<button id="back-top" aria-label="Voltar ao topo">
+  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+
+<!-- ═══ WHATSAPP CHAT BUTTON ═══════════════════════════════ -->
+<div class="whatsapp-fab" id="whatsappFab">
+  <span class="whatsapp-bubble" id="whatsappBubble" data-i18n="whatsapp.bubble">Fala comigo no WhatsApp! 👋</span>
+  <a class="whatsapp-btn" id="whatsappBtn"
+     href="https://wa.me/5581991525664?text=Ol%C3%A1%20Thaynan%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!"
+     target="_blank" rel="noopener noreferrer" aria-label="Conversar no WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+      <path d="M16 0C7.16 0 0 7.16 0 16c0 2.82.74 5.47 2.03 7.77L0 32l8.44-2.2A15.9 15.9 0 0 0 16 32c8.84 0 16-7.16 16-16S24.84 0 16 0zm0 29.2c-2.5 0-4.85-.68-6.87-1.86l-.49-.29-5.01 1.31 1.34-4.88-.32-.5A13.14 13.14 0 0 1 2.8 16C2.8 8.7 8.7 2.8 16 2.8S29.2 8.7 29.2 16 23.3 29.2 16 29.2zm7.2-9.86c-.39-.2-2.3-1.14-2.66-1.27-.36-.13-.62-.2-.88.2-.26.39-1.01 1.27-1.24 1.53-.23.26-.46.29-.85.1-.39-.2-1.65-.61-3.14-1.94-1.16-1.04-1.94-2.32-2.17-2.71-.23-.39-.02-.6.17-.79.18-.18.39-.46.59-.69.2-.23.26-.39.39-.65.13-.26.06-.49-.03-.69-.1-.2-.88-2.11-1.2-2.89-.32-.76-.64-.66-.88-.67h-.75c-.26 0-.69.1-1.05.49-.36.39-1.37 1.34-1.37 3.27s1.4 3.79 1.6 4.05c.2.26 2.75 4.2 6.66 5.89.93.4 1.66.64 2.23.82.94.3 1.79.26 2.46.16.75-.11 2.3-.94 2.63-1.85.33-.91.33-1.69.23-1.85-.1-.16-.36-.26-.75-.46z"/>
     </svg>
-  </button>
+  </a>
+</div>
 
-  <!-- ═══ SCRIPTS ════════════════════════════════════════════ -->
-  <script>
-    /* ── Year ── */
-    document.getElementById('yr').textContent = new Date().getFullYear();
+<!-- ═══ SCRIPTS ════════════════════════════════════════════ -->
+<script>
+/* ── Year ── */
+document.getElementById('yr').textContent = new Date().getFullYear();
 
-    /* ── Mobile menu ── */
-    const menuBtn = document.getElementById('menuBtn');
-    const navLinks = document.getElementById('navLinks');
-    menuBtn.addEventListener('click', () => {
-      const open = navLinks.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', open);
-    });
-    navLinks.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        menuBtn.setAttribute('aria-expanded', 'false');
-      });
-    });
+/* ── Mobile menu ── */
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+menuBtn.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', open);
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  });
+});
 
-    /* ── Back to top ── */
-    const btn = document.getElementById('back-top');
-    window.addEventListener('scroll', () => {
-      btn.classList.toggle('show', window.scrollY > 400);
-    }, { passive: true });
-    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+/* ── Back to top ── */
+const btn = document.getElementById('back-top');
+window.addEventListener('scroll', () => {
+  btn.classList.toggle('show', window.scrollY > 400);
+}, { passive: true });
+btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    /* ── Terminal animation ── */
-    (function () {
-      const el = document.getElementById('terminalBody');
-      const lines = [
-        { type: 'prompt', text: 'whoami' },
-        { type: 'out', text: '<span class="t-key">Thaynan Passos</span> — ADS & Suporte TI' },
-        { type: 'prompt', text: 'cat perfil.json' },
-        { type: 'out', text: '{' },
-        { type: 'out', text: '  <span class="t-key">"cargo"</span>: <span class="t-val">"Bolsista Suporte Técnico"</span>,' },
-        { type: 'out', text: '  <span class="t-key">"empresa"</span>: <span class="t-val">"UFPE / STI"</span>,' },
-        { type: 'out', text: '  <span class="t-key">"stack"</span>: <span class="t-val">["Python","Git","Linux","SQL"]</span>,' },
-        { type: 'out', text: '  <span class="t-key">"status"</span>: <span class="t-val">"open to work 🟢"</span>' },
-        { type: 'out', text: '}' },
-        { type: 'prompt', text: '_' },
-      ];
-      let i = 0;
-      const cursorEl = '<span class="cursor" aria-hidden="true"></span>';
-      function next() {
-        if (i >= lines.length) return;
-        const line = lines[i++];
-        const div = document.createElement('div');
-        if (line.type === 'prompt') {
-          div.innerHTML = `<span class="t-prompt">~/thaynan $</span> <span class="t-cmd">${line.text === '_' ? cursorEl : line.text}</span>`;
-        } else {
-          div.innerHTML = `<span class="t-out">${line.text}</span>`;
-        }
-        // remove old cursor if present
-        el.querySelectorAll('.cursor').forEach(c => c.remove());
-        el.appendChild(div);
-        if (i < lines.length) setTimeout(next, line.type === 'prompt' ? 600 : 180);
-        else el.querySelector('.t-cmd').appendChild(document.createElement('span')).className = 'cursor';
+/* ── Terminal animation ── */
+(function() {
+  const el = document.getElementById('terminalBody');
+  const lines = [
+    { type:'prompt', text:'whoami' },
+    { type:'out', text:'<span class="t-key">Thaynan Passos</span> — ADS & Suporte TI' },
+    { type:'prompt', text:'cat perfil.json' },
+    { type:'out', text:'{' },
+    { type:'out', text:'  <span class="t-key">"cargo"</span>: <span class="t-val">"Bolsista Suporte Técnico"</span>,' },
+    { type:'out', text:'  <span class="t-key">"empresa"</span>: <span class="t-val">"UFPE / STI"</span>,' },
+    { type:'out', text:'  <span class="t-key">"stack"</span>: <span class="t-val">["Python","Git","Linux","SQL"]</span>,' },
+    { type:'out', text:'  <span class="t-key">"status"</span>: <span class="t-val">"open to work 🟢"</span>' },
+    { type:'out', text:'}' },
+    { type:'prompt', text:'_' },
+  ];
+  let i = 0;
+  const cursorEl = '<span class="cursor" aria-hidden="true"></span>';
+  function next() {
+    if (i >= lines.length) return;
+    const line = lines[i++];
+    const div = document.createElement('div');
+    if (line.type === 'prompt') {
+      div.innerHTML = `<span class="t-prompt">~/thaynan $</span> <span class="t-cmd">${line.text === '_' ? cursorEl : line.text}</span>`;
+    } else {
+      div.innerHTML = `<span class="t-out">${line.text}</span>`;
+    }
+    // remove old cursor if present
+    el.querySelectorAll('.cursor').forEach(c => c.remove());
+    el.appendChild(div);
+    if (i < lines.length) setTimeout(next, line.type === 'prompt' ? 600 : 180);
+    else el.querySelector('.t-cmd').appendChild(document.createElement('span')).className = 'cursor';
+  }
+  setTimeout(next, 400);
+})();
+
+/* ── GitHub Projects ── */
+(function() {
+  const grid = document.getElementById('projectsGrid');
+  const GITHUB_USER = 'Thaynan-passos';
+  const LANG_COLORS = {
+    Python:'#3572A5', Java:'#b07219', HTML:'#e34c26',
+    JavaScript:'#f1e05a', CSS:'#563d7c', 'Jupyter Notebook':'#DA5B0B'
+  };
+
+  // repos to skip (forks, meta repos)
+  const SKIP = ['dio-lab-open-source','skills-communicate-using-markdown'];
+
+  function langColor(lang) { return LANG_COLORS[lang] || '#58a6ff'; }
+
+  fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=20&type=public`)
+    .then(r => {
+      if (!r.ok) throw new Error('GitHub API error');
+      return r.json();
+    })
+    .then(repos => {
+      const filtered = repos
+        .filter(r => !r.fork && !SKIP.includes(r.name))
+        .slice(0, 6);
+
+      if (!filtered.length) {
+        grid.innerHTML = '<p class="projects-error">Nenhum repositório público encontrado.</p>';
+        return;
       }
-      setTimeout(next, 400);
-    })();
 
-    /* ── GitHub Projects ── */
-    (function () {
-      const grid = document.getElementById('projectsGrid');
-      const GITHUB_USER = 'Thaynan-passos';
-      const LANG_COLORS = {
-        Python: '#3572A5', Java: '#b07219', HTML: '#e34c26',
-        JavaScript: '#f1e05a', CSS: '#563d7c', 'Jupyter Notebook': '#DA5B0B'
-      };
-
-      // repos to skip (forks, meta repos)
-      const SKIP = ['dio-lab-open-source', 'skills-communicate-using-markdown'];
-
-      function langColor(lang) { return LANG_COLORS[lang] || '#58a6ff'; }
-
-      fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=20&type=public`)
-        .then(r => {
-          if (!r.ok) throw new Error('GitHub API error');
-          return r.json();
-        })
-        .then(repos => {
-          const filtered = repos
-            .filter(r => !r.fork && !SKIP.includes(r.name))
-            .slice(0, 6);
-
-          if (!filtered.length) {
-            grid.innerHTML = '<p class="projects-error">Nenhum repositório público encontrado.</p>';
-            return;
-          }
-
-          grid.innerHTML = filtered.map(repo => {
-            const desc = repo.description || 'Sem descrição ainda.';
-            const lang = repo.language;
-            const stars = repo.stargazers_count;
-            const color = lang ? langColor(lang) : '#58a6ff';
-            return `
+      grid.innerHTML = filtered.map(repo => {
+        const desc = repo.description || 'Sem descrição ainda.';
+        const lang = repo.language;
+        const stars = repo.stargazers_count;
+        const color = lang ? langColor(lang) : '#58a6ff';
+        return `
           <article class="project-card">
             <div class="project-header">
               <h3>${repo.name}</h3>
@@ -1769,160 +1446,188 @@
               </span>
             </div>
           </article>`;
-          }).join('');
-        })
-        .catch(() => {
-          grid.innerHTML = `<p class="projects-error">
+      }).join('');
+    })
+    .catch(() => {
+      grid.innerHTML = `<p class="projects-error">
         Não foi possível carregar os projetos. 
         <a href="https://github.com/${GITHUB_USER}" target="_blank" rel="noopener" style="color:var(--accent)">Ver no GitHub →</a>
       </p>`;
-        });
+    });
 
-      function timeAgo(dateStr) {
-        const diff = Date.now() - new Date(dateStr);
-        const d = Math.floor(diff / 86400000);
-        if (d === 0) return 'hoje';
-        if (d === 1) return 'ontem';
-        if (d < 30) return `há ${d} dias`;
-        const m = Math.floor(d / 30);
-        if (m < 12) return `há ${m} ${m === 1 ? 'mês' : 'meses'}`;
-        const y = Math.floor(m / 12);
-        return `há ${y} ${y === 1 ? 'ano' : 'anos'}`;
-      }
-    })();
+  function timeAgo(dateStr) {
+    const diff = Date.now() - new Date(dateStr);
+    const d = Math.floor(diff / 86400000);
+    if (d === 0) return 'hoje';
+    if (d === 1) return 'ontem';
+    if (d < 30) return `há ${d} dias`;
+    const m = Math.floor(d / 30);
+    if (m < 12) return `há ${m} ${m===1?'mês':'meses'}`;
+    const y = Math.floor(m / 12);
+    return `há ${y} ${y===1?'ano':'anos'}`;
+  }
+})();
 
-    /* ── Contact form ── */
-    (function () {
-      const form = document.getElementById('contactForm');
-      const status = document.getElementById('formStatus');
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const btn = form.querySelector('button[type=submit]');
-        btn.disabled = true;
-        btn.textContent = 'Enviando…';
-        status.textContent = '';
-        status.className = 'form-status';
-        try {
-          const res = await fetch(form.action, {
-            method: 'POST',
-            headers: { 'Accept': 'application/json' },
-            body: new FormData(form)
-          });
-          if (res.ok) {
-            status.textContent = '✓ Mensagem enviada! Responderei em breve.';
-            status.classList.add('ok');
-            form.reset();
-          } else {
-            throw new Error();
-          }
-        } catch {
-          status.textContent = '✕ Erro ao enviar. Tente pelo e-mail diretamente.';
-          status.classList.add('err');
-        } finally {
-          btn.disabled = false;
-          btn.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Enviar mensagem';
-        }
-      });
-    })();
-    /* ── WhatsApp chat widget ── */
-    (function () {
-      const WA_NUMBER = '5581991525664';
-      const toggle = document.getElementById('wa-toggle');
-      const panel = document.getElementById('wa-panel');
-      const body = document.getElementById('waBody');
-      const optionsEl = document.getElementById('waOptions');
-      let started = false;
+/* ── Certificados (carrossel automático via pasta) ── */
+(function() {
+  const track   = document.getElementById('certTrack');
+  const dotsBox = document.getElementById('certDots');
+  const prevBtn = document.getElementById('certPrev');
+  const nextBtn = document.getElementById('certNext');
+  if (!track) return;
 
-      const FLOWS = {
-        start: {
-          bot: 'Olá! 👋 Sou o assistente do Thaynan. Sobre o que você quer falar?',
-          options: [
-            { label: '💼 Vaga de estágio', next: 'estagio' },
-            { label: '🧑‍💻 Projeto freelance', next: 'freelance' },
-            { label: '💬 Outro assunto', next: 'outro' },
-          ]
-        },
-        estagio: {
-          bot: 'Ótimo! Em qual área é a vaga?',
-          options: [
-            { label: 'Desenvolvimento', msg: 'Olá, Thaynan! Vi seu portfólio e tenho uma vaga de estágio em desenvolvimento que pode ter a ver com seu perfil.' },
-            { label: 'Suporte / Infraestrutura de TI', msg: 'Olá, Thaynan! Vi seu portfólio e tenho uma vaga de estágio em suporte/infraestrutura de TI.' },
-            { label: 'Outra área', msg: 'Olá, Thaynan! Vi seu portfólio e tenho uma vaga de estágio que pode te interessar.' },
-          ]
-        },
-        freelance: {
-          bot: 'Legal! Que tipo de projeto você tem em mente?',
-          options: [
-            { label: 'Site / Portfólio', msg: 'Olá, Thaynan! Vi seu portfólio e preciso de um site/portfólio para o meu negócio.' },
-            { label: 'Sistema de estoque/banco de dados', msg: 'Olá, Thaynan! Vi seu portfólio e preciso de um sistema de controle de estoque/banco de dados.' },
-            { label: 'Outro tipo de projeto', msg: 'Olá, Thaynan! Vi seu portfólio e tenho um projeto freelance que gostaria de conversar.' },
-          ]
-        },
-        outro: {
-          bot: 'Sem problemas! Pode escrever direto que o Thaynan te responde no WhatsApp.',
-          options: [
-            { label: 'Abrir conversa no WhatsApp', msg: 'Olá, Thaynan! Vi seu portfólio e gostaria de conversar.' },
-          ]
-        }
-      };
+  const GITHUB_USER = 'Thaynan-passos';
+  const REPO   = `${GITHUB_USER}.github.io`;
+  const FOLDER = 'certificados';
 
-      function addBubble(text, isMe) {
-        const div = document.createElement('div');
-        div.className = 'wa-bubble' + (isMe ? ' me' : '');
-        div.textContent = text;
-        body.appendChild(div);
-        body.scrollTop = body.scrollHeight;
-      }
+  const IMG_EXT = ['.png', '.jpg', '.jpeg', '.webp', '.gif'];
+  const PDF_EXT = ['.pdf'];
 
-      function renderStep(stepKey) {
-        const step = FLOWS[stepKey];
-        addBubble(step.bot, false);
-        optionsEl.innerHTML = '';
-        step.options.forEach(opt => {
-          const btn = document.createElement('button');
-          btn.className = 'wa-opt';
-          btn.textContent = opt.label;
-          btn.addEventListener('click', (e) => {
-            e.stopPropagation(); // impede que o clique "feche" o painel
-            addBubble(opt.label, true);
-            optionsEl.innerHTML = '';
-            if (opt.next) {
-              setTimeout(() => renderStep(opt.next), 350);
-            } else if (opt.msg) {
-              addBubble('Te levando para o WhatsApp… 🚀', false);
-              const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(opt.msg)}`;
-              // abre direto, sem delay, pra não ser bloqueado como pop-up
-              window.open(url, '_blank', 'noopener');
+  let index = 0;
+  let slides = [];
+
+  function extOf(name) {
+    const i = name.lastIndexOf('.');
+    return i === -1 ? '' : name.slice(i).toLowerCase();
+  }
+
+  function titleFromName(name) {
+    const noExt = name.slice(0, name.lastIndexOf('.') || name.length);
+    return noExt
+      .replace(/[-_]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .replace(/\b\w/g, c => c.toUpperCase());
+  }
+
+  function renderEmpty() {
+    track.innerHTML = `<p class="cert-loading">
+      Nenhum certificado por aqui ainda. Basta subir a imagem ou PDF na pasta
+      <code style="background:var(--border); color:var(--accent); padding:2px 6px; border-radius:4px;">/${FOLDER}</code>
+      do repositório que ele aparece aqui automaticamente.
+    </p>`;
+    dotsBox.innerHTML = '';
+    prevBtn.disabled = true;
+    nextBtn.disabled = true;
+  }
+
+  function renderError() {
+    track.innerHTML = `<p class="cert-error">
+      Não foi possível carregar os certificados agora.
+      <a href="https://github.com/${GITHUB_USER}/${REPO}/tree/main/${FOLDER}" target="_blank" rel="noopener">Ver pasta no GitHub →</a>
+    </p>`;
+    dotsBox.innerHTML = '';
+    prevBtn.disabled = true;
+    nextBtn.disabled = true;
+  }
+
+  function render() {
+    track.innerHTML = slides.map(s => `
+      <div class="cert-slide">
+        <div class="cert-card">
+          <div class="cert-card-media ${s.isPdf ? 'is-pdf' : ''}">
+            ${s.isPdf
+              ? `<svg width="46" height="46" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>arquivo PDF</span>`
+              : `<img src="${s.url}" alt="Certificado: ${s.title}" loading="lazy">`
             }
-          });
-          optionsEl.appendChild(btn);
-        });
+          </div>
+          <div class="cert-card-body">
+            <h3>${s.title}</h3>
+            <p class="cert-meta">${FOLDER}/${s.name}</p>
+            <a class="btn btn-secondary" href="${s.url}" target="_blank" rel="noopener noreferrer">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Ver certificado
+            </a>
+          </div>
+        </div>
+      </div>`).join('');
+
+    dotsBox.innerHTML = slides.map((_, i) =>
+      `<button class="cert-dot${i === index ? ' active' : ''}" role="tab" aria-label="Certificado ${i + 1}" aria-selected="${i === index}"></button>`
+    ).join('');
+
+    dotsBox.querySelectorAll('.cert-dot').forEach((dot, i) => {
+      dot.addEventListener('click', () => goTo(i));
+    });
+
+    update();
+  }
+
+  function update() {
+    track.style.transform = `translateX(-${index * 100}%)`;
+    dotsBox.querySelectorAll('.cert-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === index);
+      d.setAttribute('aria-selected', i === index);
+    });
+  }
+
+  function goTo(i) {
+    if (!slides.length) return;
+    index = (i + slides.length) % slides.length;
+    update();
+  }
+
+  prevBtn.addEventListener('click', () => goTo(index - 1));
+  nextBtn.addEventListener('click', () => goTo(index + 1));
+
+  fetch(`https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/${FOLDER}`)
+    .then(r => {
+      if (!r.ok) throw new Error('GitHub API error');
+      return r.json();
+    })
+    .then(files => {
+      if (!Array.isArray(files)) throw new Error('unexpected response');
+
+      slides = files
+        .filter(f => f.type === 'file')
+        .filter(f => IMG_EXT.includes(extOf(f.name)) || PDF_EXT.includes(extOf(f.name)))
+        .sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'))
+        .map(f => ({
+          name: f.name,
+          url: f.download_url,
+          isPdf: PDF_EXT.includes(extOf(f.name)),
+          title: titleFromName(f.name)
+        }));
+
+      if (!slides.length) { renderEmpty(); return; }
+      render();
+    })
+    .catch(renderError);
+})();
+
+/* ── Contact form ── */
+(function() {
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type=submit]');
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+    status.textContent = '';
+    status.className = 'form-status';
+    try {
+      const res = await fetch(form.action, {
+        method:'POST',
+        headers:{ 'Accept':'application/json' },
+        body: new FormData(form)
+      });
+      if (res.ok) {
+        status.textContent = '✓ Mensagem enviada! Responderei em breve.';
+        status.classList.add('ok');
+        form.reset();
+      } else {
+        throw new Error();
       }
-
-      toggle.addEventListener('click', () => {
-        const isOpen = panel.classList.toggle('show');
-        toggle.classList.toggle('open', isOpen);
-        toggle.setAttribute('aria-expanded', isOpen);
-        panel.setAttribute('aria-hidden', !isOpen);
-        if (isOpen && !started) {
-          started = true;
-          renderStep('start');
-        }
-      });
-
-      document.addEventListener('click', (e) => {
-        if (panel.classList.contains('show') &&
-          !panel.contains(e.target) &&
-          !toggle.contains(e.target)) {
-          panel.classList.remove('show');
-          toggle.classList.remove('open');
-          toggle.setAttribute('aria-expanded', false);
-          panel.setAttribute('aria-hidden', true);
-        }
-      });
-    })();
-
-  </script>
+    } catch {
+      status.textContent = '✕ Erro ao enviar. Tente pelo e-mail diretamente.';
+      status.classList.add('err');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Enviar mensagem';
+    }
+  });
+})();
+</script>
 </body>
-
 </html>
