@@ -383,6 +383,10 @@
       align-items: center;
     }
 
+    .hero-grid > * {
+      min-width: 0;
+    }
+
     .hero-eyebrow {
       font-family: var(--mono);
       font-size: 12px;
@@ -528,6 +532,7 @@
       font-size: 13px;
       line-height: 1.9;
       min-height: 220px;
+      overflow-wrap: break-word;
     }
 
     .t-prompt {
@@ -1927,36 +1932,75 @@
     /* ── Terminal animation ── */
     (function () {
       const el = document.getElementById('terminalBody');
-      const lines = [
-        { type: 'prompt', text: 'whoami' },
-        { type: 'out', text: '<span class="t-key">Thaynan Passos</span> — ADS & Sistemas' },
-        { type: 'prompt', text: 'cat perfil.json' },
-        { type: 'out', text: '{' },
-        { type: 'out', text: '  <span class="t-key">"cargo"</span>: <span class="t-val">"Estagiário em Tecnologia"</span>,' },
-        { type: 'out', text: '  <span class="t-key">"empresa"</span>: <span class="t-val">"Sesc Pernambuco / UTD"</span>,' },
-        { type: 'out', text: '  <span class="t-key">"stack"</span>: <span class="t-val">["Java","Python","Git","SQL","Docker"]</span>,' },
-        { type: 'out', text: '  <span class="t-key">"status"</span>: <span class="t-val">"estagiando 🟢"</span>' },
-        { type: 'out', text: '}' },
-        { type: 'prompt', text: '_' },
-      ];
-      let i = 0;
-      const cursorEl = '<span class="cursor" aria-hidden="true"></span>';
-      function next() {
-        if (i >= lines.length) return;
-        const line = lines[i++];
-        const div = document.createElement('div');
-        if (line.type === 'prompt') {
-          div.innerHTML = `<span class="t-prompt">~/thaynan $</span> <span class="t-cmd">${line.text === '_' ? cursorEl : line.text}</span>`;
-        } else {
-          div.innerHTML = `<span class="t-out">${line.text}</span>`;
-        }
-        // remove old cursor if present
-        el.querySelectorAll('.cursor').forEach(c => c.remove());
-        el.appendChild(div);
-        if (i < lines.length) setTimeout(next, line.type === 'prompt' ? 600 : 180);
-        else el.querySelector('.t-cmd').appendChild(document.createElement('span')).className = 'cursor';
+
+      // valores que não mudam por idioma (nome próprio, stack técnica, comandos de shell)
+      const EMPRESA_VAL = 'Sesc Pernambuco / UTD';
+      const STACK_VAL = '["Java","Python","Git","SQL","Docker"]';
+
+      // fallback (pt) caso as traduções ainda não tenham carregado
+      const FALLBACK = {
+        'terminal.subtitle': 'ADS &amp; Sistemas',
+        'terminal.cargoKey': 'cargo',
+        'terminal.cargoVal': 'Estagiário em Tecnologia',
+        'terminal.empresaKey': 'empresa',
+        'terminal.stackKey': 'stack',
+        'terminal.statusKey': 'status',
+        'terminal.statusVal': 'estagiando 🟢',
+      };
+
+      function t(dict, key) {
+        return (dict && dict[key] !== undefined) ? dict[key] : FALLBACK[key];
       }
-      setTimeout(next, 400);
+
+      function buildLines(dict) {
+        return [
+          { type: 'prompt', text: 'whoami' },
+          { type: 'out', text: `<span class="t-key">Thaynan Passos</span> — ${t(dict, 'terminal.subtitle')}` },
+          { type: 'prompt', text: 'cat perfil.json' },
+          { type: 'out', text: '{' },
+          { type: 'out', text: `  <span class="t-key">"${t(dict, 'terminal.cargoKey')}"</span>: <span class="t-val">"${t(dict, 'terminal.cargoVal')}"</span>,` },
+          { type: 'out', text: `  <span class="t-key">"${t(dict, 'terminal.empresaKey')}"</span>: <span class="t-val">"${EMPRESA_VAL}"</span>,` },
+          { type: 'out', text: `  <span class="t-key">"${t(dict, 'terminal.stackKey')}"</span>: <span class="t-val">${STACK_VAL}</span>,` },
+          { type: 'out', text: `  <span class="t-key">"${t(dict, 'terminal.statusKey')}"</span>: <span class="t-val">"${t(dict, 'terminal.statusVal')}"</span>` },
+          { type: 'out', text: '}' },
+          { type: 'prompt', text: '_' },
+        ];
+      }
+
+      const cursorEl = '<span class="cursor" aria-hidden="true"></span>';
+      let runId = 0; // evita que uma digitação antiga "vaze" se o idioma mudar no meio da animação
+
+      function typeLines(lines, myRunId, instant) {
+        let i = 0;
+        function next() {
+          if (myRunId !== runId) return; // idioma mudou de novo, cancela essa execução
+          if (i >= lines.length) return;
+          const line = lines[i++];
+          const div = document.createElement('div');
+          if (line.type === 'prompt') {
+            div.innerHTML = `<span class="t-prompt">~/thaynan $</span> <span class="t-cmd">${line.text === '_' ? cursorEl : line.text}</span>`;
+          } else {
+            div.innerHTML = `<span class="t-out">${line.text}</span>`;
+          }
+          el.querySelectorAll('.cursor').forEach(c => c.remove());
+          el.appendChild(div);
+          if (i < lines.length) setTimeout(next, instant ? 0 : (line.type === 'prompt' ? 600 : 180));
+          else el.querySelector('.t-cmd').appendChild(document.createElement('span')).className = 'cursor';
+        }
+        next();
+      }
+
+      function render(dict, instant) {
+        runId++;
+        el.innerHTML = '';
+        typeLines(buildLines(dict), runId, instant);
+      }
+
+      // primeira renderização (com o que já estiver disponível)
+      setTimeout(() => render(window.__i18nDict, false), 400);
+
+      // re-renderiza (instantâneo, sem re-digitar) sempre que o idioma mudar
+      window.addEventListener('i18n:change', (e) => render(e.detail.dict, true));
     })();
 
     /* ── GitHub Projects ── */
