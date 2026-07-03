@@ -6,13 +6,11 @@
   "nav.certificates": "certificates",
   "nav.contact": "contact",
   "nav.resume": "resume.pdf",
-
   "hero.eyebrow": "Technology Intern — Sesc Pernambuco",
   "hero.title": "Thaynan<br>Passos<br><em>Software Systems</em>",
   "hero.lead": "Systems Development student at IFPE, currently interning at Sesc Pernambuco's Digital Technology Unit. From the support desk to the codebase — building solutions that actually work.",
   "hero.btnContact": "Get in touch",
   "hero.btnProjects": "View projects",
-
   "about.title": "From tech support<br>to development",
   "about.p1": "I'm a Systems Analysis and Development student at IFPE. I currently intern at Sesc Pernambuco's Digital Technology Unit, where I work on internal platform configuration, technical documentation, software testing, and WordPress hotsite maintenance. Before that, I spent over 4 years as a technical support assistant at UFPE (STI/NATI-CB) — which gave me a real understanding of how systems work under the hood.",
   "about.p2": "That routine led me to study programming seriously. I have a solid base in logic, Python, Java, SQL, and Git, which I apply both at my internship and in personal projects — always looking to grow in software development and process automation.",
@@ -20,7 +18,6 @@
   "about.fact2": "Systems Development degree — IFPE (in progress)",
   "about.fact3": "Technology Intern — Sesc Pernambuco (since Jun/2026)",
   "about.fact4": "4+ years of experience in IT support and infrastructure",
-
   "skills.title": "Technical<br>skills",
   "skills.card1": "Dev &amp; Logic",
   "skills.logic": "Programming Logic",
@@ -35,12 +32,10 @@
   "skills.org": "Organization",
   "skills.proactive": "Proactivity",
   "skills.learn": "Fast learning",
-
   "projects.label": "repositories",
   "projects.title": "GitHub<br>projects",
   "projects.loading": "Loading GitHub projects…",
   "projects.viewAll": "View all on GitHub",
-
   "exp.label": "background",
   "exp.title": "Professional<br>experience",
   "exp.period0": "Jun/2026 — Present",
@@ -62,7 +57,6 @@
   "exp.b2_1": "Preventive and corrective computer maintenance",
   "exp.b2_2": "Installing and repairing operating systems and software",
   "exp.b2_3": "Building digital forms for service orders",
-
   "edu.label": "education",
   "edu.title": "Education &amp;<br>certifications",
   "edu.c1_title": "Associate Degree in Systems Analysis and Development",
@@ -71,11 +65,9 @@
   "edu.c4_title": "Introduction to Programming with Python",
   "edu.c5_title": "Git and GitHub for Beginners",
   "edu.c6_title": "Intern Track — Assertive Communication, Productivity, and Agile Methods (Kanban)",
-
   "cert.label": "certificates",
   "cert.title": "Certificates<br>&amp; courses",
   "cert.loading": "Loading certificates…",
-
   "contact.label": "contact",
   "contact.title": "Let's<br>talk",
   "contact.lead": "I'm currently interning at Sesc Pernambuco's Digital Technology Unit and I'm open to new opportunities and connections in systems development. Feel free to reach out via the form or the channels below.",
@@ -87,9 +79,14 @@
   "contact.formMsg": "Message <span aria-hidden=\"true\">*</span>",
   "contact.formMsgPh": "Hi Thaynan! I have an opportunity…",
   "contact.formSubmit": "Send message",
-
   "footer.text": "Thaynan Passos — built with HTML, CSS &amp; JS",
   "footer.resume": "Resume",
-
-  "whatsapp.bubble": "Chat with me on WhatsApp! 👋"
+  "whatsapp.bubble": "Chat with me on WhatsApp! 👋",
+  "terminal.subtitle": "Software Systems",
+  "terminal.cargoKey": "role",
+  "terminal.cargoVal": "Technology Intern",
+  "terminal.empresaKey": "company",
+  "terminal.stackKey": "stack",
+  "terminal.statusKey": "status",
+  "terminal.statusVal": "interning 🟢"
 }
