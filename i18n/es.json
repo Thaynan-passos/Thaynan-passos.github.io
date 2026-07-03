@@ -6,13 +6,11 @@
   "nav.certificates": "certificados",
   "nav.contact": "contacto",
   "nav.resume": "curriculum.pdf",
-
   "hero.eyebrow": "Pasante de Tecnología — Sesc Pernambuco",
   "hero.title": "Thaynan<br>Passos<br><em>Sistemas &amp; Desarrollo</em>",
   "hero.lead": "Estudiante de Análisis y Desarrollo de Sistemas en el IFPE, actualmente pasante en la Unidad de Tecnología Digital de Sesc Pernambuco. Del soporte técnico al código — construyendo soluciones realmente prácticas.",
   "hero.btnContact": "Ponerse en contacto",
   "hero.btnProjects": "Ver proyectos",
-
   "about.title": "Del soporte técnico<br>al desarrollo",
   "about.p1": "Soy estudiante de Análisis y Desarrollo de Sistemas en el IFPE. Actualmente soy pasante en la Unidad de Tecnología Digital de Sesc Pernambuco, donde trabajo en configuración de plataformas internas, documentación técnica, pruebas de software y mantenimiento de hotsites en WordPress. Antes de eso, fui becario de soporte técnico en la UFPE (STI/NATI-CB) durante más de 4 años — lo que me dio una visión real de cómo funcionan los sistemas por dentro.",
   "about.p2": "Esa rutina me llevó a estudiar programación en serio. Tengo bases en lógica, Python, Java, SQL y Git, y aplico ese conocimiento tanto en mi pasantía como en proyectos propios — siempre buscando crecer en desarrollo de software y automatización de procesos.",
@@ -20,7 +18,6 @@
   "about.fact2": "Tecnólogo en Sistemas — IFPE (en curso)",
   "about.fact3": "Pasante de Tecnología — Sesc Pernambuco (desde jun/2026)",
   "about.fact4": "Más de 4 años de experiencia en soporte e infraestructura de TI",
-
   "skills.title": "Habilidades<br>técnicas",
   "skills.card1": "Desarrollo &amp; Lógica",
   "skills.logic": "Lógica de Programación",
@@ -35,12 +32,10 @@
   "skills.org": "Organización",
   "skills.proactive": "Proactividad",
   "skills.learn": "Aprendizaje rápido",
-
   "projects.label": "repositorios",
   "projects.title": "Proyectos en<br>GitHub",
   "projects.loading": "Cargando proyectos de GitHub…",
   "projects.viewAll": "Ver todos en GitHub",
-
   "exp.label": "trayectoria",
   "exp.title": "Experiencia<br>profesional",
   "exp.period0": "Jun/2026 — Actual",
@@ -62,7 +57,6 @@
   "exp.b2_1": "Mantenimiento preventivo y correctivo de computadoras",
   "exp.b2_2": "Instalación y reparación de sistemas operativos y software",
   "exp.b2_3": "Creación de formularios digitales para órdenes de servicio",
-
   "edu.label": "estudios",
   "edu.title": "Formación y<br>certificaciones",
   "edu.c1_title": "Tecnólogo en Análisis y Desarrollo de Sistemas",
@@ -71,11 +65,9 @@
   "edu.c4_title": "Introducción a la Programación con Python",
   "edu.c5_title": "Git y GitHub para Principiantes",
   "edu.c6_title": "Ruta del Pasante — Comunicación Asertiva, Productividad y Metodologías Ágiles (Kanban)",
-
   "cert.label": "certificados",
   "cert.title": "Certificados<br>y cursos",
   "cert.loading": "Cargando certificados…",
-
   "contact.label": "contacto",
   "contact.title": "Hablemos",
   "contact.lead": "Actualmente soy pasante en la Unidad de Tecnología Digital de Sesc Pernambuco y estoy abierto a nuevas oportunidades y conexiones en el área de desarrollo de sistemas. Puedes escribirme por el formulario o por los canales de abajo.",
@@ -87,9 +79,14 @@
   "contact.formMsg": "Mensaje <span aria-hidden=\"true\">*</span>",
   "contact.formMsgPh": "¡Hola, Thaynan! Tengo una oportunidad…",
   "contact.formSubmit": "Enviar mensaje",
-
   "footer.text": "Thaynan Passos — hecho con HTML, CSS &amp; JS",
   "footer.resume": "Currículum",
-
-  "whatsapp.bubble": "¡Escríbeme por WhatsApp! 👋"
+  "whatsapp.bubble": "¡Escríbeme por WhatsApp! 👋",
+  "terminal.subtitle": "Sistemas &amp; Desarrollo",
+  "terminal.cargoKey": "cargo",
+  "terminal.cargoVal": "Pasante de Tecnología",
+  "terminal.empresaKey": "empresa",
+  "terminal.stackKey": "stack",
+  "terminal.statusKey": "estado",
+  "terminal.statusVal": "en prácticas 🟢"
 }

@@ -6,13 +6,11 @@
   "nav.certificates": "certificats",
   "nav.contact": "contact",
   "nav.resume": "cv.pdf",
-
   "hero.eyebrow": "Stagiaire en technologie — Sesc Pernambuco",
   "hero.title": "Thaynan<br>Passos<br><em>Systèmes &amp; Développement</em>",
   "hero.lead": "Étudiant en Développement de Systèmes à l'IFPE, actuellement stagiaire à l'Unité de Technologie Numérique de Sesc Pernambuco. Du support technique au code — je construis des solutions vraiment concrètes.",
   "hero.btnContact": "Me contacter",
   "hero.btnProjects": "Voir les projets",
-
   "about.title": "Du support technique<br>au développement",
   "about.p1": "Je suis étudiant en Analyse et Développement de Systèmes à l'IFPE. Je suis actuellement stagiaire à l'Unité de Technologie Numérique de Sesc Pernambuco, où je m'occupe de la configuration de plateformes internes, de documentation technique, de tests logiciels et de la maintenance de sites WordPress. Auparavant, j'ai été assistant de support technique à l'UFPE (STI/NATI-CB) pendant plus de 4 ans — ce qui m'a donné une vision concrète du fonctionnement interne des systèmes.",
   "about.p2": "Cette expérience m'a amené à étudier la programmation sérieusement. J'ai des bases solides en logique, Python, Java, SQL et Git, que j'applique aussi bien dans mon stage que dans mes projets personnels — toujours dans l'optique de progresser en développement logiciel et en automatisation des processus.",
@@ -20,7 +18,6 @@
   "about.fact2": "BTS en Développement de Systèmes — IFPE (en cours)",
   "about.fact3": "Stagiaire en technologie — Sesc Pernambuco (depuis juin 2026)",
   "about.fact4": "Plus de 4 ans d'expérience en support et infrastructure informatique",
-
   "skills.title": "Compétences<br>techniques",
   "skills.card1": "Développement &amp; Logique",
   "skills.logic": "Logique de programmation",
@@ -35,12 +32,10 @@
   "skills.org": "Organisation",
   "skills.proactive": "Proactivité",
   "skills.learn": "Apprentissage rapide",
-
   "projects.label": "dépôts",
   "projects.title": "Projets<br>GitHub",
   "projects.loading": "Chargement des projets GitHub…",
   "projects.viewAll": "Voir tout sur GitHub",
-
   "exp.label": "parcours",
   "exp.title": "Expérience<br>professionnelle",
   "exp.period0": "Juin 2026 — Aujourd'hui",
@@ -62,7 +57,6 @@
   "exp.b2_1": "Maintenance préventive et corrective d'ordinateurs",
   "exp.b2_2": "Installation et réparation de systèmes d'exploitation et de logiciels",
   "exp.b2_3": "Création de formulaires numériques pour les ordres de service",
-
   "edu.label": "études",
   "edu.title": "Formation et<br>certifications",
   "edu.c1_title": "BTS en Analyse et Développement de Systèmes",
@@ -71,11 +65,9 @@
   "edu.c4_title": "Introduction à la programmation avec Python",
   "edu.c5_title": "Git et GitHub pour débutants",
   "edu.c6_title": "Parcours du stagiaire — Communication assertive, productivité et méthodes agiles (Kanban)",
-
   "cert.label": "certificats",
   "cert.title": "Certificats<br>et cours",
   "cert.loading": "Chargement des certificats…",
-
   "contact.label": "contact",
   "contact.title": "Discutons",
   "contact.lead": "Je suis actuellement stagiaire à l'Unité de Technologie Numérique de Sesc Pernambuco et je suis ouvert à de nouvelles opportunités et connexions dans le développement de systèmes. N'hésitez pas à m'écrire via le formulaire ou les canaux ci-dessous.",
@@ -87,9 +79,14 @@
   "contact.formMsg": "Message <span aria-hidden=\"true\">*</span>",
   "contact.formMsgPh": "Bonjour Thaynan ! J'ai une opportunité…",
   "contact.formSubmit": "Envoyer le message",
-
   "footer.text": "Thaynan Passos — réalisé avec HTML, CSS &amp; JS",
   "footer.resume": "CV",
-
-  "whatsapp.bubble": "Écrivez-moi sur WhatsApp ! 👋"
+  "whatsapp.bubble": "Écrivez-moi sur WhatsApp ! 👋",
+  "terminal.subtitle": "Systèmes &amp; Développement",
+  "terminal.cargoKey": "poste",
+  "terminal.cargoVal": "Stagiaire en technologie",
+  "terminal.empresaKey": "entreprise",
+  "terminal.stackKey": "stack",
+  "terminal.statusKey": "statut",
+  "terminal.statusVal": "en stage 🟢"
 }

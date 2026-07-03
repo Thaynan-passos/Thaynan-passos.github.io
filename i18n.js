@@ -73,6 +73,11 @@
     document.querySelectorAll('.lang-option').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
     });
+
+    // expõe o dicionário atual e avisa outras partes da página (ex: terminal animado)
+    window.__i18nDict = dict;
+    window.__i18nLang = lang;
+    window.dispatchEvent(new CustomEvent('i18n:change', { detail: { lang, dict } }));
   }
 
   /* ── Troca de idioma ─────────────────────────────────────── */
