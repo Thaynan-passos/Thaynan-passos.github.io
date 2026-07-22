@@ -1,0 +1,44 @@
+name: Gerar miniaturas dos certificados
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'certificados/**/*.pdf'
+      - 'generate_certificate_previews.py'
+      - 'requirements-certificates.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-previews:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar o repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependências
+        run: python -m pip install -r requirements-certificates.txt
+
+      - name: Gerar miniaturas dos PDFs
+        run: python generate_certificate_previews.py
+
+      - name: Salvar miniaturas geradas
+        run: |
+          if git diff --quiet -- certificados/*.preview.png; then
+            echo "Nenhuma miniatura nova para salvar."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add certificados/*.preview.png
+          git commit -m "chore: gerar miniaturas dos certificados"
+          git push
