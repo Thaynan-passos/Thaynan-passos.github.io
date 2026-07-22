@@ -196,6 +196,26 @@
 
       let index = 0;
       let slides = [];
+      let autoplayId = null;
+      const carousel = document.getElementById('certCarousel');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      function stopAutoplay() {
+        if (autoplayId) {
+          clearInterval(autoplayId);
+          autoplayId = null;
+        }
+      }
+
+      function startAutoplay() {
+        stopAutoplay();
+        if (slides.length < 2 || prefersReducedMotion.matches || document.hidden) return;
+        autoplayId = setInterval(() => goTo(index + 1), 5000);
+      }
+
+      function restartAutoplay() {
+        startAutoplay();
+      }
 
       function extOf(name) {
         const i = name.lastIndexOf('.');
@@ -238,7 +258,11 @@
         <div class="cert-card">
           <div class="cert-card-media ${s.isPdf ? 'is-pdf' : ''}">
             ${s.isPdf
-            ? `<svg width="46" height="46" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>arquivo PDF</span>`
+            ? (s.previewUrl
+              ? `<img src="${s.previewUrl}" alt="Prévia do certificado: ${s.title}" loading="lazy">`
+              : `<object class="cert-pdf-preview" data="${s.url}#page=1&view=FitH&toolbar=0&navpanes=0" type="application/pdf" aria-label="Prévia do certificado: ${s.title}">
+                <a href="${s.url}" target="_blank" rel="noopener noreferrer">Abrir certificado em PDF</a>
+              </object>`)
             : `<img src="${s.url}" alt="Certificado: ${s.title}" loading="lazy">`
           }
           </div>
@@ -258,10 +282,14 @@
         ).join('');
 
         dotsBox.querySelectorAll('.cert-dot').forEach((dot, i) => {
-          dot.addEventListener('click', () => goTo(i));
+          dot.addEventListener('click', () => {
+            goTo(i);
+            restartAutoplay();
+          });
         });
 
         update();
+        startAutoplay();
       }
 
       function update() {
@@ -278,8 +306,28 @@
         update();
       }
 
-      prevBtn.addEventListener('click', () => goTo(index - 1));
-      nextBtn.addEventListener('click', () => goTo(index + 1));
+      prevBtn.addEventListener('click', () => {
+        goTo(index - 1);
+        restartAutoplay();
+      });
+      nextBtn.addEventListener('click', () => {
+        goTo(index + 1);
+        restartAutoplay();
+      });
+
+      carousel.addEventListener('mouseenter', stopAutoplay);
+      carousel.addEventListener('mouseleave', startAutoplay);
+      carousel.addEventListener('focusin', stopAutoplay);
+      carousel.addEventListener('focusout', () => {
+        setTimeout(() => {
+          if (!carousel.contains(document.activeElement)) startAutoplay();
+        }, 0);
+      });
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stopAutoplay();
+        else startAutoplay();
+      });
+      prefersReducedMotion.addEventListener('change', startAutoplay);
 
       fetch(`https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/${FOLDER}`)
         .then(r => {
@@ -289,16 +337,39 @@
         .then(files => {
           if (!Array.isArray(files)) throw new Error('unexpected response');
 
-          slides = files
-            .filter(f => f.type === 'file')
-            .filter(f => IMG_EXT.includes(extOf(f.name)) || PDF_EXT.includes(extOf(f.name)))
-            .sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'))
+          const fileItems = files.filter(f => f.type === 'file');
+          const pdfFiles = fileItems.filter(f => PDF_EXT.includes(extOf(f.name)));
+          const previewNames = new Set(
+            pdfFiles.map(f => `${f.name.slice(0, f.name.lastIndexOf('.'))}.preview.png`.toLowerCase())
+          );
+          const previewByName = new Map(
+            fileItems
+              .filter(f => IMG_EXT.includes(extOf(f.name)))
+              .map(f => [f.name.toLowerCase(), f])
+          );
+
+          const pdfSlides = pdfFiles.map(f => {
+            const previewName = `${f.name.slice(0, f.name.lastIndexOf('.'))}.preview.png`.toLowerCase();
+            return {
+              name: f.name,
+              url: f.download_url,
+              previewUrl: previewByName.get(previewName)?.download_url,
+              isPdf: true,
+              title: titleFromName(f.name)
+            };
+          });
+          const imageSlides = fileItems
+            .filter(f => IMG_EXT.includes(extOf(f.name)))
+            .filter(f => !previewNames.has(f.name.toLowerCase()))
             .map(f => ({
               name: f.name,
               url: f.download_url,
-              isPdf: PDF_EXT.includes(extOf(f.name)),
+              isPdf: false,
               title: titleFromName(f.name)
             }));
+
+          slides = [...pdfSlides, ...imageSlides]
+            .sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
 
           if (!slides.length) { renderEmpty(); return; }
           render();
