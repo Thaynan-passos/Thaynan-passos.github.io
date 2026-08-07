@@ -36,6 +36,7 @@
       font-size: 16px;
       line-height: 1.65;
       min-height: 100vh;
+      min-height: 100dvh;
       overflow-x: hidden;
     }
 
@@ -61,7 +62,7 @@
     }
 
     section {
-      padding: 96px 0;
+      padding: clamp(56px, 11vh, 96px) 0;
     }
 
     .section-label {
@@ -340,10 +341,18 @@
 
     /* ── HERO ─────────────────────────────────────────────── */
     .hero {
-      padding-top: 140px;
-      padding-bottom: 96px;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding-top: clamp(96px, 20vh, 140px);
+      padding-bottom: clamp(48px, 10vh, 96px);
       position: relative;
       overflow: hidden;
+    }
+
+    .hero .wrap {
+      width: 100%;
     }
 
     /* diagonal accent strip */
@@ -360,7 +369,7 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.1fr 0.9fr;
       gap: 64px;
       align-items: center;
     }
@@ -406,20 +415,27 @@
 
     .hero h1 {
       font-family: var(--display);
-      font-size: clamp(2.8rem, 6vw, 4.4rem);
+      font-size: clamp(2.6rem, 5vw, 3.8rem);
       font-weight: 800;
-      line-height: 1.08;
+      line-height: 1.1;
       letter-spacing: -.03em;
       color: var(--text);
       margin-bottom: 24px;
-      /* Permite que títulos traduzidos quebrem dentro da coluna, sem invadir o terminal. */
+      /* Quebra apenas se a palavra realmente não couber (rede de segurança para traduções longas). */
       white-space: normal;
-      overflow-wrap: break-word;
+      overflow-wrap: normal;
+      word-break: normal;
     }
 
     .hero h1 em {
       font-style: normal;
       color: var(--accent);
+      font-size: clamp(1.2rem, 3vw, 2.4rem);
+      line-height: 1.15;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      display: inline-block;
+      max-width: 100%;
     }
 
     .hero-lead {
@@ -517,7 +533,7 @@
       font-family: var(--mono);
       font-size: 13px;
       line-height: 1.9;
-      min-height: 220px;
+      min-height: clamp(160px, 24vh, 220px);
       overflow-wrap: break-word;
     }
 
@@ -572,7 +588,7 @@
 
     .photo-wrap img {
       width: 260px;
-      height: 290px;
+      height: clamp(220px, 32vh, 290px);
       object-fit: cover;
       border-radius: 12px;
       filter: grayscale(20%);
@@ -989,7 +1005,7 @@
       overflow: hidden;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      min-height: 320px;
+      min-height: clamp(260px, 42vh, 320px);
     }
 
     .cert-card-media {
@@ -998,7 +1014,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      min-height: 220px;
+      min-height: clamp(180px, 30vh, 220px);
     }
 
     .cert-card-media img {
@@ -1014,7 +1030,7 @@
     .cert-pdf-preview {
       width: 100%;
       height: 100%;
-      min-height: 320px;
+      min-height: clamp(260px, 42vh, 320px);
       border: 0;
       background: #fff;
     }
@@ -1108,11 +1124,11 @@
       }
 
       .cert-card-media {
-        min-height: 200px;
+        min-height: clamp(160px, 26vh, 200px);
       }
 
       .cert-pdf-preview {
-        min-height: 200px;
+        min-height: clamp(160px, 26vh, 200px);
       }
 
       .cert-card-body {
@@ -1314,7 +1330,13 @@
     /* ── RESPONSIVE ─────────────────────────────────────── */
     @media (max-width: 768px) {
       section {
-        padding: 64px 0;
+        padding: clamp(40px, 9vh, 64px) 0;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: clamp(88px, 16vh, 120px);
+        padding-bottom: clamp(40px, 8vh, 64px);
       }
 
       .hero-grid,
@@ -1324,8 +1346,34 @@
         grid-template-columns: 1fr;
       }
 
-      .nav-links,
+      nav {
+        justify-content: flex-start;
+      }
+
+      .logo {
+        margin-right: auto;
+      }
+
       .nav-cta {
+        display: none;
+      }
+
+      .lang-switch {
+        order: 2;
+      }
+
+      .menu-btn {
+        display: flex;
+        order: 3;
+        margin-left: 12px;
+      }
+
+      .lang-btn {
+        padding: 6px 10px;
+        gap: 4px;
+      }
+
+      .nav-links {
         display: none;
       }
 
@@ -1338,14 +1386,11 @@
         padding: 32px 24px;
         gap: 24px;
         border-top: 1px solid var(--border);
+        order: initial;
       }
 
       .nav-links.open a {
         font-size: 18px;
-      }
-
-      .menu-btn {
-        display: flex;
       }
 
       .photo-wrap {
@@ -1354,11 +1399,40 @@
 
       .photo-wrap img {
         width: 100%;
-        height: 260px;
+        height: clamp(200px, 34vh, 260px);
       }
 
       .about-grid {
         gap: 40px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      #langBtnLabel {
+        display: none;
+      }
+
+      .lang-btn {
+        padding: 6px 8px;
+      }
+    }
+
+    /* ── TABLET ──────────────────────────────────────────── */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .wrap {
+        padding: 0 40px;
+      }
+
+      .hero-grid {
+        gap: 40px;
+      }
+
+      .about-grid {
+        gap: 40px;
+      }
+
+      .photo-wrap img {
+        height: clamp(240px, 30vh, 290px);
       }
     }
 
