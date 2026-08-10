@@ -108,6 +108,14 @@
       border-bottom: 1px solid var(--border);
     }
 
+    /* backdrop-filter creates a new containing block for fixed-position
+       descendants, which breaks the full-screen .nav-links.open panel
+       (it would size itself against header's 60px box instead of the
+       viewport). Drop the filter for the moment the menu is open. */
+    header.nav-open {
+      backdrop-filter: none;
+    }
+
     nav {
       display: flex;
       align-items: center;

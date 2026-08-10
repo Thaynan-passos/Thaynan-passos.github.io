@@ -4,14 +4,17 @@
     /* ── Mobile menu ── */
     const menuBtn = document.getElementById('menuBtn');
     const navLinks = document.getElementById('navLinks');
+    const siteHeader = document.querySelector('header');
     menuBtn.addEventListener('click', () => {
       const open = navLinks.classList.toggle('open');
       menuBtn.setAttribute('aria-expanded', open);
+      siteHeader.classList.toggle('nav-open', open);
     });
     navLinks.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
         navLinks.classList.remove('open');
         menuBtn.setAttribute('aria-expanded', 'false');
+        siteHeader.classList.remove('nav-open');
       });
     });
 
