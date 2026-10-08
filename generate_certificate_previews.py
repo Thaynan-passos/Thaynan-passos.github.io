@@ -57,6 +57,33 @@ def main() -> None:
     generated = sum(create_preview(pdf, args.force) for pdf in pdfs)
     print(f"Concluído: {generated} miniatura(s) gerada(s).")
 
+    # Atualiza o manifesto certificados.json automaticamente
+    import json
+    items = []
+    for pdf in pdfs:
+        preview = pdf.with_suffix(".preview.png")
+        name = pdf.name
+        lower = name.lower()
+        if any(k in lower for k in ["python", "program", "git", "wordpress", "vendas"]):
+            cat = "dev"
+        elif any(k in lower for k in ["ciberseguran", "sharepoint", "redes", "suporte"]):
+            cat = "infra"
+        else:
+            cat = "gestao"
+        clean_title = name.replace(".pdf", "").replace("-", " ").replace("_", " ").strip()
+        items.append({
+            "name": name,
+            "title": clean_title,
+            "category": cat,
+            "url": f"certificados/{name}",
+            "previewUrl": f"certificados/{preview.name}" if preview.exists() else f"certificados/{name}",
+            "isPdf": True
+        })
+    manifest_path = CERTIFICATES_DIR / "certificados.json"
+    manifest_path.write_text(json.dumps(items, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Manifesto atualizado com sucesso em {manifest_path.name} ({len(items)} itens).")
+
 
 if __name__ == "__main__":
     main()
+

@@ -1,0 +1,90 @@
+[
+  {
+    "name": "certificado-udemy-Python-PCEP.pdf",
+    "title": "Python PCEP — Preparatório de Certificação",
+    "category": "dev",
+    "url": "certificados/certificado-udemy-Python-PCEP.pdf",
+    "previewUrl": "certificados/certificado-udemy-Python-PCEP.preview.png",
+    "isPdf": true
+  },
+  {
+    "name": "Cesar-School-Noções-de-Programação.pdf",
+    "title": "Cesar School — Noções de Programação",
+    "category": "dev",
+    "url": "certificados/Cesar-School-Noções-de-Programação.pdf",
+    "previewUrl": "certificados/Cesar-School-Noções-de-Programação.preview.png",
+    "isPdf": true
+  },
+  {
+    "name": "certificado-udemy-Git-Github-Zero-Avançado.pdf",
+    "title": "Git & GitHub — Do Zero ao Avançado",
+    "category": "dev",
+    "url": "certificados/certificado-udemy-Git-Github-Zero-Avançado.pdf",
+    "previewUrl": "certificados/certificado-udemy-Git-Github-Zero-Avançado.preview.png",
+    "isPdf": true
+  },
+  {
+    "name": "certificado-udemy-WordPress-bAsico-Avançado.pdf",
+    "title": "WordPress — Do Básico ao Avançado",
+    "category": "dev",
+    "url": "certificados/certificado-udemy-WordPress-bAsico-Avançado.pdf",
+    "previewUrl": "certificados/certificado-udemy-WordPress-bAsico-Avançado.preview.png",
+    "isPdf": true
+  },
+  {
+    "name": "FAST-rilha-de-Transição-de-carreira-em-Cibersegurança.pdf",
+    "title": "FAST — Transição de Carreira em Cibersegurança",
+    "category": "infra",
+    "url": "certificados/FAST-rilha-de-Transição-de-carreira-em-Cibersegurança.pdf",
+    "previewUrl": "certificados/FAST-rilha-de-Transição-de-carreira-em-Cibersegurança.preview.png",
+    "isPdf": true
+  },
+  {
+    "name": "certificado-udemy-Sharepoint-Zero-Avançado.pdf",
+    "title": "Microsoft SharePoint — Do Zero ao Avançado",
+    "category": "infra",
+    "url": "certificados/certificado-udemy-Sharepoint-Zero-Avançado.pdf",
+    "previewUrl": "certificados/certificado-udemy-Sharepoint-Zero-Avançado.preview.png",
+    "isPdf": true
+  },
+  {
+    "name": "Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.pdf",
+    "title": "Bootcamp HEINEKEN — I.A. Aplicada a Vendas",
+    "category": "dev",
+    "url": "certificados/Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.pdf",
+    "previewUrl": "certificados/Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.preview.png",
+    "isPdf": true
+  },
+  {
+    "name": "certificado-udemy_Metodologias-Ágeis-XP,Scrum,LeamEKanban.pdf",
+    "title": "Metodologias Ágeis — XP, Scrum, Lean e Kanban",
+    "category": "gestao",
+    "url": "certificados/certificado-udemy_Metodologias-Ágeis-XP,Scrum,LeamEKanban.pdf",
+    "previewUrl": "certificados/certificado-udemy_Metodologias-Ágeis-XP,Scrum,LeamEKanban.preview.png",
+    "isPdf": true
+  },
+  {
+    "name": "certificado-udemy_comunicaçãoAssertiva.pdf",
+    "title": "Comunicação Assertiva no Ambiente Profissional",
+    "category": "gestao",
+    "url": "certificados/certificado-udemy_comunicaçãoAssertiva.pdf",
+    "previewUrl": "certificados/certificado-udemy_comunicaçãoAssertiva.preview.png",
+    "isPdf": true
+  },
+  {
+    "name": "certificado-udemy-ProdutividadeProcrastinaçãoGestãoTempo.pdf",
+    "title": "Produtividade & Gestão de Tempo",
+    "category": "gestao",
+    "url": "certificados/certificado-udemy-ProdutividadeProcrastinaçãoGestãoTempo.pdf",
+    "previewUrl": "certificados/certificado-udemy-ProdutividadeProcrastinaçãoGestãoTempo.preview.png",
+    "isPdf": true
+  },
+  {
+    "name": "certificado-udemy-Hiper-Eficiência&Gestão-Tempo.pdf",
+    "title": "Hiper Eficiência & Gestão de Tempo",
+    "category": "gestao",
+    "url": "certificados/certificado-udemy-Hiper-Eficiência&Gestão-Tempo.pdf",
+    "previewUrl": "certificados/certificado-udemy-Hiper-Eficiência&Gestão-Tempo.preview.png",
+    "isPdf": true
+  }
+]

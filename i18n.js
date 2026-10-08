@@ -1,20 +1,10 @@
 /**
- * i18n.js — sistema simples de internacionalização
- * -----------------------------------------------------
- * Como funciona:
- * 1. Cada idioma tem um arquivo JSON em /i18n/{codigo}.json
- * 2. Elementos no HTML marcados com data-i18n="chave" recebem o texto traduzido
- * 3. Elementos com data-i18n-placeholder="chave" têm o atributo placeholder traduzido
- * 4. O idioma escolhido fica salvo no navegador (localStorage) para a próxima visita
- *
- * Para adicionar um novo idioma:
- * 1. Crie /i18n/{codigo}.json com as mesmas chaves dos outros arquivos
- * 2. Adicione um <button class="lang-option" data-lang="codigo"> no menu do HTML
- * 3. Adicione o rótulo curto (ex: "DE") no objeto LANG_LABELS abaixo
- *
- * Para editar um texto existente:
- * Basta abrir o arquivo JSON do idioma desejado e mudar o valor da chave.
- * Não é necessário mexer neste arquivo .js nem no index.html.
+ * i18n.js — sistema de internacionalização com suporte a SEO dinâmico
+ * ------------------------------------------------------------------
+ * 1. Carrega /i18n/{codigo}.json
+ * 2. Atualiza elementos com [data-i18n] e [data-i18n-placeholder]
+ * 3. Atualiza document.title e meta description dinamicamente
+ * 4. Salva a preferência no localStorage
  */
 (function () {
   'use strict';
@@ -26,7 +16,7 @@
   const LANG_LABELS = { pt: 'PT', en: 'EN', es: 'ES', zh: 'ZH', fr: 'FR' };
   const LANG_HTML_TAG = { pt: 'pt-BR', en: 'en', es: 'es', zh: 'zh-CN', fr: 'fr' };
 
-  const cache = {}; // guarda os JSONs já carregados, para não buscar de novo
+  const cache = {};
 
   /* ── Detecta o idioma inicial ────────────────────────────── */
   function detectInitialLang() {
@@ -39,7 +29,7 @@
     return DEFAULT_LANG;
   }
 
-  /* ── Busca o arquivo de tradução (com cache) ────────────────── */
+  /* ── Busca o arquivo de tradução (com cache em memória) ──── */
   async function loadLang(lang) {
     if (cache[lang]) return cache[lang];
     const res = await fetch(`i18n/${lang}.json`);
@@ -49,8 +39,9 @@
     return data;
   }
 
-  /* ── Aplica as traduções no DOM ──────────────────────────── */
+  /* ── Aplica as traduções no DOM e Metadados ──────────────── */
   function applyTranslations(dict, lang) {
+    // Textos comuns
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (dict[key] !== undefined) {
@@ -58,12 +49,31 @@
       }
     });
 
+    // Placeholders de inputs
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
       const key = el.getAttribute('data-i18n-placeholder');
       if (dict[key] !== undefined) {
         el.setAttribute('placeholder', dict[key]);
       }
     });
+
+    // Atualização de SEO dinâmica (Título e Descrição da aba)
+    if (dict['meta.title']) {
+      document.title = dict['meta.title'];
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.setAttribute('content', dict['meta.title']);
+      const twTitle = document.querySelector('meta[name="twitter:title"]');
+      if (twTitle) twTitle.setAttribute('content', dict['meta.title']);
+    }
+
+    if (dict['meta.desc']) {
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', dict['meta.desc']);
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) ogDesc.setAttribute('content', dict['meta.desc']);
+      const twDesc = document.querySelector('meta[name="twitter:description"]');
+      if (twDesc) twDesc.setAttribute('content', dict['meta.desc']);
+    }
 
     document.documentElement.setAttribute('lang', LANG_HTML_TAG[lang] || lang);
 
@@ -74,9 +84,10 @@
       btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
     });
 
-    // expõe o dicionário atual e avisa outras partes da página (ex: terminal animado)
+    // Expõe globalmente
     window.__i18nDict = dict;
     window.__i18nLang = lang;
+    window.t = (key, fallback) => (dict && dict[key] !== undefined ? dict[key] : (fallback || ''));
     window.dispatchEvent(new CustomEvent('i18n:change', { detail: { lang, dict } }));
   }
 
@@ -89,12 +100,13 @@
       localStorage.setItem(STORAGE_KEY, lang);
     } catch (err) {
       console.error('[i18n] erro ao trocar idioma:', err);
-      // se falhar e não for o idioma padrão, tenta cair pro padrão
       if (lang !== DEFAULT_LANG) setLang(DEFAULT_LANG);
     }
   }
 
-  /* ── Liga o dropdown do seletor de idioma ────────────────── */
+  window.setLanguage = setLang;
+
+  /* ── Dropdown do seletor de idioma ───────────────────────── */
   function wireLangSwitcher() {
     const wrap = document.getElementById('langSwitch');
     const btn = document.getElementById('langBtn');
@@ -123,12 +135,12 @@
       });
     });
 
-    // fecha ao clicar fora
+    // Fecha ao clicar fora
     document.addEventListener('click', (e) => {
       if (!wrap.contains(e.target)) closeMenu();
     });
 
-    // fecha com Esc
+    // Fecha com Esc
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeMenu();
     });

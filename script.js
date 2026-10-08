@@ -1,415 +1,727 @@
-/* ── Year ── */
-    document.getElementById('yr').textContent = new Date().getFullYear();
+/**
+ * script.js — Interatividade, API GitHub com Cache & Proteção,
+ * Carrossel com Suporte Touch/Swipe, Grade de Certificados e WhatsApp FAB.
+ */
 
-    /* ── Mobile menu ── */
-    const menuBtn = document.getElementById('menuBtn');
-    const navLinks = document.getElementById('navLinks');
-    const siteHeader = document.querySelector('header');
-    menuBtn.addEventListener('click', () => {
-      const open = navLinks.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', open);
-      siteHeader.classList.toggle('nav-open', open);
-    });
-    navLinks.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        menuBtn.setAttribute('aria-expanded', 'false');
-        siteHeader.classList.remove('nav-open');
-      });
-    });
+/* ── Ano automático no rodapé ── */
+const yrEl = document.getElementById('yr');
+if (yrEl) yrEl.textContent = new Date().getFullYear();
 
-    /* ── Back to top ── */
-    const btn = document.getElementById('back-top');
-    window.addEventListener('scroll', () => {
-      btn.classList.toggle('show', window.scrollY > 400);
-    }, { passive: true });
-    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+/* ── Menu Mobile ── */
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+const siteHeader = document.querySelector('header');
 
-    /* ── Terminal animation ── */
-    (function () {
-      const el = document.getElementById('terminalBody');
+if (menuBtn && navLinks) {
+  function toggleMobileMenu(open) {
+    const isOpen = open !== undefined ? open : !navLinks.classList.contains('open');
+    navLinks.classList.toggle('open', isOpen);
+    menuBtn.setAttribute('aria-expanded', String(isOpen));
+    if (siteHeader) siteHeader.classList.toggle('nav-open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
 
-      // valores que não mudam por idioma (nome próprio, stack técnica, comandos de shell)
-      const EMPRESA_VAL = 'Sesc Pernambuco / UTD';
-      const STACK_VAL = '["Java","Python","Git","SQL","Docker"]';
+  menuBtn.addEventListener('click', () => toggleMobileMenu());
 
-      // fallback (pt) caso as traduções ainda não tenham carregado
-      const FALLBACK = {
-        'terminal.subtitle': 'ADS &amp; Sistemas',
-        'terminal.cargoKey': 'cargo',
-        'terminal.cargoVal': 'Estagiário em Tecnologia',
-        'terminal.empresaKey': 'empresa',
-        'terminal.stackKey': 'stack',
-        'terminal.statusKey': 'status',
-        'terminal.statusVal': 'estagiando 🟢',
-      };
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => toggleMobileMenu(false));
+  });
 
-      function t(dict, key) {
-        return (dict && dict[key] !== undefined) ? dict[key] : FALLBACK[key];
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+      toggleMobileMenu(false);
+    }
+  });
+}
+
+/* ── ScrollSpy (Indicador de Seção Ativa) ── */
+(function () {
+  const sections = document.querySelectorAll('section[id], header[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  if (!sections.length || !links.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        links.forEach(link => {
+          const href = link.getAttribute('href');
+          const isCurrent = href === `#${id}` || (id === 'top' && href === '#sobre');
+          link.classList.toggle('active', isCurrent);
+        });
       }
+    });
+  }, {
+    rootMargin: '-20% 0px -70% 0px',
+    threshold: 0
+  });
 
-      function buildLines(dict) {
-        return [
-          { type: 'prompt', text: 'whoami' },
-          { type: 'out', text: `<span class="t-key">Thaynan Passos</span> — ${t(dict, 'terminal.subtitle')}` },
-          { type: 'prompt', text: 'cat perfil.json' },
-          { type: 'out', text: '{' },
-          { type: 'out', text: `  <span class="t-key">"${t(dict, 'terminal.cargoKey')}"</span>: <span class="t-val">"${t(dict, 'terminal.cargoVal')}"</span>,` },
-          { type: 'out', text: `  <span class="t-key">"${t(dict, 'terminal.empresaKey')}"</span>: <span class="t-val">"${EMPRESA_VAL}"</span>,` },
-          { type: 'out', text: `  <span class="t-key">"${t(dict, 'terminal.stackKey')}"</span>: <span class="t-val">${STACK_VAL}</span>,` },
-          { type: 'out', text: `  <span class="t-key">"${t(dict, 'terminal.statusKey')}"</span>: <span class="t-val">"${t(dict, 'terminal.statusVal')}"</span>` },
-          { type: 'out', text: '}' },
-          { type: 'prompt', text: '_' },
-        ];
+  sections.forEach(sec => observer.observe(sec));
+})();
+
+/* ── Botão Voltar ao Topo ── */
+const backTopBtn = document.getElementById('back-top');
+if (backTopBtn) {
+  window.addEventListener('scroll', () => {
+    backTopBtn.classList.toggle('show', window.scrollY > 400);
+  }, { passive: true });
+  backTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+/* ── WhatsApp FAB (Balão com timer e dispensar) ── */
+(function () {
+  const fab = document.getElementById('whatsappFab');
+  const bubble = document.getElementById('whatsappBubble');
+  const closeBtn = document.getElementById('whatsappBubbleClose');
+  if (!fab) return;
+
+  const isDismissed = sessionStorage.getItem('wa-bubble-dismissed') === 'true';
+
+  if (!isDismissed) {
+    // Exibe suavemente após 2.2 segundos de navegação
+    setTimeout(() => {
+      fab.classList.add('show');
+    }, 2200);
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      fab.classList.remove('show');
+      sessionStorage.setItem('wa-bubble-dismissed', 'true');
+    });
+  }
+})();
+
+/* ── Helper de Cache para Requisições à API ── */
+async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
+  const cachedStr = localStorage.getItem(cacheKey);
+  if (cachedStr) {
+    try {
+      const parsed = JSON.parse(cachedStr);
+      const isFresh = (Date.now() - parsed.timestamp) < ttlMs;
+      if (isFresh) return parsed.data;
+    } catch (e) {
+      localStorage.removeItem(cacheKey);
+    }
+  }
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    localStorage.setItem(cacheKey, JSON.stringify({ timestamp: Date.now(), data }));
+    return data;
+  } catch (err) {
+    // Em caso de falha de rede ou Rate Limit (403), usa o cache antigo se existir
+    if (cachedStr) {
+      try {
+        const parsed = JSON.parse(cachedStr);
+        return parsed.data;
+      } catch (e) {}
+    }
+    throw err;
+  }
+}
+
+/* ── Terminal interativo (Hero) ── */
+(function () {
+  const el = document.getElementById('terminalBody');
+  if (!el) return;
+
+  const EMPRESA_VAL = 'Sesc Pernambuco / UTD';
+  const STACK_VAL = '["Java","Python","Git","SQL","Docker"]';
+
+  const FALLBACK = {
+    'terminal.subtitle': 'ADS &amp; Sistemas',
+    'terminal.cargoKey': 'cargo',
+    'terminal.cargoVal': 'Estagiário em Tecnologia',
+    'terminal.empresaKey': 'empresa',
+    'terminal.stackKey': 'stack',
+    'terminal.statusKey': 'status',
+    'terminal.statusVal': 'estagiando 🟢',
+  };
+
+  function t(dict, key) {
+    return (dict && dict[key] !== undefined) ? dict[key] : FALLBACK[key];
+  }
+
+  function buildLines(dict) {
+    return [
+      { type: 'prompt', text: 'whoami' },
+      { type: 'out', text: `<span class="t-key">Thaynan Passos</span> — ${t(dict, 'terminal.subtitle')}` },
+      { type: 'prompt', text: 'cat perfil.json' },
+      { type: 'out', text: '{' },
+      { type: 'out', text: `  <span class="t-key">"${t(dict, 'terminal.cargoKey')}"</span>: <span class="t-val">"${t(dict, 'terminal.cargoVal')}"</span>,` },
+      { type: 'out', text: `  <span class="t-key">"${t(dict, 'terminal.empresaKey')}"</span>: <span class="t-val">"${EMPRESA_VAL}"</span>,` },
+      { type: 'out', text: `  <span class="t-key">"${t(dict, 'terminal.stackKey')}"</span>: <span class="t-val">${STACK_VAL}</span>,` },
+      { type: 'out', text: `  <span class="t-key">"${t(dict, 'terminal.statusKey')}"</span>: <span class="t-val">"${t(dict, 'terminal.statusVal')}"</span>` },
+      { type: 'out', text: '}' },
+      { type: 'prompt', text: '_' },
+    ];
+  }
+
+  const cursorEl = '<span class="cursor" aria-hidden="true"></span>';
+  let runId = 0;
+
+  function typeLines(lines, myRunId, instant) {
+    let i = 0;
+    function next() {
+      if (myRunId !== runId) return;
+      if (i >= lines.length) return;
+      const line = lines[i++];
+      const div = document.createElement('div');
+      if (line.type === 'prompt') {
+        div.innerHTML = `<span class="t-prompt">~/thaynan $</span> <span class="t-cmd">${line.text === '_' ? cursorEl : line.text}</span>`;
+      } else {
+        div.innerHTML = `<span class="t-out">${line.text}</span>`;
       }
-
-      const cursorEl = '<span class="cursor" aria-hidden="true"></span>';
-      let runId = 0; // evita que uma digitação antiga "vaze" se o idioma mudar no meio da animação
-
-      function typeLines(lines, myRunId, instant) {
-        let i = 0;
-        function next() {
-          if (myRunId !== runId) return; // idioma mudou de novo, cancela essa execução
-          if (i >= lines.length) return;
-          const line = lines[i++];
-          const div = document.createElement('div');
-          if (line.type === 'prompt') {
-            div.innerHTML = `<span class="t-prompt">~/thaynan $</span> <span class="t-cmd">${line.text === '_' ? cursorEl : line.text}</span>`;
-          } else {
-            div.innerHTML = `<span class="t-out">${line.text}</span>`;
-          }
-          el.querySelectorAll('.cursor').forEach(c => c.remove());
-          el.appendChild(div);
-          if (i < lines.length) setTimeout(next, instant ? 0 : (line.type === 'prompt' ? 600 : 180));
-          else el.querySelector('.t-cmd').appendChild(document.createElement('span')).className = 'cursor';
+      el.querySelectorAll('.cursor').forEach(c => c.remove());
+      el.appendChild(div);
+      if (i < lines.length) setTimeout(next, instant ? 0 : (line.type === 'prompt' ? 600 : 180));
+      else {
+        const lastCmd = el.querySelector('.t-cmd:last-of-type') || el.lastElementChild;
+        if (lastCmd) {
+          const cur = document.createElement('span');
+          cur.className = 'cursor';
+          lastCmd.appendChild(cur);
         }
-        next();
       }
+    }
+    next();
+  }
 
-      function render(dict, instant) {
-        runId++;
-        el.innerHTML = '';
-        typeLines(buildLines(dict), runId, instant);
-      }
+  function render(dict, instant) {
+    runId++;
+    el.innerHTML = '';
+    typeLines(buildLines(dict), runId, instant);
+  }
 
-      // primeira renderização (com o que já estiver disponível)
-      setTimeout(() => render(window.__i18nDict, false), 400);
+  setTimeout(() => render(window.__i18nDict, false), 350);
+  window.addEventListener('i18n:change', (e) => render(e.detail.dict, true));
+})();
 
-      // re-renderiza (instantâneo, sem re-digitar) sempre que o idioma mudar
-      window.addEventListener('i18n:change', (e) => render(e.detail.dict, true));
-    })();
+/* ── Projetos no GitHub com Cache & Fallback ── */
+(function () {
+  const grid = document.getElementById('projectsGrid');
+  if (!grid) return;
 
-    /* ── GitHub Projects ── */
-    (function () {
-      const grid = document.getElementById('projectsGrid');
-      const GITHUB_USER = 'Thaynan-passos';
-      const LANG_COLORS = {
-        Python: '#3572A5', Java: '#b07219', HTML: '#e34c26',
-        JavaScript: '#f1e05a', CSS: '#563d7c', 'Jupyter Notebook': '#DA5B0B'
-      };
+  const GITHUB_USER = 'Thaynan-passos';
+  const LANG_COLORS = {
+    Python: '#3572A5', Java: '#b07219', HTML: '#e34c26',
+    JavaScript: '#f1e05a', CSS: '#563d7c', 'Jupyter Notebook': '#DA5B0B'
+  };
 
-      // repos to skip (forks, meta repos)
-      const SKIP = ['dio-lab-open-source', 'skills-communicate-using-markdown'];
+  const SKIP = ['dio-lab-open-source', 'skills-communicate-using-markdown'];
 
-      function langColor(lang) { return LANG_COLORS[lang] || '#58a6ff'; }
+  // Repositórios de reserva caso a API do GitHub esteja bloqueada ou sem internet
+  const FALLBACK_REPOS = [
+    {
+      name: 'Thaynan-passos.github.io',
+      html_url: `https://github.com/${GITHUB_USER}/Thaynan-passos.github.io`,
+      description: 'Portfólio profissional moderno com suporte multilíngue (i18n), terminal interativo e certificados dinâmicos.',
+      language: 'JavaScript',
+      stargazers_count: 1,
+      pushed_at: new Date().toISOString()
+    }
+  ];
 
-      fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=20&type=public`)
-        .then(r => {
-          if (!r.ok) throw new Error('GitHub API error');
-          return r.json();
-        })
-        .then(repos => {
-          const filtered = repos
-            .filter(r => !r.fork && !SKIP.includes(r.name))
-            .slice(0, 6);
+  function langColor(lang) { return LANG_COLORS[lang] || '#58a6ff'; }
 
-          if (!filtered.length) {
-            grid.innerHTML = '<p class="projects-error">Nenhum repositório público encontrado.</p>';
-            return;
-          }
+  function timeAgo(dateStr) {
+    if (!dateStr) return '';
+    const diff = Date.now() - new Date(dateStr);
+    const d = Math.floor(diff / 86400000);
+    if (d === 0) return 'hoje';
+    if (d === 1) return 'ontem';
+    if (d < 30) return `há ${d} dias`;
+    const m = Math.floor(d / 30);
+    if (m < 12) return `há ${m} ${m === 1 ? 'mês' : 'meses'}`;
+    const y = Math.floor(m / 12);
+    return `há ${y} ${y === 1 ? 'ano' : 'anos'}`;
+  }
 
-          grid.innerHTML = filtered.map(repo => {
-            const desc = repo.description || 'Sem descrição ainda.';
-            const lang = repo.language;
-            const stars = repo.stargazers_count;
-            const color = lang ? langColor(lang) : '#58a6ff';
-            return `
-          <article class="project-card">
-            <div class="project-header">
-              <h3>${repo.name}</h3>
-              <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer"
-                 class="project-link" aria-label="Abrir ${repo.name} no GitHub">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                  <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-                </svg>
-              </a>
-            </div>
-            <p class="project-desc">${desc}</p>
-            <div class="project-meta">
-              ${lang ? `<span class="project-lang">
+  function renderRepos(repos) {
+    const filtered = repos
+      .filter(r => !r.fork && !SKIP.includes(r.name))
+      .slice(0, 6);
+
+    const list = filtered.length ? filtered : FALLBACK_REPOS;
+
+    grid.innerHTML = list.map(repo => {
+      const desc = repo.description || 'Repositório de desenvolvimento de software e soluções práticas.';
+      const lang = repo.language;
+      const stars = repo.stargazers_count;
+      const color = lang ? langColor(lang) : '#58a6ff';
+      const updated = timeAgo(repo.pushed_at);
+
+      return `
+        <article class="project-card">
+          <div class="project-header">
+            <h3>${repo.name}</h3>
+            <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer"
+               class="project-link" aria-label="Abrir ${repo.name} no GitHub">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          </div>
+          <p class="project-desc">${desc}</p>
+          <div class="project-meta">
+            ${lang ? `
+              <span class="project-lang">
                 <span class="lang-dot" style="background:${color}" aria-hidden="true"></span>
                 ${lang}
               </span>` : ''}
-              ${stars > 0 ? `<span class="project-stars">
-                <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            ${stars > 0 ? `
+              <span class="project-stars">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
                 ${stars}
               </span>` : ''}
+            ${updated ? `
               <span class="project-lang" style="margin-left:auto">
-                atualizado ${timeAgo(repo.pushed_at)}
-              </span>
-            </div>
-          </article>`;
-          }).join('');
-        })
-        .catch(() => {
-          grid.innerHTML = `<p class="projects-error">
-        Não foi possível carregar os projetos. 
-        <a href="https://github.com/${GITHUB_USER}" target="_blank" rel="noopener" style="color:var(--accent)">Ver no GitHub →</a>
-      </p>`;
-        });
-
-      function timeAgo(dateStr) {
-        const diff = Date.now() - new Date(dateStr);
-        const d = Math.floor(diff / 86400000);
-        if (d === 0) return 'hoje';
-        if (d === 1) return 'ontem';
-        if (d < 30) return `há ${d} dias`;
-        const m = Math.floor(d / 30);
-        if (m < 12) return `há ${m} ${m === 1 ? 'mês' : 'meses'}`;
-        const y = Math.floor(m / 12);
-        return `há ${y} ${y === 1 ? 'ano' : 'anos'}`;
-      }
-    })();
-
-    /* ── Certificados (carrossel automático via pasta) ── */
-    (function () {
-      const track = document.getElementById('certTrack');
-      const dotsBox = document.getElementById('certDots');
-      const prevBtn = document.getElementById('certPrev');
-      const nextBtn = document.getElementById('certNext');
-      if (!track) return;
-
-      const GITHUB_USER = 'Thaynan-passos';
-      const REPO = `${GITHUB_USER}.github.io`;
-      const FOLDER = 'certificados';
-
-      const IMG_EXT = ['.png', '.jpg', '.jpeg', '.webp', '.gif'];
-      const PDF_EXT = ['.pdf'];
-
-      let index = 0;
-      let slides = [];
-      let autoplayId = null;
-      const carousel = document.getElementById('certCarousel');
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-      function stopAutoplay() {
-        if (autoplayId) {
-          clearInterval(autoplayId);
-          autoplayId = null;
-        }
-      }
-
-      function startAutoplay() {
-        stopAutoplay();
-        if (slides.length < 2 || prefersReducedMotion.matches || document.hidden) return;
-        autoplayId = setInterval(() => goTo(index + 1), 5000);
-      }
-
-      function restartAutoplay() {
-        startAutoplay();
-      }
-
-      function extOf(name) {
-        const i = name.lastIndexOf('.');
-        return i === -1 ? '' : name.slice(i).toLowerCase();
-      }
-
-      function titleFromName(name) {
-        const noExt = name.slice(0, name.lastIndexOf('.') || name.length);
-        return noExt
-          .replace(/[-_]+/g, ' ')
-          .replace(/\s+/g, ' ')
-          .trim()
-          .replace(/\b\w/g, c => c.toUpperCase());
-      }
-
-      function renderEmpty() {
-        track.innerHTML = `<p class="cert-loading">
-      Nenhum certificado por aqui ainda. Basta subir a imagem ou PDF na pasta
-      <code style="background:var(--border); color:var(--accent); padding:2px 6px; border-radius:4px;">/${FOLDER}</code>
-      do repositório que ele aparece aqui automaticamente.
-    </p>`;
-        dotsBox.innerHTML = '';
-        prevBtn.disabled = true;
-        nextBtn.disabled = true;
-      }
-
-      function renderError() {
-        track.innerHTML = `<p class="cert-error">
-      Não foi possível carregar os certificados agora.
-      <a href="https://github.com/${GITHUB_USER}/${REPO}/tree/main/${FOLDER}" target="_blank" rel="noopener">Ver pasta no GitHub →</a>
-    </p>`;
-        dotsBox.innerHTML = '';
-        prevBtn.disabled = true;
-        nextBtn.disabled = true;
-      }
-
-      function render() {
-        track.innerHTML = slides.map(s => `
-      <div class="cert-slide">
-        <div class="cert-card">
-          <div class="cert-card-media ${s.isPdf ? 'is-pdf' : ''}">
-            ${s.isPdf
-            ? (s.previewUrl
-              ? `<img src="${s.previewUrl}" alt="Prévia do certificado: ${s.title}" loading="lazy">`
-              : `<object class="cert-pdf-preview" data="${s.url}#page=1&view=FitH&toolbar=0&navpanes=0" type="application/pdf" aria-label="Prévia do certificado: ${s.title}">
-                <a href="${s.url}" target="_blank" rel="noopener noreferrer">Abrir certificado em PDF</a>
-              </object>`)
-            : `<img src="${s.url}" alt="Certificado: ${s.title}" loading="lazy">`
-          }
+                atualizado ${updated}
+              </span>` : ''}
           </div>
-          <div class="cert-card-body">
-            <h3>${s.title}</h3>
-            <p class="cert-meta">${FOLDER}/${s.name}</p>
-            <a class="btn btn-secondary" href="${s.url}" target="_blank" rel="noopener noreferrer">
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              Ver certificado
-            </a>
-          </div>
+        </article>`;
+    }).join('');
+  }
+
+  fetchWithCache(`https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=20&type=public`, `gh-repos-${GITHUB_USER}`)
+    .then(repos => {
+      renderRepos(repos);
+    })
+    .catch(() => {
+      renderRepos(FALLBACK_REPOS);
+    });
+})();
+
+/* ── Certificados (Carrossel Touch + Grade + Filtros + Lightbox) ── */
+(function () {
+  const track = document.getElementById('certTrack');
+  const dotsBox = document.getElementById('certDots');
+  const prevBtn = document.getElementById('certPrev');
+  const nextBtn = document.getElementById('certNext');
+  const carousel = document.getElementById('certCarousel');
+  const viewport = document.getElementById('certViewport');
+  const gridView = document.getElementById('certGridView');
+
+  const btnViewCarousel = document.getElementById('btnViewCarousel');
+  const btnViewGrid = document.getElementById('btnViewGrid');
+  const filterBtns = document.querySelectorAll('.cert-filter-btn');
+
+  const modal = document.getElementById('certModal');
+  const modalContent = document.getElementById('certModalContent');
+  const modalClose = document.getElementById('certModalClose');
+  const modalBackdrop = document.getElementById('certModalBackdrop');
+
+  if (!track) return;
+
+  let allCertificates = [];
+  let currentFilter = 'all';
+  let activeSlides = [];
+  let index = 0;
+  let autoplayId = null;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function stopAutoplay() {
+    if (autoplayId) {
+      clearInterval(autoplayId);
+      autoplayId = null;
+    }
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    if (activeSlides.length < 2 || prefersReducedMotion.matches || document.hidden) return;
+    autoplayId = setInterval(() => goTo(index + 1), 6000);
+  }
+
+  function restartAutoplay() {
+    startAutoplay();
+  }
+
+  function getCategory(name) {
+    const n = name.toLowerCase();
+    if (n.includes('python') || n.includes('program') || n.includes('git') || n.includes('wordpress') || n.includes('vendas')) return 'dev';
+    if (n.includes('ciberseguran') || n.includes('sharepoint') || n.includes('redes') || n.includes('suporte')) return 'infra';
+    return 'gestao';
+  }
+
+  function getBadgeLabel(cat) {
+    if (cat === 'dev') return 'Dev';
+    if (cat === 'infra') return 'Infra';
+    return 'Gestão';
+  }
+
+  /* ── Lightbox Modal ── */
+  function openModal(item) {
+    if (!modal || !modalContent) return;
+    const viewBtnText = (window.__i18nDict && window.__i18nDict['cert.viewBtn']) || 'Abrir arquivo';
+    const preview = item.previewUrl || item.url;
+
+    modalContent.innerHTML = `
+      <img src="${preview}" alt="${item.title}">
+      <div class="cert-modal-footer">
+        <div>
+          <h3>${item.title}</h3>
+          <span class="cert-grid-badge" style="position:static; display:inline-block; margin-top:4px;">${getBadgeLabel(item.category)}</span>
         </div>
-      </div>`).join('');
+        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          ${viewBtnText}
+        </a>
+      </div>
+    `;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
 
-        dotsBox.innerHTML = slides.map((_, i) =>
-          `<button class="cert-dot${i === index ? ' active' : ''}" role="tab" aria-label="Certificado ${i + 1}" aria-selected="${i === index}"></button>`
-        ).join('');
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
 
-        dotsBox.querySelectorAll('.cert-dot').forEach((dot, i) => {
-          dot.addEventListener('click', () => {
-            goTo(i);
-            restartAutoplay();
-          });
+  if (modalClose) modalClose.addEventListener('click', closeModal);
+  if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('open')) closeModal();
+  });
+
+  /* ── Renderização do Carrossel ── */
+  function updateCarousel() {
+    if (!activeSlides.length) {
+      track.innerHTML = `<p class="cert-loading">Nenhum certificado encontrado para esta categoria.</p>`;
+      if (dotsBox) dotsBox.innerHTML = '';
+      if (prevBtn) prevBtn.disabled = true;
+      if (nextBtn) nextBtn.disabled = true;
+      return;
+    }
+
+    if (prevBtn) prevBtn.disabled = false;
+    if (nextBtn) nextBtn.disabled = false;
+
+    track.innerHTML = activeSlides.map((s, i) => {
+      const preview = s.previewUrl || s.url;
+      const viewBtnText = (window.__i18nDict && window.__i18nDict['cert.viewBtn']) || 'Ver certificado';
+      return `
+        <div class="cert-slide">
+          <div class="cert-card">
+            <div class="cert-card-media" data-index="${i}">
+              <img src="${preview}" alt="Certificado: ${s.title}" loading="lazy" style="cursor:pointer;" title="Clique para ampliar">
+            </div>
+            <div class="cert-card-body">
+              <span class="pill" style="align-self:flex-start;">${getBadgeLabel(s.category)}</span>
+              <h3>${s.title}</h3>
+              <p class="cert-meta">Documento verificado</p>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button type="button" class="btn btn-secondary cert-zoom-btn" data-index="${i}">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                  Ampliar
+                </button>
+                <a class="btn btn-primary" href="${s.url}" target="_blank" rel="noopener noreferrer">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  ${viewBtnText}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+
+    track.querySelectorAll('.cert-card-media, .cert-zoom-btn').forEach(el => {
+      el.addEventListener('click', () => {
+        const idx = Number(el.getAttribute('data-index'));
+        if (activeSlides[idx]) openModal(activeSlides[idx]);
+      });
+    });
+
+    if (dotsBox) {
+      dotsBox.innerHTML = activeSlides.map((_, i) =>
+        `<button class="cert-dot${i === index ? ' active' : ''}" role="tab" aria-label="Certificado ${i + 1}" aria-selected="${i === index}"></button>`
+      ).join('');
+
+      dotsBox.querySelectorAll('.cert-dot').forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          goTo(i);
+          restartAutoplay();
         });
+      });
+    }
 
-        update();
-        startAutoplay();
-      }
+    applyPosition();
+    startAutoplay();
+  }
 
-      function update() {
-        track.style.transform = `translateX(-${index * 100}%)`;
-        dotsBox.querySelectorAll('.cert-dot').forEach((d, i) => {
-          d.classList.toggle('active', i === index);
-          d.setAttribute('aria-selected', i === index);
-        });
-      }
+  function applyPosition() {
+    track.style.transform = `translateX(-${index * 100}%)`;
+    if (dotsBox) {
+      dotsBox.querySelectorAll('.cert-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === index);
+        d.setAttribute('aria-selected', String(i === index));
+      });
+    }
+  }
 
-      function goTo(i) {
-        if (!slides.length) return;
-        index = (i + slides.length) % slides.length;
-        update();
-      }
+  function goTo(i) {
+    if (!activeSlides.length) return;
+    index = (i + activeSlides.length) % activeSlides.length;
+    applyPosition();
+  }
 
-      prevBtn.addEventListener('click', () => {
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      goTo(index - 1);
+      restartAutoplay();
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      goTo(index + 1);
+      restartAutoplay();
+    });
+  }
+
+  /* ── Suporte a Teclado no Carrossel ── */
+  if (carousel) {
+    carousel.setAttribute('tabindex', '0');
+    carousel.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
         goTo(index - 1);
         restartAutoplay();
-      });
-      nextBtn.addEventListener('click', () => {
+      } else if (e.key === 'ArrowRight') {
         goTo(index + 1);
         restartAutoplay();
-      });
+      }
+    });
+  }
 
-      carousel.addEventListener('mouseenter', stopAutoplay);
-      carousel.addEventListener('mouseleave', startAutoplay);
-      carousel.addEventListener('focusin', stopAutoplay);
-      carousel.addEventListener('focusout', () => {
-        setTimeout(() => {
-          if (!carousel.contains(document.activeElement)) startAutoplay();
-        }, 0);
-      });
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) stopAutoplay();
-        else startAutoplay();
-      });
-      prefersReducedMotion.addEventListener('change', startAutoplay);
+  /* ── Suporte a Touch Swipe (Arrastar com o dedo) ── */
+  if (viewport) {
+    let startX = 0;
+    let endX = 0;
 
-      fetch(`https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/${FOLDER}`)
-        .then(r => {
-          if (!r.ok) throw new Error('GitHub API error');
-          return r.json();
-        })
+    viewport.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      endX = startX;
+      stopAutoplay();
+    }, { passive: true });
+
+    viewport.addEventListener('touchmove', (e) => {
+      endX = e.touches[0].clientX;
+    }, { passive: true });
+
+    viewport.addEventListener('touchend', () => {
+      const diffX = endX - startX;
+      if (Math.abs(diffX) > 40) {
+        if (diffX < 0) {
+          goTo(index + 1);
+        } else {
+          goTo(index - 1);
+        }
+      }
+      restartAutoplay();
+    });
+  }
+
+  /* ── Renderização da Grade Completa ── */
+  function renderGrid() {
+    if (!gridView) return;
+    if (!activeSlides.length) {
+      gridView.innerHTML = `<p class="cert-loading" style="grid-column: 1/-1;">Nenhum certificado para o filtro selecionado.</p>`;
+      return;
+    }
+
+    const viewBtnText = (window.__i18nDict && window.__i18nDict['cert.viewBtn']) || 'Abrir';
+
+    gridView.innerHTML = activeSlides.map((s, i) => {
+      const preview = s.previewUrl || s.url;
+      return `
+        <article class="cert-grid-card">
+          <div class="cert-grid-media" data-index="${i}">
+            <img src="${preview}" alt="${s.title}" loading="lazy">
+            <span class="cert-grid-badge">${getBadgeLabel(s.category)}</span>
+          </div>
+          <div class="cert-grid-body">
+            <h3>${s.title}</h3>
+            <div class="cert-grid-footer">
+              <button type="button" class="cert-preview-btn cert-grid-zoom" data-index="${i}">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                Ver prévia
+              </button>
+              <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                ${viewBtnText}
+              </a>
+            </div>
+          </div>
+        </article>`;
+    }).join('');
+
+    gridView.querySelectorAll('.cert-grid-media, .cert-grid-zoom').forEach(el => {
+      el.addEventListener('click', () => {
+        const idx = Number(el.getAttribute('data-index'));
+        if (activeSlides[idx]) openModal(activeSlides[idx]);
+      });
+    });
+  }
+
+  /* ── Alternância de Filtros ── */
+  function applyFilter(cat) {
+    currentFilter = cat;
+    filterBtns.forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-filter') === cat);
+    });
+
+    activeSlides = currentFilter === 'all'
+      ? allCertificates
+      : allCertificates.filter(c => c.category === currentFilter);
+
+    index = 0;
+    updateCarousel();
+    renderGrid();
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      applyFilter(btn.getAttribute('data-filter'));
+    });
+  });
+
+  /* ── Alternância de Visualização (Carrossel vs Grade) ── */
+  if (btnViewCarousel && btnViewGrid && carousel && gridView) {
+    btnViewCarousel.addEventListener('click', () => {
+      btnViewCarousel.classList.add('active');
+      btnViewGrid.classList.remove('active');
+      carousel.style.display = 'flex';
+      gridView.style.display = 'none';
+      startAutoplay();
+    });
+
+    btnViewGrid.addEventListener('click', () => {
+      btnViewGrid.classList.add('active');
+      btnViewCarousel.classList.remove('active');
+      carousel.style.display = 'none';
+      gridView.style.display = 'grid';
+      stopAutoplay();
+      renderGrid();
+    });
+  }
+
+  // Pausa autoplay em interações
+  if (carousel) {
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+    carousel.addEventListener('focusin', stopAutoplay);
+    carousel.addEventListener('focusout', () => {
+      setTimeout(() => {
+        if (!carousel.contains(document.activeElement)) startAutoplay();
+      }, 0);
+    });
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopAutoplay();
+    else startAutoplay();
+  });
+
+  /* ── Carregamento dos Certificados (JSON local seguro com fallback à API) ── */
+  fetch('certificados/certificados.json')
+    .then(r => {
+      if (!r.ok) throw new Error();
+      return r.json();
+    })
+    .then(list => {
+      allCertificates = list.map(item => ({
+        ...item,
+        category: item.category || getCategory(item.name || item.title)
+      }));
+      activeSlides = allCertificates;
+      updateCarousel();
+      renderGrid();
+    })
+    .catch(() => {
+      // Fallback: se o arquivo json não puder ser lido diretamente, tenta API do GitHub com cache
+      const GITHUB_USER = 'Thaynan-passos';
+      const REPO = `${GITHUB_USER}.github.io`;
+      fetchWithCache(`https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/certificados`, 'gh-cert-list')
         .then(files => {
-          if (!Array.isArray(files)) throw new Error('unexpected response');
+          if (!Array.isArray(files)) throw new Error();
+          const pdfs = files.filter(f => f.name.endsWith('.pdf'));
+          const previews = new Map(files.filter(f => f.name.endsWith('.preview.png')).map(f => [f.name.toLowerCase(), f.download_url]));
 
-          const fileItems = files.filter(f => f.type === 'file');
-          const pdfFiles = fileItems.filter(f => PDF_EXT.includes(extOf(f.name)));
-          const previewNames = new Set(
-            pdfFiles.map(f => `${f.name.slice(0, f.name.lastIndexOf('.'))}.preview.png`.toLowerCase())
-          );
-          const previewByName = new Map(
-            fileItems
-              .filter(f => IMG_EXT.includes(extOf(f.name)))
-              .map(f => [f.name.toLowerCase(), f])
-          );
-
-          const pdfSlides = pdfFiles.map(f => {
+          allCertificates = pdfs.map(f => {
             const previewName = `${f.name.slice(0, f.name.lastIndexOf('.'))}.preview.png`.toLowerCase();
             return {
               name: f.name,
               url: f.download_url,
-              previewUrl: previewByName.get(previewName)?.download_url,
-              isPdf: true,
-              title: titleFromName(f.name)
+              previewUrl: previews.get(previewName) || f.download_url,
+              title: f.name.replace(/\.pdf$/i, '').replace(/[-_]+/g, ' ').trim(),
+              category: getCategory(f.name)
             };
           });
-          const imageSlides = fileItems
-            .filter(f => IMG_EXT.includes(extOf(f.name)))
-            .filter(f => !previewNames.has(f.name.toLowerCase()))
-            .map(f => ({
-              name: f.name,
-              url: f.download_url,
-              isPdf: false,
-              title: titleFromName(f.name)
-            }));
 
-          slides = [...pdfSlides, ...imageSlides]
-            .sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
-
-          if (!slides.length) { renderEmpty(); return; }
-          render();
+          activeSlides = allCertificates;
+          updateCarousel();
+          renderGrid();
         })
-        .catch(renderError);
-    })();
+        .catch(() => {
+          track.innerHTML = `<p class="cert-error">
+            Não foi possível carregar os certificados agora.
+            <a href="https://github.com/Thaynan-passos/Thaynan-passos.github.io/tree/main/certificados" target="_blank" rel="noopener">Ver pasta no GitHub →</a>
+          </p>`;
+        });
+    });
+})();
 
-    /* ── Contact form ── */
-    (function () {
-      const form = document.getElementById('contactForm');
-      const status = document.getElementById('formStatus');
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const btn = form.querySelector('button[type=submit]');
-        btn.disabled = true;
-        btn.textContent = 'Enviando…';
-        status.textContent = '';
-        status.className = 'form-status';
-        try {
-          const res = await fetch(form.action, {
-            method: 'POST',
-            headers: { 'Accept': 'application/json' },
-            body: new FormData(form)
-          });
-          if (res.ok) {
-            status.textContent = '✓ Mensagem enviada! Responderei em breve.';
-            status.classList.add('ok');
-            form.reset();
-          } else {
-            throw new Error();
-          }
-        } catch {
-          status.textContent = '✕ Erro ao enviar. Tente pelo e-mail diretamente.';
-          status.classList.add('err');
-        } finally {
-          btn.disabled = false;
-          btn.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Enviar mensagem';
-        }
+/* ── Formulário de Contato ── */
+(function () {
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  if (!form || !status) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type=submit]');
+    if (!btn) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+    status.textContent = '';
+    status.className = 'form-status';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
       });
-    })();
+      if (res.ok) {
+        status.textContent = '✓ Mensagem enviada! Responderei em breve.';
+        status.classList.add('ok');
+        form.reset();
+      } else {
+        throw new Error();
+      }
+    } catch {
+      status.textContent = '✕ Erro ao enviar. Tente pelo e-mail ou WhatsApp diretamente.';
+      status.classList.add('err');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = `
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <line x1="22" y1="2" x2="11" y2="13" />
+          <polygon points="22 2 15 22 11 13 2 9 22 2" />
+        </svg>
+        <span>Enviar mensagem</span>
+      `;
+    }
+  });
+})();

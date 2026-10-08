@@ -6,7 +6,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thaynan Passos — Dev & Suporte TI</title>
   <meta name="description"
+    content="Portfólio de Thaynan Passos, estudante de ADS no IFPE e desenvolvedor em formação. Da bancada de suporte ao código.">
+  <link rel="canonical" href="https://thaynan-passos.github.io/">
+  <meta name="theme-color" content="#0d0f14">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="imagens/thaynan-foto.png">
+
+  <!-- Open Graph / WhatsApp / LinkedIn / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thaynan-passos.github.io/">
+  <meta property="og:title" content="Thaynan Passos — Dev & Suporte TI">
+  <meta property="og:description"
+    content="Portfólio de Thaynan Passos, estudante de ADS no IFPE e desenvolvedor em formação. Da bancada de suporte ao código.">
+  <meta property="og:image" content="https://thaynan-passos.github.io/imagens/thaynan-foto.png">
+  <meta property="og:image:alt" content="Thaynan Passos">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Thaynan Passos — Dev & Suporte TI">
+  <meta name="twitter:description"
     content="Portfólio de Thaynan Passos, estudante de ADS no IFPE e desenvolvedor em formação.">
+  <meta name="twitter:image" content="https://thaynan-passos.github.io/imagens/thaynan-foto.png">
+
+  <!-- Schema.org dados estruturados -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Thaynan Passos",
+    "url": "https://thaynan-passos.github.io/",
+    "image": "https://thaynan-passos.github.io/imagens/thaynan-foto.png",
+    "jobTitle": "Estagiário em Tecnologia / Desenvolvedor",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Sesc Pernambuco"
+    },
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Instituto Federal de Pernambuco (IFPE)"
+    },
+    "sameAs": [
+      "https://github.com/Thaynan-passos",
+      "https://www.linkedin.com/in/thaynan-passos-91bb86181"
+    ]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -388,11 +434,31 @@
     </div>
   </section>
 
-  <!-- ═══ CERTIFICADOS (carrossel automático via pasta) ═══════ -->
+  <!-- ═══ CERTIFICADOS (carrossel automático via pasta & grade com filtros) ═══════ -->
   <section class="cert-section" id="certificados" aria-labelledby="cert-h">
     <div class="wrap">
       <p class="section-label" data-i18n="cert.label">certificados</p>
       <h2 id="cert-h" data-i18n="cert.title">Certificados<br>e cursos</h2>
+
+      <div class="cert-controls">
+        <div class="cert-filters" id="certFilters" role="toolbar" aria-label="Filtrar certificados">
+          <button class="cert-filter-btn active" data-filter="all" data-i18n="cert.filterAll">Todos</button>
+          <button class="cert-filter-btn" data-filter="dev" data-i18n="cert.filterDev">Desenvolvimento</button>
+          <button class="cert-filter-btn" data-filter="infra" data-i18n="cert.filterInfra">Suporte & Infra</button>
+          <button class="cert-filter-btn" data-filter="gestao" data-i18n="cert.filterGestao">Gestão & Soft Skills</button>
+        </div>
+        <div class="cert-view-toggle">
+          <button class="view-btn active" id="btnViewCarousel" aria-label="Visualização em carrossel" title="Carrossel">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+            <span data-i18n="cert.viewCarousel">Carrossel</span>
+          </button>
+          <button class="view-btn" id="btnViewGrid" aria-label="Visualização em grade" title="Grade">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span data-i18n="cert.viewGrid">Ver todos em grade</span>
+          </button>
+        </div>
+      </div>
+
       <div class="cert-carousel" id="certCarousel">
         <div class="cert-track-wrap">
           <button class="cert-nav prev" id="certPrev" aria-label="Certificado anterior">
@@ -402,7 +468,7 @@
             </svg>
           </button>
 
-          <div class="cert-viewport">
+          <div class="cert-viewport" id="certViewport">
             <div class="cert-track" id="certTrack" aria-live="polite">
               <p class="cert-loading"><span aria-hidden="true">⟳</span> <span data-i18n="cert.loading">Carregando
                   certificados…</span></p>
@@ -419,6 +485,8 @@
 
         <div class="cert-dots" id="certDots" role="tablist" aria-label="Selecionar certificado"></div>
       </div>
+
+      <div class="cert-grid-view" id="certGridView" style="display: none;" aria-live="polite"></div>
     </div>
   </section>
 
@@ -549,7 +617,10 @@
 
   <!-- ═══ WHATSAPP CHAT BUTTON ═══════════════════════════════ -->
   <div class="whatsapp-fab" id="whatsappFab">
-    <span class="whatsapp-bubble" id="whatsappBubble" data-i18n="whatsapp.bubble">Fala comigo no WhatsApp! 👋</span>
+    <div class="whatsapp-bubble" id="whatsappBubble">
+      <span data-i18n="whatsapp.bubble">Fala comigo no WhatsApp! 👋</span>
+      <button class="whatsapp-bubble-close" id="whatsappBubbleClose" aria-label="Fechar mensagem" title="Fechar">✕</button>
+    </div>
     <a class="whatsapp-btn" id="whatsappBtn"
       href="https://wa.me/5581991525664?text=Ol%C3%A1%20Thaynan%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!"
       target="_blank" rel="noopener noreferrer" aria-label="Conversar no WhatsApp">
@@ -558,6 +629,20 @@
           d="M16 0C7.16 0 0 7.16 0 16c0 2.82.74 5.47 2.03 7.77L0 32l8.44-2.2A15.9 15.9 0 0 0 16 32c8.84 0 16-7.16 16-16S24.84 0 16 0zm0 29.2c-2.5 0-4.85-.68-6.87-1.86l-.49-.29-5.01 1.31 1.34-4.88-.32-.5A13.14 13.14 0 0 1 2.8 16C2.8 8.7 8.7 2.8 16 2.8S29.2 8.7 29.2 16 23.3 29.2 16 29.2zm7.2-9.86c-.39-.2-2.3-1.14-2.66-1.27-.36-.13-.62-.2-.88.2-.26.39-1.01 1.27-1.24 1.53-.23.26-.46.29-.85.1-.39-.2-1.65-.61-3.14-1.94-1.16-1.04-1.94-2.32-2.17-2.71-.23-.39-.02-.6.17-.79.18-.18.39-.46.59-.69.2-.23.26-.39.39-.65.13-.26.06-.49-.03-.69-.1-.2-.88-2.11-1.2-2.89-.32-.76-.64-.66-.88-.67h-.75c-.26 0-.69.1-1.05.49-.36.39-1.37 1.34-1.37 3.27s1.4 3.79 1.6 4.05c.2.26 2.75 4.2 6.66 5.89.93.4 1.66.64 2.23.82.94.3 1.79.26 2.46.16.75-.11 2.3-.94 2.63-1.85.33-.91.33-1.69.23-1.85-.1-.16-.36-.26-.75-.46z" />
       </svg>
     </a>
+  </div>
+
+  <!-- ═══ MODAL PREVIEW DE CERTIFICADO (LIGHTBOX) ═══════════════ -->
+  <div class="cert-modal" id="certModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="cert-modal-backdrop" id="certModalBackdrop"></div>
+    <div class="cert-modal-dialog">
+      <button class="cert-modal-close" id="certModalClose" aria-label="Fechar visualização">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <div class="cert-modal-content" id="certModalContent"></div>
+    </div>
   </div>
 
   <!-- ═══ SCRIPTS ════════════════════════════════════════════ -->
