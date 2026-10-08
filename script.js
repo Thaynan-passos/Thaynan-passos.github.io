@@ -309,6 +309,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
   const carousel = document.getElementById('certCarousel');
   const viewport = document.getElementById('certViewport');
   const gridView = document.getElementById('certGridView');
+  const counterEl = document.getElementById('certCounter');
 
   const btnViewCarousel = document.getElementById('btnViewCarousel');
   const btnViewGrid = document.getElementById('btnViewGrid');
@@ -321,9 +322,101 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
 
   if (!track) return;
 
-  let allCertificates = [];
+  // Catálogo completo pré-carregado: funciona 100% offline, em file:// e sem depender de requisições de rede
+  const INITIAL_CERTIFICATES = [
+    {
+      name: "certificado-udemy-Python-PCEP.pdf",
+      title: "Python PCEP — Preparatório de Certificação",
+      category: "dev",
+      url: "certificados/certificado-udemy-Python-PCEP.pdf",
+      previewUrl: "certificados/certificado-udemy-Python-PCEP.preview.png",
+      isPdf: true
+    },
+    {
+      name: "Cesar-School-Noções-de-Programação.pdf",
+      title: "Cesar School — Noções de Programação",
+      category: "dev",
+      url: "certificados/Cesar-School-Noções-de-Programação.pdf",
+      previewUrl: "certificados/Cesar-School-Noções-de-Programação.preview.png",
+      isPdf: true
+    },
+    {
+      name: "certificado-udemy-Git-Github-Zero-Avançado.pdf",
+      title: "Git & GitHub — Do Zero ao Avançado",
+      category: "dev",
+      url: "certificados/certificado-udemy-Git-Github-Zero-Avançado.pdf",
+      previewUrl: "certificados/certificado-udemy-Git-Github-Zero-Avançado.preview.png",
+      isPdf: true
+    },
+    {
+      name: "certificado-udemy-WordPress-bAsico-Avançado.pdf",
+      title: "WordPress — Do Básico ao Avançado",
+      category: "dev",
+      url: "certificados/certificado-udemy-WordPress-bAsico-Avançado.pdf",
+      previewUrl: "certificados/certificado-udemy-WordPress-bAsico-Avançado.preview.png",
+      isPdf: true
+    },
+    {
+      name: "Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.pdf",
+      title: "Bootcamp HEINEKEN — I.A. Aplicada a Vendas",
+      category: "dev",
+      url: "certificados/Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.pdf",
+      previewUrl: "certificados/Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.preview.png",
+      isPdf: true
+    },
+    {
+      name: "FAST-rilha-de-Transição-de-carreira-em-Cibersegurança.pdf",
+      title: "FAST — Transição de Carreira em Cibersegurança",
+      category: "infra",
+      url: "certificados/FAST-rilha-de-Transição-de-carreira-em-Cibersegurança.pdf",
+      previewUrl: "certificados/FAST-rilha-de-Transição-de-carreira-em-Cibersegurança.preview.png",
+      isPdf: true
+    },
+    {
+      name: "certificado-udemy-Sharepoint-Zero-Avançado.pdf",
+      title: "Microsoft SharePoint — Do Zero ao Avançado",
+      category: "infra",
+      url: "certificados/certificado-udemy-Sharepoint-Zero-Avançado.pdf",
+      previewUrl: "certificados/certificado-udemy-Sharepoint-Zero-Avançado.preview.png",
+      isPdf: true
+    },
+    {
+      name: "certificado-udemy_Metodologias-Ágeis-XP,Scrum,LeamEKanban.pdf",
+      title: "Metodologias Ágeis — XP, Scrum, Lean e Kanban",
+      category: "gestao",
+      url: "certificados/certificado-udemy_Metodologias-Ágeis-XP,Scrum,LeamEKanban.pdf",
+      previewUrl: "certificados/certificado-udemy_Metodologias-Ágeis-XP,Scrum,LeamEKanban.preview.png",
+      isPdf: true
+    },
+    {
+      name: "certificado-udemy_comunicaçãoAssertiva.pdf",
+      title: "Comunicação Assertiva no Ambiente Profissional",
+      category: "gestao",
+      url: "certificados/certificado-udemy_comunicaçãoAssertiva.pdf",
+      previewUrl: "certificados/certificado-udemy_comunicaçãoAssertiva.preview.png",
+      isPdf: true
+    },
+    {
+      name: "certificado-udemy-ProdutividadeProcrastinaçãoGestãoTempo.pdf",
+      title: "Produtividade & Gestão de Tempo",
+      category: "gestao",
+      url: "certificados/certificado-udemy-ProdutividadeProcrastinaçãoGestãoTempo.pdf",
+      previewUrl: "certificados/certificado-udemy-ProdutividadeProcrastinaçãoGestãoTempo.preview.png",
+      isPdf: true
+    },
+    {
+      name: "certificado-udemy-Hiper-Eficiência&Gestão-Tempo.pdf",
+      title: "Hiper Eficiência & Gestão de Tempo",
+      category: "gestao",
+      url: "certificados/certificado-udemy-Hiper-Eficiência&Gestão-Tempo.pdf",
+      previewUrl: "certificados/certificado-udemy-Hiper-Eficiência&Gestão-Tempo.preview.png",
+      isPdf: true
+    }
+  ];
+
+  let allCertificates = [...INITIAL_CERTIFICATES];
   let currentFilter = 'all';
-  let activeSlides = [];
+  let activeSlides = [...allCertificates];
   let index = 0;
   let autoplayId = null;
 
@@ -346,13 +439,6 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     startAutoplay();
   }
 
-  function getCategory(name) {
-    const n = name.toLowerCase();
-    if (n.includes('python') || n.includes('program') || n.includes('git') || n.includes('wordpress') || n.includes('vendas')) return 'dev';
-    if (n.includes('ciberseguran') || n.includes('sharepoint') || n.includes('redes') || n.includes('suporte')) return 'infra';
-    return 'gestao';
-  }
-
   function getBadgeLabel(cat) {
     if (cat === 'dev') return 'Dev';
     if (cat === 'infra') return 'Infra';
@@ -362,7 +448,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
   /* ── Lightbox Modal ── */
   function openModal(item) {
     if (!modal || !modalContent) return;
-    const viewBtnText = (window.__i18nDict && window.__i18nDict['cert.viewBtn']) || 'Abrir arquivo';
+    const viewBtnText = (window.__i18nDict && window.__i18nDict['cert.viewBtn']) || 'Abrir PDF';
     const preview = item.previewUrl || item.url;
 
     modalContent.innerHTML = `
@@ -403,6 +489,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
       if (dotsBox) dotsBox.innerHTML = '';
       if (prevBtn) prevBtn.disabled = true;
       if (nextBtn) nextBtn.disabled = true;
+      if (counterEl) counterEl.textContent = '0 / 0';
       return;
     }
 
@@ -421,7 +508,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
             <div class="cert-card-body">
               <span class="pill" style="align-self:flex-start;">${getBadgeLabel(s.category)}</span>
               <h3>${s.title}</h3>
-              <p class="cert-meta">Documento verificado</p>
+              <p class="cert-meta">Documento certificado e verificado</p>
               <div style="display:flex; gap:10px; flex-wrap:wrap;">
                 <button type="button" class="btn btn-secondary cert-zoom-btn" data-index="${i}">
                   <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
@@ -463,6 +550,9 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
 
   function applyPosition() {
     track.style.transform = `translateX(-${index * 100}%)`;
+    if (counterEl) {
+      counterEl.textContent = `${index + 1} / ${activeSlides.length}`;
+    }
     if (dotsBox) {
       dotsBox.querySelectorAll('.cert-dot').forEach((d, i) => {
         d.classList.toggle('active', i === index);
@@ -490,7 +580,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     });
   }
 
-  /* ── Suporte a Teclado no Carrossel ── */
+  /* ── Teclado no Carrossel ── */
   if (carousel) {
     carousel.setAttribute('tabindex', '0');
     carousel.addEventListener('keydown', (e) => {
@@ -504,7 +594,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     });
   }
 
-  /* ── Suporte a Touch Swipe (Arrastar com o dedo) ── */
+  /* ── Suporte a Touch Swipe no Celular ── */
   if (viewport) {
     let startX = 0;
     let endX = 0;
@@ -540,7 +630,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
       return;
     }
 
-    const viewBtnText = (window.__i18nDict && window.__i18nDict['cert.viewBtn']) || 'Abrir';
+    const viewBtnText = (window.__i18nDict && window.__i18nDict['cert.viewBtn']) || 'Abrir PDF';
 
     gridView.innerHTML = activeSlides.map((s, i) => {
       const preview = s.previewUrl || s.url;
@@ -615,7 +705,6 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     });
   }
 
-  // Pausa autoplay em interações
   if (carousel) {
     carousel.addEventListener('mouseenter', stopAutoplay);
     carousel.addEventListener('mouseleave', startAutoplay);
@@ -632,53 +721,26 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     else startAutoplay();
   });
 
-  /* ── Carregamento dos Certificados (JSON local seguro com fallback à API) ── */
-  fetch('certificados/certificados.json')
-    .then(r => {
-      if (!r.ok) throw new Error();
-      return r.json();
-    })
-    .then(list => {
-      allCertificates = list.map(item => ({
-        ...item,
-        category: item.category || getCategory(item.name || item.title)
-      }));
-      activeSlides = allCertificates;
-      updateCarousel();
-      renderGrid();
-    })
-    .catch(() => {
-      // Fallback: se o arquivo json não puder ser lido diretamente, tenta API do GitHub com cache
-      const GITHUB_USER = 'Thaynan-passos';
-      const REPO = `${GITHUB_USER}.github.io`;
-      fetchWithCache(`https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/certificados`, 'gh-cert-list')
-        .then(files => {
-          if (!Array.isArray(files)) throw new Error();
-          const pdfs = files.filter(f => f.name.endsWith('.pdf'));
-          const previews = new Map(files.filter(f => f.name.endsWith('.preview.png')).map(f => [f.name.toLowerCase(), f.download_url]));
+  // Renderiza imediatamente na inicialização
+  updateCarousel();
+  renderGrid();
 
-          allCertificates = pdfs.map(f => {
-            const previewName = `${f.name.slice(0, f.name.lastIndexOf('.'))}.preview.png`.toLowerCase();
-            return {
-              name: f.name,
-              url: f.download_url,
-              previewUrl: previews.get(previewName) || f.download_url,
-              title: f.name.replace(/\.pdf$/i, '').replace(/[-_]+/g, ' ').trim(),
-              category: getCategory(f.name)
-            };
-          });
-
-          activeSlides = allCertificates;
+  // Tenta sincronizar silenciosamente com o JSON local se disponível em ambiente HTTP/HTTPS
+  if (window.location.protocol.startsWith('http')) {
+    fetch('certificados/certificados.json')
+      .then(r => r.ok ? r.json() : null)
+      .then(list => {
+        if (Array.isArray(list) && list.length) {
+          allCertificates = list;
+          activeSlides = currentFilter === 'all'
+            ? allCertificates
+            : allCertificates.filter(c => c.category === currentFilter);
           updateCarousel();
           renderGrid();
-        })
-        .catch(() => {
-          track.innerHTML = `<p class="cert-error">
-            Não foi possível carregar os certificados agora.
-            <a href="https://github.com/Thaynan-passos/Thaynan-passos.github.io/tree/main/certificados" target="_blank" rel="noopener">Ver pasta no GitHub →</a>
-          </p>`;
-        });
-    });
+        }
+      })
+      .catch(() => {});
+  }
 })();
 
 /* ── Formulário de Contato ── */

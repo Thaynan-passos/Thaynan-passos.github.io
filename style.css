@@ -1002,6 +1002,7 @@
       font-size: 12px;
     }
 
+    /* ── CERTIFICATES CONTROLS (Filtros e Seletor) ─────────── */
     .cert-controls {
       display: flex;
       align-items: center;
@@ -1010,6 +1011,10 @@
       gap: 16px;
       margin-top: -24px;
       margin-bottom: 32px;
+      background: var(--surface);
+      border: 1px solid var(--border-hi);
+      border-radius: 12px;
+      padding: 12px 16px;
     }
 
     .cert-filters {
@@ -1020,34 +1025,57 @@
     }
 
     .cert-filter-btn {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: .03em;
-      padding: 6px 14px;
-      border-radius: 6px;
+      appearance: none;
+      -webkit-appearance: none;
       background: var(--bg);
       border: 1px solid var(--border-hi);
       color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .03em;
+      padding: 8px 14px;
+      border-radius: 8px;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       transition: all .2s ease;
+      user-select: none;
+      line-height: 1;
     }
 
     .cert-filter-btn:hover {
+      background: var(--border);
       border-color: var(--muted);
       color: var(--text);
     }
 
     .cert-filter-btn.active {
-      background: rgba(249, 115, 22, .12);
+      background: rgba(249, 115, 22, .15);
       border-color: var(--accent);
       color: var(--accent);
-      font-weight: 500;
+      font-weight: 600;
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+
+    .cert-filter-count {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      background: var(--border);
+      color: var(--muted);
+      transition: all .2s;
+    }
+
+    .cert-filter-btn.active .cert-filter-count {
+      background: var(--accent);
+      color: #fff;
     }
 
     .cert-view-toggle {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
       background: var(--bg);
       padding: 4px;
       border: 1px solid var(--border-hi);
@@ -1055,18 +1083,21 @@
     }
 
     .view-btn {
-      display: flex;
+      appearance: none;
+      -webkit-appearance: none;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: 12px;
       color: var(--muted);
       background: transparent;
       border: none;
-      border-radius: 5px;
-      padding: 6px 10px;
+      border-radius: 6px;
+      padding: 6px 12px;
       cursor: pointer;
       transition: all .2s ease;
+      line-height: 1;
     }
 
     .view-btn:hover {
@@ -1076,7 +1107,9 @@
     .view-btn.active {
       background: var(--surface);
       color: var(--accent);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
+      border: 1px solid var(--border-hi);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .4);
+      font-weight: 600;
     }
 
     .view-btn svg {
@@ -1224,27 +1257,50 @@
       cursor: not-allowed;
     }
 
+    .cert-carousel-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .cert-counter {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .08em;
+      background: var(--bg);
+      border: 1px solid var(--border-hi);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
     .cert-dots {
       display: flex;
+      align-items: center;
       justify-content: center;
       gap: 8px;
       flex-wrap: wrap;
     }
 
     .cert-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
       background: var(--border-hi);
       border: none;
       cursor: pointer;
       padding: 0;
-      transition: background .2s, transform .2s;
+      transition: all .25s ease;
     }
 
     .cert-dot.active {
       background: var(--accent);
-      transform: scale(1.25);
+      width: 24px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px var(--accent-glow);
     }
 
     @media (max-width: 768px) {
