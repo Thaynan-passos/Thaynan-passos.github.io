@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+import unicodedata
 from pathlib import Path
 
 try:
@@ -18,8 +19,21 @@ CERTIFICATES_DIR = Path(__file__).resolve().parent / "certificados"
 MAX_WIDTH = 1400
 
 
+def slugify(name: str) -> str:
+    """Converte nome com acentos/caracteres especiais para ASCII seguro."""
+    # Normaliza unicode (NFD) e remove diacríticos
+    normalized = unicodedata.normalize("NFD", name)
+    ascii_name = "".join(c for c in normalized if unicodedata.category(c) != "Mn")
+    # Substitui caracteres problemáticos
+    for old, new in [("&", "-"), (",", "-"), (" ", "-")]:
+        ascii_name = ascii_name.replace(old, new)
+    return ascii_name
+
+
 def create_preview(pdf_path: Path, overwrite: bool) -> bool:
-    preview_path = pdf_path.with_suffix(".preview.png")
+    # Usa nome slugificado para o preview (sem acentos)
+    preview_name = slugify(pdf_path.stem) + ".preview.png"
+    preview_path = pdf_path.parent / preview_name
     if preview_path.exists() and not overwrite:
         print(f"Ignorado (já existe): {preview_path.name}")
         return False
@@ -61,22 +75,25 @@ def main() -> None:
     import json
     items = []
     for pdf in pdfs:
-        preview = pdf.with_suffix(".preview.png")
-        name = pdf.name
-        lower = name.lower()
+        slug_stem = slugify(pdf.stem)
+        preview_name = slug_stem + ".preview.png"
+        preview = pdf.parent / preview_name
+        slug_name = slug_stem + ".pdf"
+        lower = slug_name.lower()
+        # Categorias sem acentos
         if any(k in lower for k in ["python", "program", "git", "wordpress", "vendas"]):
             cat = "dev"
         elif any(k in lower for k in ["ciberseguran", "sharepoint", "redes", "suporte"]):
             cat = "infra"
         else:
             cat = "gestao"
-        clean_title = name.replace(".pdf", "").replace("-", " ").replace("_", " ").strip()
+        clean_title = pdf.name.replace(".pdf", "").replace("-", " ").replace("_", " ").strip()
         items.append({
-            "name": name,
+            "name": slug_name,
             "title": clean_title,
             "category": cat,
-            "url": f"certificados/{name}",
-            "previewUrl": f"certificados/{preview.name}" if preview.exists() else f"certificados/{name}",
+            "url": f"certificados/{slug_name}",
+            "previewUrl": f"certificados/{preview_name}" if preview.exists() else f"certificados/{slug_name}",
             "isPdf": True
         })
     manifest_path = CERTIFICATES_DIR / "certificados.json"

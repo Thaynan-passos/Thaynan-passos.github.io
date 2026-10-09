@@ -8,43 +8,43 @@
     "isPdf": true
   },
   {
-    "name": "Cesar-School-Noções-de-Programação.pdf",
+    "name": "Cesar-School-Nocoes-de-Programacao.pdf",
     "title": "Cesar School — Noções de Programação",
     "category": "dev",
-    "url": "certificados/Cesar-School-Noções-de-Programação.pdf",
-    "previewUrl": "certificados/Cesar-School-Noções-de-Programação.preview.png",
+    "url": "certificados/Cesar-School-Nocoes-de-Programacao.pdf",
+    "previewUrl": "certificados/Cesar-School-Nocoes-de-Programacao.preview.png",
     "isPdf": true
   },
   {
-    "name": "certificado-udemy-Git-Github-Zero-Avançado.pdf",
+    "name": "certificado-udemy-Git-Github-Zero-Avancado.pdf",
     "title": "Git & GitHub — Do Zero ao Avançado",
     "category": "dev",
-    "url": "certificados/certificado-udemy-Git-Github-Zero-Avançado.pdf",
-    "previewUrl": "certificados/certificado-udemy-Git-Github-Zero-Avançado.preview.png",
+    "url": "certificados/certificado-udemy-Git-Github-Zero-Avancado.pdf",
+    "previewUrl": "certificados/certificado-udemy-Git-Github-Zero-Avancado.preview.png",
     "isPdf": true
   },
   {
-    "name": "certificado-udemy-WordPress-bAsico-Avançado.pdf",
+    "name": "certificado-udemy-WordPress-bAsico-Avancado.pdf",
     "title": "WordPress — Do Básico ao Avançado",
     "category": "dev",
-    "url": "certificados/certificado-udemy-WordPress-bAsico-Avançado.pdf",
-    "previewUrl": "certificados/certificado-udemy-WordPress-bAsico-Avançado.preview.png",
+    "url": "certificados/certificado-udemy-WordPress-bAsico-Avancado.pdf",
+    "previewUrl": "certificados/certificado-udemy-WordPress-bAsico-Avancado.preview.png",
     "isPdf": true
   },
   {
-    "name": "FAST-rilha-de-Transição-de-carreira-em-Cibersegurança.pdf",
+    "name": "FAST-rilha-de-Transicao-de-carreira-em-Ciberseguranca.pdf",
     "title": "FAST — Transição de Carreira em Cibersegurança",
     "category": "infra",
-    "url": "certificados/FAST-rilha-de-Transição-de-carreira-em-Cibersegurança.pdf",
-    "previewUrl": "certificados/FAST-rilha-de-Transição-de-carreira-em-Cibersegurança.preview.png",
+    "url": "certificados/FAST-rilha-de-Transicao-de-carreira-em-Ciberseguranca.pdf",
+    "previewUrl": "certificados/FAST-rilha-de-Transicao-de-carreira-em-Ciberseguranca.preview.png",
     "isPdf": true
   },
   {
-    "name": "certificado-udemy-Sharepoint-Zero-Avançado.pdf",
+    "name": "certificado-udemy-Sharepoint-Zero-Avancado.pdf",
     "title": "Microsoft SharePoint — Do Zero ao Avançado",
     "category": "infra",
-    "url": "certificados/certificado-udemy-Sharepoint-Zero-Avançado.pdf",
-    "previewUrl": "certificados/certificado-udemy-Sharepoint-Zero-Avançado.preview.png",
+    "url": "certificados/certificado-udemy-Sharepoint-Zero-Avancado.pdf",
+    "previewUrl": "certificados/certificado-udemy-Sharepoint-Zero-Avancado.preview.png",
     "isPdf": true
   },
   {
@@ -56,35 +56,35 @@
     "isPdf": true
   },
   {
-    "name": "certificado-udemy_Metodologias-Ágeis-XP,Scrum,LeamEKanban.pdf",
+    "name": "certificado-udemy_Metodologias-Ageis-XP-Scrum-LeamEKanban.pdf",
     "title": "Metodologias Ágeis — XP, Scrum, Lean e Kanban",
     "category": "gestao",
-    "url": "certificados/certificado-udemy_Metodologias-Ágeis-XP,Scrum,LeamEKanban.pdf",
-    "previewUrl": "certificados/certificado-udemy_Metodologias-Ágeis-XP,Scrum,LeamEKanban.preview.png",
+    "url": "certificados/certificado-udemy_Metodologias-Ageis-XP-Scrum-LeamEKanban.pdf",
+    "previewUrl": "certificados/certificado-udemy_Metodologias-Ageis-XP-Scrum-LeamEKanban.preview.png",
     "isPdf": true
   },
   {
-    "name": "certificado-udemy_comunicaçãoAssertiva.pdf",
+    "name": "certificado-udemy_comunicacaoAssertiva.pdf",
     "title": "Comunicação Assertiva no Ambiente Profissional",
     "category": "gestao",
-    "url": "certificados/certificado-udemy_comunicaçãoAssertiva.pdf",
-    "previewUrl": "certificados/certificado-udemy_comunicaçãoAssertiva.preview.png",
+    "url": "certificados/certificado-udemy_comunicacaoAssertiva.pdf",
+    "previewUrl": "certificados/certificado-udemy_comunicacaoAssertiva.preview.png",
     "isPdf": true
   },
   {
-    "name": "certificado-udemy-ProdutividadeProcrastinaçãoGestãoTempo.pdf",
+    "name": "certificado-udemy-ProdutividadeProcrastinacaoGestaoTempo.pdf",
     "title": "Produtividade & Gestão de Tempo",
     "category": "gestao",
-    "url": "certificados/certificado-udemy-ProdutividadeProcrastinaçãoGestãoTempo.pdf",
-    "previewUrl": "certificados/certificado-udemy-ProdutividadeProcrastinaçãoGestãoTempo.preview.png",
+    "url": "certificados/certificado-udemy-ProdutividadeProcrastinacaoGestaoTempo.pdf",
+    "previewUrl": "certificados/certificado-udemy-ProdutividadeProcrastinacaoGestaoTempo.preview.png",
     "isPdf": true
   },
   {
-    "name": "certificado-udemy-Hiper-Eficiência&Gestão-Tempo.pdf",
+    "name": "certificado-udemy-Hiper-Eficiencia-Gestao-Tempo.pdf",
     "title": "Hiper Eficiência & Gestão de Tempo",
     "category": "gestao",
-    "url": "certificados/certificado-udemy-Hiper-Eficiência&Gestão-Tempo.pdf",
-    "previewUrl": "certificados/certificado-udemy-Hiper-Eficiência&Gestão-Tempo.preview.png",
+    "url": "certificados/certificado-udemy-Hiper-Eficiencia-Gestao-Tempo.pdf",
+    "previewUrl": "certificados/certificado-udemy-Hiper-Eficiencia-Gestao-Tempo.preview.png",
     "isPdf": true
   }
 ]
