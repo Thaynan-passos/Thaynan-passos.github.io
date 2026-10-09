@@ -1,90 +1,98 @@
 [
   {
-    "name": "certificado-udemy-Python-PCEP.pdf",
-    "title": "Python PCEP — Preparatório de Certificação",
-    "category": "dev",
-    "url": "certificados/certificado-udemy-Python-PCEP.pdf",
-    "previewUrl": "certificados/certificado-udemy-Python-PCEP.preview.png",
-    "isPdf": true
-  },
-  {
-    "name": "Cesar-School-Nocoes-de-Programacao.pdf",
-    "title": "Cesar School — Noções de Programação",
-    "category": "dev",
-    "url": "certificados/Cesar-School-Nocoes-de-Programacao.pdf",
-    "previewUrl": "certificados/Cesar-School-Nocoes-de-Programacao.preview.png",
-    "isPdf": true
-  },
-  {
-    "name": "certificado-udemy-Git-Github-Zero-Avancado.pdf",
-    "title": "Git & GitHub — Do Zero ao Avançado",
-    "category": "dev",
-    "url": "certificados/certificado-udemy-Git-Github-Zero-Avancado.pdf",
-    "previewUrl": "certificados/certificado-udemy-Git-Github-Zero-Avancado.preview.png",
-    "isPdf": true
-  },
-  {
-    "name": "certificado-udemy-WordPress-bAsico-Avancado.pdf",
-    "title": "WordPress — Do Básico ao Avançado",
-    "category": "dev",
-    "url": "certificados/certificado-udemy-WordPress-bAsico-Avancado.pdf",
-    "previewUrl": "certificados/certificado-udemy-WordPress-bAsico-Avancado.preview.png",
-    "isPdf": true
-  },
-  {
-    "name": "FAST-rilha-de-Transicao-de-carreira-em-Ciberseguranca.pdf",
-    "title": "FAST — Transição de Carreira em Cibersegurança",
-    "category": "infra",
-    "url": "certificados/FAST-rilha-de-Transicao-de-carreira-em-Ciberseguranca.pdf",
-    "previewUrl": "certificados/FAST-rilha-de-Transicao-de-carreira-em-Ciberseguranca.preview.png",
-    "isPdf": true
-  },
-  {
-    "name": "certificado-udemy-Sharepoint-Zero-Avancado.pdf",
-    "title": "Microsoft SharePoint — Do Zero ao Avançado",
-    "category": "infra",
-    "url": "certificados/certificado-udemy-Sharepoint-Zero-Avancado.pdf",
-    "previewUrl": "certificados/certificado-udemy-Sharepoint-Zero-Avancado.preview.png",
-    "isPdf": true
-  },
-  {
     "name": "Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.pdf",
     "title": "Bootcamp HEINEKEN — I.A. Aplicada a Vendas",
     "category": "dev",
     "url": "certificados/Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.pdf",
-    "previewUrl": "certificados/Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.preview.png",
+    "previewUrl": "certificados/Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.preview.webp",
     "isPdf": true
   },
   {
-    "name": "certificado-udemy_Metodologias-Ageis-XP-Scrum-LeamEKanban.pdf",
-    "title": "Metodologias Ágeis — XP, Scrum, Lean e Kanban",
+    "name": "certificado-udemy-comunica-U00e7-U00e3oAssertiva.pdf",
+    "title": "Comunica#u00e7#u00e3oassertiva",
     "category": "gestao",
-    "url": "certificados/certificado-udemy_Metodologias-Ageis-XP-Scrum-LeamEKanban.pdf",
-    "previewUrl": "certificados/certificado-udemy_Metodologias-Ageis-XP-Scrum-LeamEKanban.preview.png",
+    "url": "certificados/certificado-udemy-comunica-U00e7-U00e3oAssertiva.pdf",
+    "previewUrl": "certificados/certificado-udemy-comunica-U00e7-U00e3oAssertiva.preview.webp",
     "isPdf": true
   },
   {
-    "name": "certificado-udemy_comunicacaoAssertiva.pdf",
-    "title": "Comunicação Assertiva no Ambiente Profissional",
-    "category": "gestao",
-    "url": "certificados/certificado-udemy_comunicacaoAssertiva.pdf",
-    "previewUrl": "certificados/certificado-udemy_comunicacaoAssertiva.preview.png",
+    "name": "certificado-udemy-Git-Github-Zero-Avan-U00e7ado.pdf",
+    "title": "Git Github Zero Avan#u00e7ado",
+    "category": "dev",
+    "url": "certificados/certificado-udemy-Git-Github-Zero-Avan-U00e7ado.pdf",
+    "previewUrl": "certificados/certificado-udemy-Git-Github-Zero-Avan-U00e7ado.preview.webp",
     "isPdf": true
   },
   {
-    "name": "certificado-udemy-ProdutividadeProcrastinacaoGestaoTempo.pdf",
-    "title": "Produtividade & Gestão de Tempo",
+    "name": "certificado-udemy-Hiper-Efici-U00eancia-Gest-U00e3o-Tempo.pdf",
+    "title": "Hiper Efici#u00eancia&gest#u00e3o Tempo",
     "category": "gestao",
-    "url": "certificados/certificado-udemy-ProdutividadeProcrastinacaoGestaoTempo.pdf",
-    "previewUrl": "certificados/certificado-udemy-ProdutividadeProcrastinacaoGestaoTempo.preview.png",
+    "url": "certificados/certificado-udemy-Hiper-Efici-U00eancia-Gest-U00e3o-Tempo.pdf",
+    "previewUrl": "certificados/certificado-udemy-Hiper-Efici-U00eancia-Gest-U00e3o-Tempo.preview.webp",
     "isPdf": true
   },
   {
-    "name": "certificado-udemy-Hiper-Eficiencia-Gestao-Tempo.pdf",
-    "title": "Hiper Eficiência & Gestão de Tempo",
+    "name": "certificado-udemy-Metodologias-U00c1geis-XP-Scrum-LeamEKanban.pdf",
+    "title": "Metodologias #u00c1geis Xp,scrum,leamekanban",
     "category": "gestao",
-    "url": "certificados/certificado-udemy-Hiper-Eficiencia-Gestao-Tempo.pdf",
-    "previewUrl": "certificados/certificado-udemy-Hiper-Eficiencia-Gestao-Tempo.preview.png",
+    "url": "certificados/certificado-udemy-Metodologias-U00c1geis-XP-Scrum-LeamEKanban.pdf",
+    "previewUrl": "certificados/certificado-udemy-Metodologias-U00c1geis-XP-Scrum-LeamEKanban.preview.webp",
+    "isPdf": true
+  },
+  {
+    "name": "certificado-udemy-Procrastina-U00e7-U00e3oGest-U00e3o.pdf",
+    "title": "Procrastina#u00e7#u00e3ogest#u00e3o",
+    "category": "gestao",
+    "url": "certificados/certificado-udemy-Procrastina-U00e7-U00e3oGest-U00e3o.pdf",
+    "previewUrl": "certificados/certificado-udemy-Procrastina-U00e7-U00e3oGest-U00e3o.preview.webp",
+    "isPdf": true
+  },
+  {
+    "name": "certificado-udemy-ProdutividadeProcrastina-U00e7-U00e3oGest-U00e3oTempo.pdf",
+    "title": "Produtividadeprocrastina#u00e7#u00e3ogest#u00e3otempo",
+    "category": "gestao",
+    "url": "certificados/certificado-udemy-ProdutividadeProcrastina-U00e7-U00e3oGest-U00e3oTempo.pdf",
+    "previewUrl": "certificados/certificado-udemy-ProdutividadeProcrastina-U00e7-U00e3oGest-U00e3oTempo.preview.webp",
+    "isPdf": true
+  },
+  {
+    "name": "certificado-udemy-Python-PCEP.pdf",
+    "title": "Python PCEP — Preparatório de Certificação",
+    "category": "dev",
+    "url": "certificados/certificado-udemy-Python-PCEP.pdf",
+    "previewUrl": "certificados/certificado-udemy-Python-PCEP.preview.webp",
+    "isPdf": true
+  },
+  {
+    "name": "certificado-udemy-Sharepoint-Zero-Avan-U00e7ado.pdf",
+    "title": "Sharepoint Zero Avan#u00e7ado",
+    "category": "infra",
+    "url": "certificados/certificado-udemy-Sharepoint-Zero-Avan-U00e7ado.pdf",
+    "previewUrl": "certificados/certificado-udemy-Sharepoint-Zero-Avan-U00e7ado.preview.webp",
+    "isPdf": true
+  },
+  {
+    "name": "certificado-udemy-WordPress-bAsico-Avan-U00e7ado.pdf",
+    "title": "Wordpress Basico Avan#u00e7ado",
+    "category": "dev",
+    "url": "certificados/certificado-udemy-WordPress-bAsico-Avan-U00e7ado.pdf",
+    "previewUrl": "certificados/certificado-udemy-WordPress-bAsico-Avan-U00e7ado.preview.webp",
+    "isPdf": true
+  },
+  {
+    "name": "Cesar-School-No-U00e7-U00f5es-de-Programa-U00e7-U00e3o.pdf",
+    "title": "Cesar School No#u00e7#u00f5es De Programa#u00e7#u00e3o",
+    "category": "dev",
+    "url": "certificados/Cesar-School-No-U00e7-U00f5es-de-Programa-U00e7-U00e3o.pdf",
+    "previewUrl": "certificados/Cesar-School-No-U00e7-U00f5es-de-Programa-U00e7-U00e3o.preview.webp",
+    "isPdf": true
+  },
+  {
+    "name": "FAST-rilha-de-Transi-U00e7-U00e3o-de-carreira-em-Ciberseguran-U00e7a.pdf",
+    "title": "Fast Rilha De Transi#u00e7#u00e3o De Carreira Em Ciberseguran#u00e7a",
+    "category": "infra",
+    "url": "certificados/FAST-rilha-de-Transi-U00e7-U00e3o-de-carreira-em-Ciberseguran-U00e7a.pdf",
+    "previewUrl": "certificados/FAST-rilha-de-Transi-U00e7-U00e3o-de-carreira-em-Ciberseguran-U00e7a.preview.webp",
     "isPdf": true
   }
 ]

@@ -329,7 +329,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
       title: "Python PCEP — Preparatório de Certificação",
       category: "dev",
       url: "certificados/certificado-udemy-Python-PCEP.pdf",
-      previewUrl: "certificados/certificado-udemy-Python-PCEP.preview.png",
+      previewUrl: "certificados/certificado-udemy-Python-PCEP.preview.webp",
       isPdf: true
     },
     {
@@ -337,7 +337,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
       title: "Cesar School — Noções de Programação",
       category: "dev",
       url: "certificados/Cesar-School-Nocoes-de-Programacao.pdf",
-      previewUrl: "certificados/Cesar-School-Nocoes-de-Programacao.preview.png",
+      previewUrl: "certificados/Cesar-School-Nocoes-de-Programacao.preview.webp",
       isPdf: true
     },
     {
@@ -345,7 +345,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
       title: "Git & GitHub — Do Zero ao Avançado",
       category: "dev",
       url: "certificados/certificado-udemy-Git-Github-Zero-Avancado.pdf",
-      previewUrl: "certificados/certificado-udemy-Git-Github-Zero-Avancado.preview.png",
+      previewUrl: "certificados/certificado-udemy-Git-Github-Zero-Avancado.preview.webp",
       isPdf: true
     },
     {
@@ -353,7 +353,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
       title: "WordPress — Do Básico ao Avançado",
       category: "dev",
       url: "certificados/certificado-udemy-WordPress-bAsico-Avancado.pdf",
-      previewUrl: "certificados/certificado-udemy-WordPress-bAsico-Avancado.preview.png",
+      previewUrl: "certificados/certificado-udemy-WordPress-bAsico-Avancado.preview.webp",
       isPdf: true
     },
     {
@@ -361,7 +361,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
       title: "Bootcamp HEINEKEN — I.A. Aplicada a Vendas",
       category: "dev",
       url: "certificados/Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.pdf",
-      previewUrl: "certificados/Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.preview.png",
+      previewUrl: "certificados/Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.preview.webp",
       isPdf: true
     },
     {
@@ -369,7 +369,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
       title: "FAST — Transição de Carreira em Cibersegurança",
       category: "infra",
       url: "certificados/FAST-rilha-de-Transicao-de-carreira-em-Ciberseguranca.pdf",
-      previewUrl: "certificados/FAST-rilha-de-Transicao-de-carreira-em-Ciberseguranca.preview.png",
+      previewUrl: "certificados/FAST-rilha-de-Transicao-de-carreira-em-Ciberseguranca.preview.webp",
       isPdf: true
     },
     {
@@ -377,7 +377,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
       title: "Microsoft SharePoint — Do Zero ao Avançado",
       category: "infra",
       url: "certificados/certificado-udemy-Sharepoint-Zero-Avancado.pdf",
-      previewUrl: "certificados/certificado-udemy-Sharepoint-Zero-Avancado.preview.png",
+      previewUrl: "certificados/certificado-udemy-Sharepoint-Zero-Avancado.preview.webp",
       isPdf: true
     },
     {
@@ -385,7 +385,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
       title: "Metodologias Ágeis — XP, Scrum, Lean e Kanban",
       category: "gestao",
       url: "certificados/certificado-udemy_Metodologias-Ageis-XP-Scrum-LeamEKanban.pdf",
-      previewUrl: "certificados/certificado-udemy_Metodologias-Ageis-XP-Scrum-LeamEKanban.preview.png",
+      previewUrl: "certificados/certificado-udemy_Metodologias-Ageis-XP-Scrum-LeamEKanban.preview.webp",
       isPdf: true
     },
     {
@@ -393,7 +393,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
       title: "Comunicação Assertiva no Ambiente Profissional",
       category: "gestao",
       url: "certificados/certificado-udemy_comunicacaoAssertiva.pdf",
-      previewUrl: "certificados/certificado-udemy_comunicacaoAssertiva.preview.png",
+      previewUrl: "certificados/certificado-udemy_comunicacaoAssertiva.preview.webp",
       isPdf: true
     },
     {
@@ -401,7 +401,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
       title: "Produtividade & Gestão de Tempo",
       category: "gestao",
       url: "certificados/certificado-udemy-ProdutividadeProcrastinacaoGestaoTempo.pdf",
-      previewUrl: "certificados/certificado-udemy-ProdutividadeProcrastinacaoGestaoTempo.preview.png",
+      previewUrl: "certificados/certificado-udemy-ProdutividadeProcrastinacaoGestaoTempo.preview.webp",
       isPdf: true
     },
     {
@@ -409,7 +409,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
       title: "Hiper Eficiência & Gestão de Tempo",
       category: "gestao",
       url: "certificados/certificado-udemy-Hiper-Eficiencia-Gestao-Tempo.pdf",
-      previewUrl: "certificados/certificado-udemy-Hiper-Eficiencia-Gestao-Tempo.preview.png",
+      previewUrl: "certificados/certificado-udemy-Hiper-Eficiencia-Gestao-Tempo.preview.webp",
       isPdf: true
     }
   ];
@@ -450,18 +450,25 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     if (!modal || !modalContent) return;
     const viewBtnText = (window.__i18nDict && window.__i18nDict['cert.viewBtn']) || 'Abrir PDF';
     const preview = item.previewUrl || item.url;
+    const safeUrl = encodeURI(item.url);
 
     modalContent.innerHTML = `
-      <img src="${preview}" alt="${item.title}">
+      <img src="${preview}" alt="${item.title}" onerror="if(this.src.endsWith('.webp')){this.onerror=null;this.src=this.src.replace('.webp','.png');}">
       <div class="cert-modal-footer">
         <div>
           <h3>${item.title}</h3>
           <span class="cert-grid-badge" style="position:static; display:inline-block; margin-top:4px;">${getBadgeLabel(item.category)}</span>
         </div>
-        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          ${viewBtnText}
-        </a>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            ${viewBtnText}
+          </a>
+          <a href="${safeUrl}" download="${item.name}" class="btn btn-secondary">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Baixar
+          </a>
+        </div>
       </div>
     `;
     modal.classList.add('open');
@@ -498,12 +505,13 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
 
     track.innerHTML = activeSlides.map((s, i) => {
       const preview = s.previewUrl || s.url;
+      const safeUrl = encodeURI(s.url);
       const viewBtnText = (window.__i18nDict && window.__i18nDict['cert.viewBtn']) || 'Ver certificado';
       return `
         <div class="cert-slide">
           <div class="cert-card">
             <div class="cert-card-media" data-index="${i}">
-              <img src="${preview}" alt="Certificado: ${s.title}" loading="lazy" style="cursor:pointer;" title="Clique para ampliar">
+              <img src="${preview}" alt="Certificado: ${s.title}" loading="lazy" style="cursor:pointer;" title="Clique para ampliar" onerror="if(this.src.endsWith('.webp')){this.onerror=null;this.src=this.src.replace('.webp','.png');}">
             </div>
             <div class="cert-card-body">
               <span class="pill" style="align-self:flex-start;">${getBadgeLabel(s.category)}</span>
@@ -514,7 +522,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
                   <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                   Ampliar
                 </button>
-                <a class="btn btn-primary" href="${s.url}" target="_blank" rel="noopener noreferrer">
+                <a class="btn btn-primary" href="${safeUrl}" target="_blank" rel="noopener noreferrer">
                   <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                   ${viewBtnText}
                 </a>
@@ -634,10 +642,11 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
 
     gridView.innerHTML = activeSlides.map((s, i) => {
       const preview = s.previewUrl || s.url;
+      const safeUrl = encodeURI(s.url);
       return `
         <article class="cert-grid-card">
           <div class="cert-grid-media" data-index="${i}">
-            <img src="${preview}" alt="${s.title}" loading="lazy">
+            <img src="${preview}" alt="${s.title}" loading="lazy" onerror="if(this.src.endsWith('.webp')){this.onerror=null;this.src=this.src.replace('.webp','.png');}">
             <span class="cert-grid-badge">${getBadgeLabel(s.category)}</span>
           </div>
           <div class="cert-grid-body">
@@ -647,7 +656,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                 Ver prévia
               </button>
-              <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                 ${viewBtnText}
               </a>
             </div>
