@@ -7,6 +7,49 @@
 const yrEl = document.getElementById('yr');
 if (yrEl) yrEl.textContent = new Date().getFullYear();
 
+/* ── Alternância de Tema Claro / Escuro ── */
+(function () {
+  const themeToggle = document.getElementById('themeToggle');
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  const THEME_KEY = 'site-theme';
+
+  function setTheme(theme) {
+    if (theme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem(THEME_KEY, 'light');
+      if (metaTheme) metaTheme.setAttribute('content', '#f8fafc');
+      if (themeToggle) themeToggle.setAttribute('aria-label', 'Ativar modo escuro');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem(THEME_KEY, 'dark');
+      if (metaTheme) metaTheme.setAttribute('content', '#0d0f14');
+      if (themeToggle) themeToggle.setAttribute('aria-label', 'Ativar modo claro');
+    }
+  }
+
+  const saved = localStorage.getItem(THEME_KEY);
+  if (saved) {
+    setTheme(saved);
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    setTheme('light');
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      setTheme(isLight ? 'dark' : 'light');
+    });
+  }
+
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+      if (!localStorage.getItem(THEME_KEY)) {
+        setTheme(e.matches ? 'light' : 'dark');
+      }
+    });
+  }
+})();
+
 /* ── Menu Mobile ── */
 const menuBtn = document.getElementById('menuBtn');
 const navLinks = document.getElementById('navLinks');
