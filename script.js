@@ -535,7 +535,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     const safeUrl = encodeURI(item.url);
 
     modalContent.innerHTML = `
-      <img src="${preview}" alt="${item.title}" onerror="if(this.src.endsWith('.webp')){this.onerror=null;this.src=this.src.replace('.webp','.png');}">
+      <img src="${preview}" alt="${item.title}" loading="lazy" decoding="async" onerror="if(this.src.endsWith('.webp')){this.onerror=null;this.src=this.src.replace('.webp','.png');}">
       <div class="cert-modal-footer">
         <div>
           <h3>${item.title}</h3>
@@ -592,7 +592,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
         <div class="cert-slide">
           <div class="cert-card">
             <div class="cert-card-media" data-index="${i}">
-              <img src="${preview}" alt="Certificado: ${s.title}" loading="lazy" style="cursor:pointer;" title="Clique para ampliar" onerror="if(this.src.endsWith('.webp')){this.onerror=null;this.src=this.src.replace('.webp','.png');}">
+              <img src="${preview}" alt="Certificado: ${s.title}" loading="lazy" decoding="async" style="cursor:pointer;" title="Clique para ampliar" onerror="if(this.src.endsWith('.webp')){this.onerror=null;this.src=this.src.replace('.webp','.png');}">
             </div>
             <div class="cert-card-body">
               <span class="pill" style="align-self:flex-start;">${getBadgeLabel(s.category)}</span>
@@ -724,7 +724,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
       return `
         <article class="cert-grid-card">
           <div class="cert-grid-media" data-index="${i}">
-            <img src="${preview}" alt="${s.title}" loading="lazy" onerror="if(this.src.endsWith('.webp')){this.onerror=null;this.src=this.src.replace('.webp','.png');}">
+            <img src="${preview}" alt="${s.title}" loading="lazy" decoding="async" onerror="if(this.src.endsWith('.webp')){this.onerror=null;this.src=this.src.replace('.webp','.png');}">
             <span class="cert-grid-badge">${getBadgeLabel(s.category)}</span>
           </div>
           <div class="cert-grid-body">

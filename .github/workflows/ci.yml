@@ -1,0 +1,62 @@
+name: CI & Validação de Boas Práticas
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validação de Código e Assets
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validar integridade dos arquivos JSON
+        run: |
+          node -e "
+            const fs = require('fs');
+            const files = ['certificados/certificados.json', ...fs.readdirSync('i18n').map(f => 'i18n/' + f)];
+            for (const file of files) {
+              if (file.endsWith('.json')) {
+                JSON.parse(fs.readFileSync(file, 'utf8'));
+                console.log('✓ ' + file + ' válido');
+              }
+            }
+          "
+
+      - name: Validar sintaxe dos scripts JavaScript
+        run: |
+          node --check script.js
+          node --check i18n.js
+          echo "✓ Sintaxe dos scripts JavaScript validada com sucesso"
+
+      - name: Verificar integridade dos assets referenciados
+        run: |
+          node -e "
+            const fs = require('fs');
+            const html = fs.readFileSync('index.html', 'utf8');
+            const criticalAssets = ['style.css', 'script.js', 'i18n.js', 'favicon.svg', 'imagens/thaynan-foto.png'];
+            for (const asset of criticalAssets) {
+              if (!fs.existsSync(asset)) {
+                console.error('✗ Asset crítico ausente: ' + asset);
+                process.exit(1);
+              }
+              const stats = fs.statSync(asset);
+              if (stats.size === 0) {
+                console.error('✗ Asset vazio detectado: ' + asset);
+                process.exit(1);
+              }
+              console.log('✓ Asset ' + asset + ' presente (' + stats.size + ' bytes)');
+            }
+          "
+
