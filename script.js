@@ -1,3 +1,38 @@
+'use strict';
+
+const safeStorage = {
+  get(key) {
+    try {
+      return window.localStorage.getItem(key);
+    } catch (error) {
+      return null;
+    }
+  },
+  set(key, value) {
+    try {
+      window.localStorage.setItem(key, value);
+    } catch (error) {
+      // Ignora falhas de storage em navegadores restritivos ou privacidade forte
+    }
+  },
+  remove(key) {
+    try {
+      window.localStorage.removeItem(key);
+    } catch (error) {
+      // Ignora falhas de storage em navegadores restritivos ou privacidade forte
+    }
+  }
+};
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 /**
  * script.js — Interatividade, API GitHub com Cache & Proteção,
  * Carrossel com Suporte Touch/Swipe, Grade de Certificados e WhatsApp FAB.
@@ -14,20 +49,25 @@ if (yrEl) yrEl.textContent = new Date().getFullYear();
   const THEME_KEY = 'site-theme';
 
   function setTheme(theme) {
-    if (theme === 'light') {
+    const isLight = theme === 'light';
+    if (isLight) {
       document.documentElement.setAttribute('data-theme', 'light');
-      localStorage.setItem(THEME_KEY, 'light');
+      safeStorage.set(THEME_KEY, 'light');
       if (metaTheme) metaTheme.setAttribute('content', '#f8fafc');
       if (themeToggle) themeToggle.setAttribute('aria-label', 'Ativar modo escuro');
     } else {
       document.documentElement.removeAttribute('data-theme');
-      localStorage.setItem(THEME_KEY, 'dark');
+      safeStorage.set(THEME_KEY, 'dark');
       if (metaTheme) metaTheme.setAttribute('content', '#0d0f14');
       if (themeToggle) themeToggle.setAttribute('aria-label', 'Ativar modo claro');
     }
+
+    if (themeToggle) {
+      themeToggle.setAttribute('aria-pressed', String(isLight));
+    }
   }
 
-  const saved = localStorage.getItem(THEME_KEY);
+  const saved = safeStorage.get(THEME_KEY);
   if (saved) {
     setTheme(saved);
   } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
@@ -43,7 +83,7 @@ if (yrEl) yrEl.textContent = new Date().getFullYear();
 
   if (window.matchMedia) {
     window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
-      if (!localStorage.getItem(THEME_KEY)) {
+      if (!safeStorage.get(THEME_KEY)) {
         setTheme(e.matches ? 'light' : 'dark');
       }
     });
@@ -121,7 +161,6 @@ if (backTopBtn) {
   const isDismissed = sessionStorage.getItem('wa-bubble-dismissed') === 'true';
 
   if (!isDismissed) {
-    // Exibe suavemente após 2.2 segundos de navegação
     setTimeout(() => {
       fab.classList.add('show');
     }, 2200);
@@ -139,14 +178,14 @@ if (backTopBtn) {
 
 /* ── Helper de Cache para Requisições à API ── */
 async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
-  const cachedStr = localStorage.getItem(cacheKey);
+  const cachedStr = safeStorage.get(cacheKey);
   if (cachedStr) {
     try {
       const parsed = JSON.parse(cachedStr);
       const isFresh = (Date.now() - parsed.timestamp) < ttlMs;
       if (isFresh) return parsed.data;
     } catch (e) {
-      localStorage.removeItem(cacheKey);
+      safeStorage.remove(cacheKey);
     }
   }
 
@@ -154,15 +193,16 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    localStorage.setItem(cacheKey, JSON.stringify({ timestamp: Date.now(), data }));
+    safeStorage.set(cacheKey, JSON.stringify({ timestamp: Date.now(), data }));
     return data;
   } catch (err) {
-    // Em caso de falha de rede ou Rate Limit (403), usa o cache antigo se existir
     if (cachedStr) {
       try {
         const parsed = JSON.parse(cachedStr);
         return parsed.data;
-      } catch (e) {}
+      } catch (e) {
+        // ignora cache inválido
+      }
     }
     throw err;
   }
@@ -258,7 +298,6 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
 
   const SKIP = ['dio-lab-open-source', 'skills-communicate-using-markdown'];
 
-  // Repositórios de reserva caso a API do GitHub esteja bloqueada ou sem internet
   const FALLBACK_REPOS = [
     {
       name: 'Thaynan-passos.github.io',
@@ -293,18 +332,20 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     const list = filtered.length ? filtered : FALLBACK_REPOS;
 
     grid.innerHTML = list.map(repo => {
-      const desc = repo.description || 'Repositório de desenvolvimento de software e soluções práticas.';
-      const lang = repo.language;
-      const stars = repo.stargazers_count;
+      const name = escapeHtml(repo.name || 'Projeto sem nome');
+      const repoUrl = escapeHtml(repo.html_url || '#');
+      const desc = escapeHtml(repo.description || 'Repositório de desenvolvimento de software e soluções práticas.');
+      const lang = escapeHtml(repo.language || '');
+      const stars = Number(repo.stargazers_count || 0);
       const color = lang ? langColor(lang) : '#58a6ff';
       const updated = timeAgo(repo.pushed_at);
 
       return `
         <article class="project-card">
           <div class="project-header">
-            <h3>${repo.name}</h3>
-            <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer"
-               class="project-link" aria-label="Abrir ${repo.name} no GitHub">
+            <h3>${name}</h3>
+            <a href="${repoUrl}" target="_blank" rel="noopener noreferrer"
+               class="project-link" aria-label="Abrir ${name} no GitHub">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
                 <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
@@ -365,94 +406,93 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
 
   if (!track) return;
 
-  // Catálogo completo pré-carregado: funciona 100% offline, em file:// e sem depender de requisições de rede
   const INITIAL_CERTIFICATES = [
     {
-      name: "certificado-udemy-Python-PCEP.pdf",
-      title: "Python PCEP — Preparatório de Certificação",
-      category: "dev",
-      url: "certificados/certificado-udemy-Python-PCEP.pdf",
-      previewUrl: "certificados/certificado-udemy-Python-PCEP.preview.webp",
+      name: 'certificado-udemy-Python-PCEP.pdf',
+      title: 'Python PCEP — Preparatório de Certificação',
+      category: 'dev',
+      url: 'certificados/certificado-udemy-Python-PCEP.pdf',
+      previewUrl: 'certificados/certificado-udemy-Python-PCEP.preview.webp',
       isPdf: true
     },
     {
-      name: "Cesar-School-Nocoes-de-Programacao.pdf",
-      title: "Cesar School — Noções de Programação",
-      category: "dev",
-      url: "certificados/Cesar-School-Nocoes-de-Programacao.pdf",
-      previewUrl: "certificados/Cesar-School-Nocoes-de-Programacao.preview.webp",
+      name: 'Cesar-School-Nocoes-de-Programacao.pdf',
+      title: 'Cesar School — Noções de Programação',
+      category: 'dev',
+      url: 'certificados/Cesar-School-Nocoes-de-Programacao.pdf',
+      previewUrl: 'certificados/Cesar-School-Nocoes-de-Programacao.preview.webp',
       isPdf: true
     },
     {
-      name: "certificado-udemy-Git-Github-Zero-Avancado.pdf",
-      title: "Git & GitHub — Do Zero ao Avançado",
-      category: "dev",
-      url: "certificados/certificado-udemy-Git-Github-Zero-Avancado.pdf",
-      previewUrl: "certificados/certificado-udemy-Git-Github-Zero-Avancado.preview.webp",
+      name: 'certificado-udemy-Git-Github-Zero-Avancado.pdf',
+      title: 'Git & GitHub — Do Zero ao Avançado',
+      category: 'dev',
+      url: 'certificados/certificado-udemy-Git-Github-Zero-Avancado.pdf',
+      previewUrl: 'certificados/certificado-udemy-Git-Github-Zero-Avancado.preview.webp',
       isPdf: true
     },
     {
-      name: "certificado-udemy-WordPress-bAsico-Avancado.pdf",
-      title: "WordPress — Do Básico ao Avançado",
-      category: "dev",
-      url: "certificados/certificado-udemy-WordPress-bAsico-Avancado.pdf",
-      previewUrl: "certificados/certificado-udemy-WordPress-bAsico-Avancado.preview.webp",
+      name: 'certificado-udemy-WordPress-bAsico-Avancado.pdf',
+      title: 'WordPress — Do Básico ao Avançado',
+      category: 'dev',
+      url: 'certificados/certificado-udemy-WordPress-bAsico-Avancado.pdf',
+      previewUrl: 'certificados/certificado-udemy-WordPress-bAsico-Avancado.preview.webp',
       isPdf: true
     },
     {
-      name: "Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.pdf",
-      title: "Bootcamp HEINEKEN — I.A. Aplicada a Vendas",
-      category: "dev",
-      url: "certificados/Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.pdf",
-      previewUrl: "certificados/Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.preview.webp",
+      name: 'Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.pdf',
+      title: 'Bootcamp HEINEKEN — I.A. Aplicada a Vendas',
+      category: 'dev',
+      url: 'certificados/Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.pdf',
+      previewUrl: 'certificados/Bootvamp-HEINEKEN-I.A-aplicada-a-Vendas.preview.webp',
       isPdf: true
     },
     {
-      name: "FAST-rilha-de-Transicao-de-carreira-em-Ciberseguranca.pdf",
-      title: "FAST — Transição de Carreira em Cibersegurança",
-      category: "infra",
-      url: "certificados/FAST-rilha-de-Transicao-de-carreira-em-Ciberseguranca.pdf",
-      previewUrl: "certificados/FAST-rilha-de-Transicao-de-carreira-em-Ciberseguranca.preview.webp",
+      name: 'FAST-rilha-de-Transicao-de-carreira-em-Ciberseguranca.pdf',
+      title: 'FAST — Transição de Carreira em Cibersegurança',
+      category: 'infra',
+      url: 'certificados/FAST-rilha-de-Transicao-de-carreira-em-Ciberseguranca.pdf',
+      previewUrl: 'certificados/FAST-rilha-de-Transicao-de-carreira-em-Ciberseguranca.preview.webp',
       isPdf: true
     },
     {
-      name: "certificado-udemy-Sharepoint-Zero-Avancado.pdf",
-      title: "Microsoft SharePoint — Do Zero ao Avançado",
-      category: "infra",
-      url: "certificados/certificado-udemy-Sharepoint-Zero-Avancado.pdf",
-      previewUrl: "certificados/certificado-udemy-Sharepoint-Zero-Avancado.preview.webp",
+      name: 'certificado-udemy-Sharepoint-Zero-Avancado.pdf',
+      title: 'Microsoft SharePoint — Do Zero ao Avançado',
+      category: 'infra',
+      url: 'certificados/certificado-udemy-Sharepoint-Zero-Avancado.pdf',
+      previewUrl: 'certificados/certificado-udemy-Sharepoint-Zero-Avancado.preview.webp',
       isPdf: true
     },
     {
-      name: "certificado-udemy_Metodologias-Ageis-XP-Scrum-LeamEKanban.pdf",
-      title: "Metodologias Ágeis — XP, Scrum, Lean e Kanban",
-      category: "gestao",
-      url: "certificados/certificado-udemy_Metodologias-Ageis-XP-Scrum-LeamEKanban.pdf",
-      previewUrl: "certificados/certificado-udemy_Metodologias-Ageis-XP-Scrum-LeamEKanban.preview.webp",
+      name: 'certificado-udemy_Metodologias-Ageis-XP-Scrum-LeamEKanban.pdf',
+      title: 'Metodologias Ágeis — XP, Scrum, Lean e Kanban',
+      category: 'gestao',
+      url: 'certificados/certificado-udemy_Metodologias-Ageis-XP-Scrum-LeamEKanban.pdf',
+      previewUrl: 'certificados/certificado-udemy_Metodologias-Ageis-XP-Scrum-LeamEKanban.preview.webp',
       isPdf: true
     },
     {
-      name: "certificado-udemy_comunicacaoAssertiva.pdf",
-      title: "Comunicação Assertiva no Ambiente Profissional",
-      category: "gestao",
-      url: "certificados/certificado-udemy_comunicacaoAssertiva.pdf",
-      previewUrl: "certificados/certificado-udemy_comunicacaoAssertiva.preview.webp",
+      name: 'certificado-udemy_comunicacaoAssertiva.pdf',
+      title: 'Comunicação Assertiva no Ambiente Profissional',
+      category: 'gestao',
+      url: 'certificados/certificado-udemy_comunicacaoAssertiva.pdf',
+      previewUrl: 'certificados/certificado-udemy_comunicacaoAssertiva.preview.webp',
       isPdf: true
     },
     {
-      name: "certificado-udemy-ProdutividadeProcrastinacaoGestaoTempo.pdf",
-      title: "Produtividade & Gestão de Tempo",
-      category: "gestao",
-      url: "certificados/certificado-udemy-ProdutividadeProcrastinacaoGestaoTempo.pdf",
-      previewUrl: "certificados/certificado-udemy-ProdutividadeProcrastinacaoGestaoTempo.preview.webp",
+      name: 'certificado-udemy-ProdutividadeProcrastinacaoGestaoTempo.pdf',
+      title: 'Produtividade & Gestão de Tempo',
+      category: 'gestao',
+      url: 'certificados/certificado-udemy-ProdutividadeProcrastinacaoGestaoTempo.pdf',
+      previewUrl: 'certificados/certificado-udemy-ProdutividadeProcrastinacaoGestaoTempo.preview.webp',
       isPdf: true
     },
     {
-      name: "certificado-udemy-Hiper-Eficiencia-Gestao-Tempo.pdf",
-      title: "Hiper Eficiência & Gestão de Tempo",
-      category: "gestao",
-      url: "certificados/certificado-udemy-Hiper-Eficiencia-Gestao-Tempo.pdf",
-      previewUrl: "certificados/certificado-udemy-Hiper-Eficiencia-Gestao-Tempo.preview.webp",
+      name: 'certificado-udemy-Hiper-Eficiencia-Gestao-Tempo.pdf',
+      title: 'Hiper Eficiência & Gestão de Tempo',
+      category: 'gestao',
+      url: 'certificados/certificado-udemy-Hiper-Eficiencia-Gestao-Tempo.pdf',
+      previewUrl: 'certificados/certificado-udemy-Hiper-Eficiencia-Gestao-Tempo.preview.webp',
       isPdf: true
     }
   ];
@@ -488,7 +528,6 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     return 'Gestão';
   }
 
-  /* ── Lightbox Modal ── */
   function openModal(item) {
     if (!modal || !modalContent) return;
     const viewBtnText = (window.__i18nDict && window.__i18nDict['cert.viewBtn']) || 'Abrir PDF';
@@ -532,10 +571,9 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     if (e.key === 'Escape' && modal && modal.classList.contains('open')) closeModal();
   });
 
-  /* ── Renderização do Carrossel ── */
   function updateCarousel() {
     if (!activeSlides.length) {
-      track.innerHTML = `<p class="cert-loading">Nenhum certificado encontrado para esta categoria.</p>`;
+      track.innerHTML = '<p class="cert-loading">Nenhum certificado encontrado para esta categoria.</p>';
       if (dotsBox) dotsBox.innerHTML = '';
       if (prevBtn) prevBtn.disabled = true;
       if (nextBtn) nextBtn.disabled = true;
@@ -562,7 +600,7 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
               <p class="cert-meta">Documento certificado e verificado</p>
               <div style="display:flex; gap:10px; flex-wrap:wrap;">
                 <button type="button" class="btn btn-secondary cert-zoom-btn" data-index="${i}">
-                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                   Ampliar
                 </button>
                 <a class="btn btn-primary" href="${safeUrl}" target="_blank" rel="noopener noreferrer">
@@ -631,7 +669,6 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     });
   }
 
-  /* ── Teclado no Carrossel ── */
   if (carousel) {
     carousel.setAttribute('tabindex', '0');
     carousel.addEventListener('keydown', (e) => {
@@ -645,7 +682,6 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     });
   }
 
-  /* ── Suporte a Touch Swipe no Celular ── */
   if (viewport) {
     let startX = 0;
     let endX = 0;
@@ -673,11 +709,10 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     });
   }
 
-  /* ── Renderização da Grade Completa ── */
   function renderGrid() {
     if (!gridView) return;
     if (!activeSlides.length) {
-      gridView.innerHTML = `<p class="cert-loading" style="grid-column: 1/-1;">Nenhum certificado para o filtro selecionado.</p>`;
+      gridView.innerHTML = '<p class="cert-loading" style="grid-column: 1/-1;">Nenhum certificado para o filtro selecionado.</p>';
       return;
     }
 
@@ -715,7 +750,6 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     });
   }
 
-  /* ── Alternância de Filtros ── */
   function applyFilter(cat) {
     currentFilter = cat;
     filterBtns.forEach(b => {
@@ -737,7 +771,6 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     });
   });
 
-  /* ── Alternância de Visualização (Carrossel vs Grade) ── */
   if (btnViewCarousel && btnViewGrid && carousel && gridView) {
     btnViewCarousel.addEventListener('click', () => {
       btnViewCarousel.classList.add('active');
@@ -773,11 +806,9 @@ async function fetchWithCache(url, cacheKey, ttlMs = 1000 * 60 * 60 * 6) {
     else startAutoplay();
   });
 
-  // Renderiza imediatamente na inicialização
   updateCarousel();
   renderGrid();
 
-  // Tenta sincronizar silenciosamente com o JSON local se disponível em ambiente HTTP/HTTPS
   if (window.location.protocol.startsWith('http')) {
     fetch('certificados/certificados.json')
       .then(r => r.ok ? r.json() : null)

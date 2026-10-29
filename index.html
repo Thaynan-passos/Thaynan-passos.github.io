@@ -10,11 +10,15 @@
   <link rel="canonical" href="https://thaynan-passos.github.io/">
   <meta name="theme-color" content="#0d0f14">
 
-  <!-- Favicon -->
+  <noscript>
+    <div class="noscript-banner">
+      <strong>Atenção:</strong> para melhor experiência, habilite JavaScript neste site.
+    </div>
+  </noscript>
+
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="apple-touch-icon" href="imagens/thaynan-foto.png">
 
-  <!-- Open Graph / WhatsApp / LinkedIn / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://thaynan-passos.github.io/">
   <meta property="og:title" content="Thaynan Passos — Dev & Suporte TI">
@@ -23,14 +27,12 @@
   <meta property="og:image" content="https://thaynan-passos.github.io/imagens/thaynan-foto.png">
   <meta property="og:image:alt" content="Thaynan Passos">
 
-  <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Thaynan Passos — Dev & Suporte TI">
   <meta name="twitter:description"
     content="Portfólio de Thaynan Passos, estudante de ADS no IFPE e desenvolvedor em formação.">
   <meta name="twitter:image" content="https://thaynan-passos.github.io/imagens/thaynan-foto.png">
 
-  <!-- Schema.org dados estruturados -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -59,12 +61,16 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2.0">
+  <link rel="stylesheet" href="style.css?v=2.1">
   <script>
     (function () {
-      var saved = localStorage.getItem('site-theme');
-      if (saved === 'light' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
-        document.documentElement.setAttribute('data-theme', 'light');
+      try {
+        var saved = localStorage.getItem('site-theme');
+        if (saved === 'light' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {
+        // Ignora falha em ambientes com armazenamento indisponível
       }
     })();
   </script>
@@ -72,7 +78,6 @@
 
 <body>
 
-  <!-- ═══ NAV ═══════════════════════════════════════════════ -->
   <header>
     <nav class="wrap">
       <a href="#top" class="logo" aria-label="Thaynan Passos, início">
@@ -97,8 +102,7 @@
         <li><a href="#contato" data-i18n="nav.contact">contato</a></li>
       </ul>
 
-      <!-- Botão de Alternância de Tema (Claro / Escuro) -->
-      <button class="theme-toggle-btn" id="themeToggle" type="button" aria-label="Alternar tema claro/escuro" title="Alternar tema">
+      <button class="theme-toggle-btn" id="themeToggle" type="button" aria-label="Alternar tema claro/escuro" aria-pressed="false" title="Alternar tema">
         <svg class="icon-sun" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="12" cy="12" r="5"></circle>
           <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -144,551 +148,435 @@
     </nav>
   </header>
 
-  <!-- ═══ HERO ═══════════════════════════════════════════════ -->
-  <section class="hero" id="top" aria-label="Apresentação">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="hero-eyebrow">
-          <span class="dot-live" aria-hidden="true"></span>
-          <span data-i18n="hero.eyebrow">estagiário em Tecnologia — Sesc Pernambuco</span>
-        </p>
-        <h1 data-i18n="hero.title">Thaynan<br>Passos<br><em>ADS & Sistemas</em></h1>
-        <p class="hero-lead" data-i18n="hero.lead">
-          Estudante de ADS no IFPE, atualmente estagiário na Unidade de Tecnologia Digital do Sesc
-          Pernambuco. Da bancada de suporte ao código — construindo soluções práticas de verdade.
-        </p>
-        <div class="hero-btns">
-          <a href="#contato" class="btn btn-primary">
+  <main>
+    <section class="hero" id="top" aria-label="Apresentação">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="hero-eyebrow">
+            <span class="dot-live" aria-hidden="true"></span>
+            <span data-i18n="hero.eyebrow">estagiário em Tecnologia — Sesc Pernambuco</span>
+          </p>
+          <h1 data-i18n="hero.title">Thaynan<br>Passos<br><em>ADS & Sistemas</em></h1>
+          <p class="hero-lead" data-i18n="hero.lead">
+            Estudante de ADS no IFPE, atualmente estagiário na Unidade de Tecnologia Digital do Sesc
+            Pernambuco. Da bancada de suporte ao código — construindo soluções práticas de verdade.
+          </p>
+          <div class="hero-btns">
+            <a href="#contato" class="btn btn-primary">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                aria-hidden="true">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+              <span data-i18n="hero.btnContact">Entrar em contato</span>
+            </a>
+            <a href="#projetos" class="btn btn-secondary">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                aria-hidden="true">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.6 5.09 1 4.1 2.19A5.44 5.44 0 0 0 2 7.77C2 13.58 5.35 14.78 8.49 15.13A3.37 3.37 0 0 1 7.55 18.74V22" />
+              </svg>
+              <span data-i18n="hero.btnProjects">Ver projetos</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="terminal-card" role="img" aria-label="Terminal simulando perfil técnico de Thaynan">
+          <div class="terminal-bar">
+            <span class="t-dot r" aria-hidden="true"></span>
+            <span class="t-dot y" aria-hidden="true"></span>
+            <span class="t-dot g" aria-hidden="true"></span>
+            <span class="terminal-title">bash — thaynan@portfolio</span>
+          </div>
+          <div class="terminal-body" id="terminalBody" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre" aria-labelledby="sobre-h">
+      <div class="wrap">
+        <p class="section-label">whoami</p>
+        <div class="about-grid">
+          <div class="photo-wrap">
+            <img src="imagens/thaynan-foto.png" alt="Thaynan Passos, homem de barba e óculos, braços cruzados com vista ao fundo"
+              width="260" height="290" loading="lazy">
+            <span class="photo-tag" aria-hidden="true">Paulista, PE 📍</span>
+          </div>
+          <div class="about-text">
+            <h2 id="sobre-h" data-i18n="about.title">Do suporte técnico<br>ao desenvolvimento</h2>
+            <p data-i18n="about.p1">
+              Sou estudante de Análise e Desenvolvimento de Sistemas no IFPE. Atualmente sou
+              estagiário na Unidade de Tecnologia Digital do Sesc Pernambuco, onde atuo em
+              configuração de plataformas internas, documentação técnica, testes de software e
+              manutenção de hotsites em WordPress. Antes disso, fui bolsista de suporte técnico
+              na UFPE (STI/NATI-CB) por mais de 4 anos — o que me deu uma visão real de como
+              sistemas funcionam por dentro.
+            </p>
+            <p data-i18n="about.p2">
+              Essa rotina me levou a estudar programação a sério. Tenho base em lógica, Python,
+              Java, SQL e Git, e aplico esse conhecimento tanto no estágio quanto em projetos
+              próprios — sempre em busca de crescer em desenvolvimento de software e automação
+              de processos.
+            </p>
+            <ul class="facts" aria-label="Informações extras">
+              <li class="fact">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                  aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span data-i18n="about.fact1">Paulista, PE — CNH categoria B</span>
+              </li>
+              <li class="fact">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                  aria-hidden="true">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                  <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                </svg>
+                <span data-i18n="about.fact2">Tecnólogo em ADS — IFPE (em andamento)</span>
+              </li>
+              <li class="fact">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                  aria-hidden="true">
+                  <rect x="2" y="7" width="20" height="14" rx="2" />
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                </svg>
+                <span data-i18n="about.fact3">Estagiário em Tecnologia — Sesc Pernambuco (desde jun/2026)</span>
+              </li>
+              <li class="fact">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                  aria-hidden="true">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                <span data-i18n="about.fact4">4+ anos de experiência em suporte e infraestrutura TI</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="skills-section" id="habilidades" aria-labelledby="skills-h">
+      <div class="wrap">
+        <p class="section-label">stack</p>
+        <h2 id="skills-h" data-i18n="skills.title">Habilidades<br>técnicas</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                aria-hidden="true">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+              <span data-i18n="skills.card1">Dev & Lógica</span>
+            </h3>
+            <ul class="tags" aria-label="Habilidades de desenvolvimento">
+              <li class="tag hi">Python</li>
+              <li class="tag hi">Java</li>
+              <li class="tag hi">Git & GitHub</li>
+              <li class="tag" data-i18n="skills.logic">Lógica de Programação</li>
+              <li class="tag">SQL</li>
+              <li class="tag">HTML & CSS</li>
+            </ul>
+          </div>
+
+          <div class="skill-card">
+            <h3>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                aria-hidden="true">
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+              <span data-i18n="skills.card2">Infraestrutura</span>
+            </h3>
+            <ul class="tags" aria-label="Habilidades de infraestrutura">
+              <li class="tag hi">Windows</li>
+              <li class="tag hi">Linux</li>
+              <li class="tag" data-i18n="skills.networks">Redes (LAN)</li>
+              <li class="tag" data-i18n="skills.support1">Suporte Nível 1</li>
+              <li class="tag" data-i18n="skills.hardware">Hardware</li>
+              <li class="tag">Help Desk</li>
+            </ul>
+          </div>
+
+          <div class="skill-card">
+            <h3>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+              <span data-i18n="skills.card3">Ferramentas</span>
+            </h3>
+            <ul class="tags" aria-label="Ferramentas">
+              <li class="tag">SIPAC</li>
+              <li class="tag">WordPress</li>
+              <li class="tag">Microsoft Office</li>
+              <li class="tag">VS Code</li>
+              <li class="tag">MySQL Workbench</li>
+              <li class="tag">Docker</li>
+            </ul>
+          </div>
+
+          <div class="skill-card">
+            <h3>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              <span data-i18n="skills.card4">Soft Skills</span>
+            </h3>
+            <ul class="tags" aria-label="Habilidades comportamentais">
+              <li class="tag" data-i18n="skills.comm">Comunicação assertiva</li>
+              <li class="tag" data-i18n="skills.team">Trabalho em equipe</li>
+              <li class="tag" data-i18n="skills.org">Organização</li>
+              <li class="tag" data-i18n="skills.proactive">Proatividade</li>
+              <li class="tag" data-i18n="skills.learn">Aprendizado rápido</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos" aria-labelledby="proj-h">
+      <div class="wrap">
+        <p class="section-label" data-i18n="projects.label">repositórios</p>
+        <h2 id="proj-h" data-i18n="projects.title">Projetos no<br>GitHub</h2>
+        <div class="projects-grid" id="projectsGrid" aria-live="polite" aria-label="Projetos do GitHub">
+          <p class="projects-loading">
+            <span aria-hidden="true">⟳</span> <span data-i18n="projects.loading">Carregando projetos do GitHub…</span>
+          </p>
+        </div>
+        <div class="projects-footer">
+          <a href="https://github.com/Thaynan-passos" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
               aria-hidden="true">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.6 5.09 1 4.1 2.19A5.44 5.44 0 0 0 2 7.77C2 13.58 5.35 14.78 8.49 15.13A3.37 3.37 0 0 1 7.55 18.74V22" />
             </svg>
-            <span data-i18n="hero.btnContact">Entrar em contato</span>
-          </a>
-          <a href="#projetos" class="btn btn-secondary">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-              aria-hidden="true">
-              <path
-                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-            </svg>
-            <span data-i18n="hero.btnProjects">Ver projetos</span>
+            <span data-i18n="projects.viewAll">Ver todos no GitHub</span>
           </a>
         </div>
       </div>
+    </section>
 
-      <div class="terminal-card" role="img" aria-label="Terminal simulando perfil técnico de Thaynan">
-        <div class="terminal-bar">
-          <span class="t-dot r" aria-hidden="true"></span>
-          <span class="t-dot y" aria-hidden="true"></span>
-          <span class="t-dot g" aria-hidden="true"></span>
-          <span class="terminal-title">bash — thaynan@portfolio</span>
-        </div>
-        <div class="terminal-body" id="terminalBody" aria-live="polite"></div>
+    <section class="exp-section" id="experiencia" aria-labelledby="exp-h">
+      <div class="wrap">
+        <p class="section-label" data-i18n="exp.label">trajetória</p>
+        <h2 id="exp-h" data-i18n="exp.title">Experiência<br>profissional</h2>
+        <ol class="timeline" aria-label="Linha do tempo profissional">
+          <li class="tl-item current">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <p class="tl-period" data-i18n="exp.period0">Jun/2026 — Atual</p>
+            <h3 class="tl-org">Sesc Pernambuco — Unidade de Tecnologia Digital</h3>
+            <p class="tl-role" data-i18n="exp.role0">Estagiário em Tecnologia / Análise de Sistemas</p>
+            <ul class="tl-bullets">
+              <li data-i18n="exp.b0_1">Configuração e orientação de usuários na plataforma interna de eventos</li>
+              <li data-i18n="exp.b0_2">Documentação técnica de sistemas e funcionalidades</li>
+              <li data-i18n="exp.b0_3">Testes de software e verificação de funcionalidades</li>
+              <li data-i18n="exp.b0_4">Manutenção e atualização de hotsites em WordPress</li>
+              <li data-i18n="exp.b0_5">Criação e atualização de portfólio profissional e perfil no LinkedIn</li>
+            </ul>
+          </li>
+          <li class="tl-item">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <p class="tl-period" data-i18n="exp.period3">2025 — 2026</p>
+            <h3 class="tl-org">Davila &amp; Passos Representações</h3>
+            <p class="tl-role" data-i18n="exp.role3">Representante Comercial / Sócio</p>
+            <ul class="tl-bullets">
+              <li data-i18n="exp.b3_1">Vendas de materiais e produtos para construção civil</li>
+              <li data-i18n="exp.b3_2">Suporte a clientes</li>
+              <li data-i18n="exp.b3_3">Assistência técnica para identificação de problemas</li>
+            </ul>
+          </li>
+          <li class="tl-item">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <p class="tl-period" data-i18n="exp.period4">2021.1 — 2025.1</p>
+            <h3 class="tl-org">UFPE — Engenharia Cartográfica e Agrimensura</h3>
+            <p class="tl-role" data-i18n="exp.role4">Graduação (trancada) — cursado até o 8º período</p>
+          </li>
+          <li class="tl-item">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <p class="tl-period" data-i18n="exp.period1">Ago/2022 — Mai/2026</p>
+            <h3 class="tl-org">UFPE — STI / NATI-CB</h3>
+            <p class="tl-role" data-i18n="exp.role1">Bolsista de Suporte Técnico em Informática</p>
+            <ul class="tl-bullets">
+              <li data-i18n="exp.b1_1">Atendimento e resolução de chamados via SIPAC</li>
+              <li data-i18n="exp.b1_2">Suporte técnico presencial e remoto a usuários</li>
+              <li data-i18n="exp.b1_3">Instalação, formatação e configuração de sistemas operacionais</li>
+              <li data-i18n="exp.b1_4">Manutenção e substituição de componentes de hardware</li>
+              <li data-i18n="exp.b1_5">Apoio à infraestrutura de redes locais</li>
+            </ul>
+          </li>
+          <li class="tl-item">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <p class="tl-period" data-i18n="exp.period2">Fev/2019 — Set/2020</p>
+            <h3 class="tl-org">Tratomaq Serviços e Peças</h3>
+            <p class="tl-role" data-i18n="exp.role2">Estagiário de TI</p>
+            <ul class="tl-bullets">
+              <li data-i18n="exp.b2_1">Manutenção preventiva e corretiva de computadores</li>
+              <li data-i18n="exp.b2_2">Instalação e reparo de sistemas operacionais e softwares</li>
+              <li data-i18n="exp.b2_3">Criação de formulários digitais para ordens de serviço</li>
+            </ul>
+          </li>
+        </ol>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══ SOBRE ═══════════════════════════════════════════════ -->
-  <section id="sobre" aria-labelledby="sobre-h">
-    <div class="wrap">
-      <p class="section-label">whoami</p>
-      <div class="about-grid">
-        <div class="photo-wrap">
-          <img src="imagens/thaynan-foto.png" alt="Thaynan Passos, homem de barba e óculos, braços cruzados com vista ao fundo"
-            width="260" height="290" loading="lazy">
-          <span class="photo-tag" aria-hidden="true">Paulista, PE 📍</span>
-        </div>
-        <div class="about-text">
-          <h2 id="sobre-h" data-i18n="about.title">Do suporte técnico<br>ao desenvolvimento</h2>
-          <p data-i18n="about.p1">
-            Sou estudante de Análise e Desenvolvimento de Sistemas no IFPE. Atualmente sou
-            estagiário na Unidade de Tecnologia Digital do Sesc Pernambuco, onde atuo em
-            configuração de plataformas internas, documentação técnica, testes de software e
-            manutenção de hotsites em WordPress. Antes disso, fui bolsista de suporte técnico
-            na UFPE (STI/NATI-CB) por mais de 4 anos — o que me deu uma visão real de como
-            sistemas funcionam por dentro.
-          </p>
-          <p data-i18n="about.p2">
-            Essa rotina me levou a estudar programação a sério. Tenho base em lógica, Python,
-            Java, SQL e Git, e aplico esse conhecimento tanto no estágio quanto em projetos
-            próprios — sempre em busca de crescer em desenvolvimento de software e automação
-            de processos.
-          </p>
-          <ul class="facts" aria-label="Informações extras">
-            <li class="fact">
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                aria-hidden="true">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              <span data-i18n="about.fact1">Paulista, PE — CNH categoria B</span>
-            </li>
-            <li class="fact">
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                aria-hidden="true">
-                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                <path d="M6 12v5c3 3 9 3 12 0v-5" />
-              </svg>
-              <span data-i18n="about.fact2">Tecnólogo em ADS — IFPE (em andamento)</span>
-            </li>
-            <li class="fact">
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                aria-hidden="true">
-                <rect x="2" y="7" width="20" height="14" rx="2" />
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-              </svg>
-              <span data-i18n="about.fact3">Estagiário em Tecnologia — Sesc Pernambuco (desde jun/2026)</span>
-            </li>
-            <li class="fact">
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                aria-hidden="true">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-              <span data-i18n="about.fact4">4+ anos de experiência em suporte e infraestrutura TI</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ SKILLS ═══════════════════════════════════════════════ -->
-  <section class="skills-section" id="habilidades" aria-labelledby="skills-h">
-    <div class="wrap">
-      <p class="section-label">stack</p>
-      <h2 id="skills-h" data-i18n="skills.title">Habilidades<br>técnicas</h2>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <h3>
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-              aria-hidden="true">
-              <polyline points="16 18 22 12 16 6" />
-              <polyline points="8 6 2 12 8 18" />
-            </svg>
-            <span data-i18n="skills.card1">Dev & Lógica</span>
-          </h3>
-          <ul class="tags" aria-label="Habilidades de desenvolvimento">
-            <li class="tag hi">Python</li>
-            <li class="tag hi">Java</li>
-            <li class="tag hi">Git & GitHub</li>
-            <li class="tag" data-i18n="skills.logic">Lógica de Programação</li>
-            <li class="tag">SQL</li>
-            <li class="tag">HTML & CSS</li>
-          </ul>
-        </div>
-        <div class="skill-card">
-          <h3>
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-              aria-hidden="true">
-              <rect x="2" y="3" width="20" height="14" rx="2" />
-              <line x1="8" y1="21" x2="16" y2="21" />
-              <line x1="12" y1="17" x2="12" y2="21" />
-            </svg>
-            <span data-i18n="skills.card2">Infraestrutura</span>
-          </h3>
-          <ul class="tags" aria-label="Habilidades de infraestrutura">
-            <li class="tag hi">Windows</li>
-            <li class="tag hi">Linux</li>
-            <li class="tag" data-i18n="skills.networks">Redes (LAN)</li>
-            <li class="tag" data-i18n="skills.support1">Suporte Nível 1</li>
-            <li class="tag" data-i18n="skills.hardware">Hardware</li>
-            <li class="tag">Help Desk</li>
-          </ul>
-        </div>
-        <div class="skill-card">
-          <h3>
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-              aria-hidden="true">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-            </svg>
-            <span data-i18n="skills.card3">Ferramentas</span>
-          </h3>
-          <ul class="tags" aria-label="Ferramentas">
-            <li class="tag">SIPAC</li>
-            <li class="tag">WordPress</li>
-            <li class="tag">Microsoft Office</li>
-            <li class="tag">VS Code</li>
-            <li class="tag">MySQL Workbench</li>
-            <li class="tag">Docker</li>
-          </ul>
-        </div>
-        <div class="skill-card">
-          <h3>
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-              aria-hidden="true">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
-            <span data-i18n="skills.card4">Soft Skills</span>
-          </h3>
-          <ul class="tags" aria-label="Habilidades comportamentais">
-            <li class="tag" data-i18n="skills.comm">Comunicação assertiva</li>
-            <li class="tag" data-i18n="skills.team">Trabalho em equipe</li>
-            <li class="tag" data-i18n="skills.org">Organização</li>
-            <li class="tag" data-i18n="skills.proactive">Proatividade</li>
-            <li class="tag" data-i18n="skills.learn">Aprendizado rápido</li>
-          </ul>
+    <section id="formacao" aria-labelledby="edu-h">
+      <div class="wrap">
+        <p class="section-label" data-i18n="edu.label">estudos</p>
+        <h2 id="edu-h" data-i18n="edu.title">Formação e<br>certificações</h2>
+        <div class="edu-grid">
+          <div class="edu-card">
+            <h3 data-i18n="edu.c1_title">Tecnólogo em Análise e Desenvolvimento de Sistemas</h3>
+            <p class="meta">Instituto Federal de Pernambuco — IFPE</p>
+            <span class="pill" data-i18n="edu.ongoing">Em andamento</span>
+          </div>
+          <div class="edu-card">
+            <h3 data-i18n="edu.c2_title">Técnico em Manutenção e Suporte em Informática</h3>
+            <p class="meta">IFPE — Paulista/PE</p>
+          </div>
+          <div class="edu-card">
+            <h3>Google IT Support</h3>
+            <p class="meta">Coursera</p>
+            <span class="pill" data-i18n="edu.ongoing">Em andamento</span>
+          </div>
+          <div class="edu-card">
+            <h3 data-i18n="edu.c4_title">Introdução à Programação com Python</h3>
+            <p class="meta">Fundação Bradesco</p>
+          </div>
+          <div class="edu-card">
+            <h3 data-i18n="edu.c5_title">Git e GitHub para Iniciantes</h3>
+            <p class="meta">Udemy</p>
+          </div>
+          <div class="edu-card">
+            <h3 data-i18n="edu.c6_title">Trilha do Estagiário — Comunicação Assertiva, Produtividade e Metodologias Ágeis (Kanban)</h3>
+            <p class="meta">Sesc Pernambuco — Udemy</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══ PROJETOS (GitHub API) ══════════════════════════════ -->
-  <section id="projetos" aria-labelledby="proj-h">
-    <div class="wrap">
-      <p class="section-label" data-i18n="projects.label">repositórios</p>
-      <h2 id="proj-h" data-i18n="projects.title">Projetos no<br>GitHub</h2>
-      <div class="projects-grid" id="projectsGrid" aria-live="polite" aria-label="Projetos do GitHub">
-        <p class="projects-loading">
-          <span aria-hidden="true">⟳</span> <span data-i18n="projects.loading">Carregando projetos do GitHub…</span>
-        </p>
-      </div>
-      <div class="projects-footer">
-        <a href="https://github.com/Thaynan-passos" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-            aria-hidden="true">
-            <path
-              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-          </svg>
-          <span data-i18n="projects.viewAll">Ver todos no GitHub</span>
-        </a>
-      </div>
-    </div>
-  </section>
+    <section class="cert-section" id="certificados" aria-labelledby="cert-h">
+      <div class="wrap">
+        <p class="section-label" data-i18n="cert.label">certificados</p>
+        <h2 id="cert-h" data-i18n="cert.title">Certificados<br>e cursos</h2>
 
-  <!-- ═══ EXPERIÊNCIA ══════════════════════════════════════════ -->
-  <section class="exp-section" id="experiencia" aria-labelledby="exp-h">
-    <div class="wrap">
-      <p class="section-label" data-i18n="exp.label">trajetória</p>
-      <h2 id="exp-h" data-i18n="exp.title">Experiência<br>profissional</h2>
-      <ol class="timeline" aria-label="Linha do tempo profissional">
-        <li class="tl-item current">
-          <span class="tl-dot" aria-hidden="true"></span>
-          <p class="tl-period" data-i18n="exp.period0">Jun/2026 — Atual</p>
-          <h3 class="tl-org">Sesc Pernambuco — Unidade de Tecnologia Digital</h3>
-          <p class="tl-role" data-i18n="exp.role0">Estagiário em Tecnologia / Análise de Sistemas</p>
-          <ul class="tl-bullets">
-            <li data-i18n="exp.b0_1">Configuração e orientação de usuários na plataforma interna de eventos</li>
-            <li data-i18n="exp.b0_2">Documentação técnica de sistemas e funcionalidades</li>
-            <li data-i18n="exp.b0_3">Testes de software e verificação de funcionalidades</li>
-            <li data-i18n="exp.b0_4">Manutenção e atualização de hotsites em WordPress</li>
-            <li data-i18n="exp.b0_5">Criação e atualização de portfólio profissional e perfil no LinkedIn</li>
-          </ul>
-        </li>
-        <li class="tl-item">
-          <span class="tl-dot" aria-hidden="true"></span>
-          <p class="tl-period" data-i18n="exp.period3">2025 — 2026</p>
-          <h3 class="tl-org">Davila &amp; Passos Representações</h3>
-          <p class="tl-role" data-i18n="exp.role3">Representante Comercial / Sócio</p>
-          <ul class="tl-bullets">
-            <li data-i18n="exp.b3_1">Vendas de materiais e produtos para construção civil</li>
-            <li data-i18n="exp.b3_2">Suporte a clientes</li>
-            <li data-i18n="exp.b3_3">Assistência técnica para identificação de problemas</li>
-          </ul>
-        </li>
-        <li class="tl-item">
-          <span class="tl-dot" aria-hidden="true"></span>
-          <p class="tl-period" data-i18n="exp.period4">2021.1 — 2025.1</p>
-          <h3 class="tl-org">UFPE — Engenharia Cartográfica e Agrimensura</h3>
-          <p class="tl-role" data-i18n="exp.role4">Graduação (trancada) — cursado até o 8º período</p>
-        </li>
-        <li class="tl-item">
-          <span class="tl-dot" aria-hidden="true"></span>
-          <p class="tl-period" data-i18n="exp.period1">Ago/2022 — Mai/2026</p>
-          <h3 class="tl-org">UFPE — STI / NATI-CB</h3>
-          <p class="tl-role" data-i18n="exp.role1">Bolsista de Suporte Técnico em Informática</p>
-          <ul class="tl-bullets">
-            <li data-i18n="exp.b1_1">Atendimento e resolução de chamados via SIPAC</li>
-            <li data-i18n="exp.b1_2">Suporte técnico presencial e remoto a usuários</li>
-            <li data-i18n="exp.b1_3">Instalação, formatação e configuração de sistemas operacionais</li>
-            <li data-i18n="exp.b1_4">Manutenção e substituição de componentes de hardware</li>
-            <li data-i18n="exp.b1_5">Apoio à infraestrutura de redes locais</li>
-          </ul>
-        </li>
-        <li class="tl-item">
-          <span class="tl-dot" aria-hidden="true"></span>
-          <p class="tl-period" data-i18n="exp.period2">Fev/2019 — Set/2020</p>
-          <h3 class="tl-org">Tratomaq Serviços e Peças</h3>
-          <p class="tl-role" data-i18n="exp.role2">Estagiário de TI</p>
-          <ul class="tl-bullets">
-            <li data-i18n="exp.b2_1">Manutenção preventiva e corretiva de computadores</li>
-            <li data-i18n="exp.b2_2">Instalação e reparo de sistemas operacionais e softwares</li>
-            <li data-i18n="exp.b2_3">Criação de formulários digitais para ordens de serviço</li>
-          </ul>
-        </li>
-      </ol>
-    </div>
-  </section>
+        <div class="cert-controls">
+          <div class="cert-filters" id="certFilters" role="tablist" aria-label="Filtrar certificados">
+            <button type="button" class="cert-filter-btn active" data-filter="all">
+              <span data-i18n="cert.filterAll">Todos</span>
+              <span class="cert-filter-count">11</span>
+            </button>
+            <button type="button" class="cert-filter-btn" data-filter="dev">
+              <span data-i18n="cert.filterDev">Desenvolvimento</span>
+              <span class="cert-filter-count">5</span>
+            </button>
+            <button type="button" class="cert-filter-btn" data-filter="infra">
+              <span data-i18n="cert.filterInfra">Suporte & Infra</span>
+              <span class="cert-filter-count">2</span>
+            </button>
+            <button type="button" class="cert-filter-btn" data-filter="gestao">
+              <span data-i18n="cert.filterGestao">Gestão & Soft Skills</span>
+              <span class="cert-filter-count">4</span>
+            </button>
+          </div>
 
-  <!-- ═══ FORMAÇÃO ════════════════════════════════════════════ -->
-  <section id="formacao" aria-labelledby="edu-h">
-    <div class="wrap">
-      <p class="section-label" data-i18n="edu.label">estudos</p>
-      <h2 id="edu-h" data-i18n="edu.title">Formação e<br>certificações</h2>
-      <div class="edu-grid">
-        <div class="edu-card">
-          <h3 data-i18n="edu.c1_title">Tecnólogo em Análise e Desenvolvimento de Sistemas</h3>
-          <p class="meta">Instituto Federal de Pernambuco — IFPE</p>
-          <span class="pill" data-i18n="edu.ongoing">Em andamento</span>
-        </div>
-        <div class="edu-card">
-          <h3 data-i18n="edu.c2_title">Técnico em Manutenção e Suporte em Informática</h3>
-          <p class="meta">IFPE — Paulista/PE</p>
-        </div>
-        <div class="edu-card">
-          <h3>Google IT Support</h3>
-          <p class="meta">Coursera</p>
-          <span class="pill" data-i18n="edu.ongoing">Em andamento</span>
-        </div>
-        <div class="edu-card">
-          <h3 data-i18n="edu.c4_title">Introdução à Programação com Python</h3>
-          <p class="meta">Fundação Bradesco</p>
-        </div>
-        <div class="edu-card">
-          <h3 data-i18n="edu.c5_title">Git e GitHub para Iniciantes</h3>
-          <p class="meta">Udemy</p>
-        </div>
-        <div class="edu-card">
-          <h3 data-i18n="edu.c6_title">Trilha do Estagiário — Comunicação Assertiva, Produtividade e Metodologias Ágeis (Kanban)</h3>
-          <p class="meta">Sesc Pernambuco — Udemy</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ CERTIFICADOS (carrossel automático via pasta & grade com filtros) ═══════ -->
-  <section class="cert-section" id="certificados" aria-labelledby="cert-h">
-    <div class="wrap">
-      <p class="section-label" data-i18n="cert.label">certificados</p>
-      <h2 id="cert-h" data-i18n="cert.title">Certificados<br>e cursos</h2>
-
-      <div class="cert-controls">
-        <div class="cert-filters" id="certFilters" role="tablist" aria-label="Filtrar certificados">
-          <button type="button" class="cert-filter-btn active" data-filter="all">
-            <span data-i18n="cert.filterAll">Todos</span>
-            <span class="cert-filter-count">11</span>
-          </button>
-          <button type="button" class="cert-filter-btn" data-filter="dev">
-            <span data-i18n="cert.filterDev">Desenvolvimento</span>
-            <span class="cert-filter-count">5</span>
-          </button>
-          <button type="button" class="cert-filter-btn" data-filter="infra">
-            <span data-i18n="cert.filterInfra">Suporte & Infra</span>
-            <span class="cert-filter-count">2</span>
-          </button>
-          <button type="button" class="cert-filter-btn" data-filter="gestao">
-            <span data-i18n="cert.filterGestao">Gestão & Soft Skills</span>
-            <span class="cert-filter-count">4</span>
-          </button>
+          <div class="cert-view-toggle" role="group" aria-label="Modo de visualização">
+            <button type="button" class="view-btn active" id="btnViewCarousel" aria-label="Visualização em carrossel" title="Carrossel">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+              <span data-i18n="cert.viewCarousel">Carrossel</span>
+            </button>
+            <button type="button" class="view-btn" id="btnViewGrid" aria-label="Visualização em grade" title="Grade">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              <span data-i18n="cert.viewGrid">Grade</span>
+            </button>
+          </div>
         </div>
 
-        <div class="cert-view-toggle" role="group" aria-label="Modo de visualização">
-          <button type="button" class="view-btn active" id="btnViewCarousel" aria-label="Visualização em carrossel" title="Carrossel">
-            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
-            <span data-i18n="cert.viewCarousel">Carrossel</span>
-          </button>
-          <button type="button" class="view-btn" id="btnViewGrid" aria-label="Visualização em grade" title="Grade">
-            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            <span data-i18n="cert.viewGrid">Grade</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="cert-carousel" id="certCarousel">
-        <div class="cert-track-wrap">
-          <button type="button" class="cert-nav prev" id="certPrev" aria-label="Certificado anterior">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-              aria-hidden="true">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
-
+        <div class="cert-carousel" id="certCarousel">
           <div class="cert-viewport" id="certViewport">
             <div class="cert-track" id="certTrack" aria-live="polite"></div>
           </div>
-
-          <button type="button" class="cert-nav next" id="certNext" aria-label="Próximo certificado">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-              aria-hidden="true">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </button>
+          <div class="cert-nav">
+            <button type="button" class="cert-nav-btn" id="certPrev" aria-label="Certificado anterior">←</button>
+            <div class="cert-counter" id="certCounter">1 / 1</div>
+            <button type="button" class="cert-nav-btn" id="certNext" aria-label="Próximo certificado">→</button>
+          </div>
+          <div class="cert-dots" id="certDots" aria-label="Seleção de certificados"></div>
         </div>
 
-        <div class="cert-carousel-footer">
-          <span class="cert-counter" id="certCounter" aria-live="polite">1 / 11</span>
-          <div class="cert-dots" id="certDots" role="tablist" aria-label="Selecionar certificado"></div>
-        </div>
+        <div class="cert-grid-view" id="certGridView" style="display:none"></div>
       </div>
+    </section>
 
-      <div class="cert-grid-view" id="certGridView" style="display: none;" aria-live="polite"></div>
-    </div>
-  </section>
+    <section id="contato" aria-labelledby="contact-h">
+      <div class="wrap contact-wrap">
+        <p class="section-label">contact</p>
+        <h2 id="contact-h" data-i18n="contact.title">Vamos conversar</h2>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3 data-i18n="contact.card1">Contato rápido</h3>
+            <p data-i18n="contact.card1Text">Disponível para oportunidades, projetos e desafios de tecnologia.</p>
+            <ul class="contact-list">
+              <li><span>E-mail</span> <a href="mailto:thaynanpassos@gmail.com">thaynanpassos@gmail.com</a></li>
+              <li><span>WhatsApp</span> <a href="https://wa.me/5581999006127" target="_blank" rel="noreferrer">+55 (81) 99900-6127</a></li>
+              <li><span>LinkedIn</span> <a href="https://www.linkedin.com/in/thaynan-passos-91bb86181" target="_blank" rel="noreferrer">linkedin.com/in/thaynan-passos</a></li>
+            </ul>
+          </div>
 
-  <!-- ═══ CONTATO ════════════════════════════════════════════ -->
-  <section class="contact-section" id="contato" aria-labelledby="contato-h">
-    <div class="wrap">
-      <p class="section-label" data-i18n="contact.label">contato</p>
-      <h2 id="contato-h" data-i18n="contact.title">Vamos<br>conversar</h2>
-      <div class="contact-grid">
-        <div>
-          <p style="color:var(--muted); margin-bottom:24px;" data-i18n="contact.lead">
-            Atualmente sou estagiário na Unidade de Tecnologia Digital do Sesc Pernambuco e estou
-            aberto a novas oportunidades e conexões na área de desenvolvimento de sistemas.
-            Pode mandar mensagem pelo formulário ou pelos canais abaixo.
-          </p>
-          <ul class="contact-links" aria-label="Canais de contato">
-            <li>
-              <a href="mailto:thaynan0davila@gmail.com" class="contact-link">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                  aria-hidden="true">
-                  <rect x="2" y="4" width="20" height="16" rx="2" />
-                  <path d="M22 7l-10 7L2 7" />
-                </svg>
-                thaynan0davila@gmail.com
-              </a>
-            </li>
-            <li>
-              <a href="tel:+5581991525664" class="contact-link">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                  aria-hidden="true">
-                  <path
-                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-                </svg>
-                (81) 99152-5664
-              </a>
-            </li>
-            <li>
-              <a href="https://wa.me/5581991525664?text=Ol%C3%A1%20Thaynan%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!"
-                target="_blank" rel="noopener noreferrer" class="contact-link">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                  aria-hidden="true">
-                  <path
-                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-                </svg>
-                WhatsApp — (81) 99152-5664
-              </a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/thaynan-passos-91bb86181" target="_blank" rel="noopener noreferrer"
-                class="contact-link">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                  aria-hidden="true">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
-                  <rect x="2" y="9" width="4" height="12" />
-                  <circle cx="4" cy="4" r="2" />
-                </svg>
-                LinkedIn — thaynan-passos
-                <span style="font-size:11px; color:var(--muted)" data-i18n="contact.newTab">(nova aba)</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/Thaynan-passos" target="_blank" rel="noopener noreferrer"
-                class="contact-link">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                  aria-hidden="true">
-                  <path
-                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                </svg>
-                GitHub — Thaynan-passos
-                <span style="font-size:11px; color:var(--muted)" data-i18n="contact.newTab">(nova aba)</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <form id="contactForm" action="https://formspree.io/f/myezyyke" method="POST" novalidate>
-            <div class="form-group">
-              <label for="contactName" data-i18n="contact.formName">Nome <span aria-hidden="true">*</span></label>
-              <input type="text" id="contactName" name="nome" autocomplete="name" required
-                data-i18n-placeholder="contact.formNamePh" placeholder="Seu nome completo">
-            </div>
-            <div class="form-group">
-              <label for="contactEmail" data-i18n="contact.formEmail">E-mail <span aria-hidden="true">*</span></label>
-              <input type="email" id="contactEmail" name="email" autocomplete="email" required
-                data-i18n-placeholder="contact.formEmailPh" placeholder="seu@email.com">
-            </div>
-            <div class="form-group">
-              <label for="contactMsg" data-i18n="contact.formMsg">Mensagem <span aria-hidden="true">*</span></label>
-              <textarea id="contactMsg" name="mensagem" required data-i18n-placeholder="contact.formMsgPh"
-                placeholder="Olá, Thaynan! Tenho uma oportunidade…"></textarea>
-            </div>
+          <form id="contactForm" class="contact-form" action="https://formsubmit.co/thaynanpassos@gmail.com" method="POST">
+            <label>
+              <span data-i18n="contact.name">Nome</span>
+              <input type="text" name="nome" placeholder="Seu nome" required>
+            </label>
+            <label>
+              <span data-i18n="contact.email">E-mail</span>
+              <input type="email" name="email" placeholder="seu@email.com" required>
+            </label>
+            <label>
+              <span data-i18n="contact.message">Mensagem</span>
+              <textarea name="mensagem" rows="5" placeholder="Escreva sua mensagem" required></textarea>
+            </label>
             <button type="submit" class="btn btn-primary">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                aria-hidden="true">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                 <line x1="22" y1="2" x2="11" y2="13" />
                 <polygon points="22 2 15 22 11 13 2 9 22 2" />
               </svg>
-              <span data-i18n="contact.formSubmit">Enviar mensagem</span>
+              <span data-i18n="contact.send">Enviar mensagem</span>
             </button>
             <p id="formStatus" class="form-status" aria-live="polite"></p>
           </form>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- ═══ FOOTER ════════════════════════════════════════════ -->
-  <footer>
-    <div class="wrap footer-inner">
-      <p class="footer-text">© <span id="yr"></span> <span data-i18n="footer.text">Thaynan Passos — feito com HTML, CSS
-          & JS</span></p>
-      <nav class="footer-links" aria-label="Links do rodapé">
-        <a href="https://github.com/Thaynan-passos" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/in/thaynan-passos-91bb86181" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="THAYNANCurriculo.pdf" download data-i18n="footer.resume">Currículo</a>
-      </nav>
+  <footer class="site-footer">
+    <div class="wrap footer-wrap">
+      <p>© <span id="yr"></span> Thaynan Passos</p>
+      <p>Feito com ❤️ e muito café.</p>
     </div>
   </footer>
 
-  <button id="back-top" aria-label="Voltar ao topo">
-    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-      aria-hidden="true">
-      <line x1="12" y1="19" x2="12" y2="5" />
-      <polyline points="5 12 12 5 19 12" />
-    </svg>
-  </button>
-
-  <!-- ═══ WHATSAPP CHAT BUTTON ═══════════════════════════════ -->
   <div class="whatsapp-fab" id="whatsappFab">
     <div class="whatsapp-bubble" id="whatsappBubble">
-      <span data-i18n="whatsapp.bubble">Fala comigo no WhatsApp! 👋</span>
-      <button class="whatsapp-bubble-close" id="whatsappBubbleClose" aria-label="Fechar mensagem" title="Fechar">✕</button>
+      <span>Vamos conversar?</span>
+      <button class="whatsapp-bubble-close" id="whatsappBubbleClose" aria-label="Fechar mensagem">✕</button>
     </div>
-    <a class="whatsapp-btn" id="whatsappBtn"
-      href="https://wa.me/5581991525664?text=Ol%C3%A1%20Thaynan%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!"
-      target="_blank" rel="noopener noreferrer" aria-label="Conversar no WhatsApp">
-      <svg width="30" height="30" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
-        <path
-          d="M16 0C7.16 0 0 7.16 0 16c0 2.82.74 5.47 2.03 7.77L0 32l8.44-2.2A15.9 15.9 0 0 0 16 32c8.84 0 16-7.16 16-16S24.84 0 16 0zm0 29.2c-2.5 0-4.85-.68-6.87-1.86l-.49-.29-5.01 1.31 1.34-4.88-.32-.5A13.14 13.14 0 0 1 2.8 16C2.8 8.7 8.7 2.8 16 2.8S29.2 8.7 29.2 16 23.3 29.2 16 29.2zm7.2-9.86c-.39-.2-2.3-1.14-2.66-1.27-.36-.13-.62-.2-.88.2-.26.39-1.01 1.27-1.24 1.53-.23.26-.46.29-.85.1-.39-.2-1.65-.61-3.14-1.94-1.16-1.04-1.94-2.32-2.17-2.71-.23-.39-.02-.6.17-.79.18-.18.39-.46.59-.69.2-.23.26-.39.39-.65.13-.26.06-.49-.03-.69-.1-.2-.88-2.11-1.2-2.89-.32-.76-.64-.66-.88-.67h-.75c-.26 0-.69.1-1.05.49-.36.39-1.37 1.34-1.37 3.27s1.4 3.79 1.6 4.05c.2.26 2.75 4.2 6.66 5.89.93.4 1.66.64 2.23.82.94.3 1.79.26 2.46.16.75-.11 2.3-.94 2.63-1.85.33-.91.33-1.69.23-1.85-.1-.16-.36-.26-.75-.46z" />
+    <a href="https://wa.me/5581999006127" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" aria-label="Abrir WhatsApp">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M20.52 3.48A11.91 11.91 0 0 0 12.06 0C5.65 0 .51 5.15.51 11.54c0 2.03.53 4.02 1.54 5.77L.37 23.63l6.49-1.72a11.57 11.57 0 0 0 5.2 1.5h.01c6.41 0 11.54-5.15 11.54-11.54 0-3.09-1.2-5.99-3.35-8.15ZM12.06 21.1h-.01a9.57 9.57 0 0 1-4.86-1.33l-.35-.2-3.85 1.02 1.03-3.75-.23-.38a9.57 9.57 0 1 1 8.27 4.64Zm5.27-7.17c-.29-.15-1.72-.85-1.99-.94-.27-.09-.46-.15-.65.15-.2.29-.76.94-.94 1.12-.17.2-.35.22-.64.08-.29-.15-1.23-.45-2.34-1.44-.86-.77-1.47-1.72-1.64-2.01-.17-.29-.02-.45.13-.6.13-.13.29-.35.44-.52.15-.17.2-.29.29-.48.1-.2.05-.38-.02-.52-.08-.15-.65-1.56-.89-2.14-.23-.56-.46-.49-.65-.49h-.55c-.18 0-.48.07-.73.35-.25.28-1.08 1.06-1.08 2.58 0 1.52 1.1 2.98 1.25 3.17.15.2 2.15 3.28 5.22 4.6.73.32 1.3.51 1.74.66.73.23 1.39.2 1.92.12.59-.09 1.72-.7 1.96-1.38.24-.68.24-1.27.17-1.39-.07-.12-.27-.19-.56-.34Z"/>
       </svg>
     </a>
   </div>
 
-  <!-- ═══ MODAL PREVIEW DE CERTIFICADO (LIGHTBOX) ═══════════════ -->
-  <div class="cert-modal" id="certModal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="cert-modal-backdrop" id="certModalBackdrop"></div>
-    <div class="cert-modal-dialog">
-      <button class="cert-modal-close" id="certModalClose" aria-label="Fechar visualização">
-        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-      </button>
-      <div class="cert-modal-content" id="certModalContent"></div>
-    </div>
-  </div>
+  <button type="button" class="back-top" id="back-top" aria-label="Voltar ao topo">↑</button>
 
-  <!-- ═══ SCRIPTS ════════════════════════════════════════════ -->
-  <script src="script.js?v=2.0"></script>
-
-  <!-- ═══ I18N (seletor de idioma) ═══════════════════════════ -->
-  <script src="i18n.js?v=2.0" defer></script>
+  <script src="script.js?v=2.1"></script>
 </body>
 
 </html>
