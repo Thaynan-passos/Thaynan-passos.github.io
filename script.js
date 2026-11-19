@@ -696,7 +696,7 @@
         hours: '45h',
         category: 'dev',
         url: 'certificados/Itau-Java-com-Inteligencia-Artificial.pdf',
-        previewUrl: null,
+        previewUrl: 'certificados/Itau-Java-com-Inteligencia-Artificial.preview.jpg',
         isPdf: true
       },
       {
@@ -706,7 +706,7 @@
         hours: '8,5h',
         category: 'dev',
         url: 'certificados/IAparaDevs.pdf',
-        previewUrl: null,
+        previewUrl: 'certificados/IAparaDevs.preview.jpg',
         isPdf: true
       },
       {
@@ -716,7 +716,7 @@
         hours: '5h',
         category: 'dev',
         url: 'certificados/Antigravity-IDE-Guia-Pratico-de-Desenvolvimento-com-IA.pdf',
-        previewUrl: null,
+        previewUrl: 'certificados/Antigravity-IDE-Guia-Pratico-de-Desenvolvimento-com-IA.preview.jpg',
         isPdf: true
       },
       {
@@ -726,7 +726,7 @@
         hours: '',
         category: 'dev',
         url: 'certificados/claude-academy-badge-claude-code-101.pdf',
-        previewUrl: null,
+        previewUrl: 'certificados/claude-academy-badge-claude-code-101.preview.jpg',
         isPdf: true
       },
       {
