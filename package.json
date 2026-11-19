@@ -1,0 +1,15 @@
+{
+  "name": "thaynan-passos-portfolio",
+  "version": "3.0.0",
+  "description": "Portfólio técnico estático com arquitetura Industrial, console interativo, i18n em 5 idiomas e gerenciamento de certificados.",
+  "private": true,
+  "scripts": {
+    "lint": "node scripts/validate.mjs",
+    "test": "node --test tests/portfolio.test.mjs",
+    "build": "node scripts/build-check.mjs"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "license": "MIT"
+}

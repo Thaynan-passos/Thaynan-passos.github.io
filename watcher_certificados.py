@@ -57,7 +57,11 @@ MAX_WIDTH = 1400
 MANIFEST = CERTS_DIR / "certificados.json"
 
 CATEGORY_KEYWORDS = {
-    "dev": ["python", "program", "git", "wordpress", "vendas", "bootcamp", "heineken", "java", "web", "dev", "codigo"],
+    "dev": [
+        "python", "program", "git", "wordpress", "vendas", "bootcamp", "heineken",
+        "java", "web", "dev", "codigo", "ia", "inteligencia", "claude", "antigravity",
+        "llm", "agent",
+    ],
     "infra": ["ciberseguran", "sharepoint", "redes", "suporte", "infra", "cisco", "linux", "cloud", "aws", "azure"],
 }
 
@@ -184,31 +188,44 @@ def rename_file(path: Path, log_fn=print) -> Path:
 def update_manifest(log_fn=print) -> None:
     """
     Varre a pasta certificados/ e sincroniza o certificados.json com os nomes corretos e WebP,
-    preservando titulos existentes bem formatados.
+    preservando ordem, titulos, emissores e carga horaria existentes.
     """
     if not CERTS_DIR.is_dir():
         return
 
-    # Carrega titulos e categorias pre-existentes para nao sobrescrever edicoes manuais
-    existing_titles = {}
-    existing_cats = {}
+    # Carrega metadados e ordem pre-existentes para nao sobrescrever edicoes manuais
+    existing_meta: dict[str, dict] = {}
+    existing_order: list[str] = []
     if MANIFEST.exists():
         try:
             old_items = json.loads(MANIFEST.read_text(encoding="utf-8"))
             for oi in old_items:
                 n = oi.get("name", "")
-                existing_titles[n] = oi.get("title", "")
-                existing_titles[slugify(n)] = oi.get("title", "")
-                existing_cats[n] = oi.get("category", "")
-                existing_cats[slugify(n)] = oi.get("category", "")
-        except Exception:
-            pass
+                slug_n = slugify(n) if n else ""
+                meta = {
+                    "title": oi.get("title", ""),
+                    "issuer": oi.get("issuer", ""),
+                    "hours": oi.get("hours", ""),
+                    "category": oi.get("category", ""),
+                }
+                if n:
+                    existing_meta[n] = meta
+                    existing_order.append(n)
+                if slug_n and slug_n != n:
+                    existing_meta[slug_n] = meta
+        except Exception as exc:
+            log_fn(f"[AVISO] Nao foi possivel ler manifesto anterior: {exc}")
 
-    pdfs = sorted(CERTS_DIR.glob("*.pdf"))
+    pdfs_by_name = {pdf.name: pdf for pdf in sorted(CERTS_DIR.glob("*.pdf"))}
+    ordered_names = [name for name in existing_order if name in pdfs_by_name]
+    for name in sorted(pdfs_by_name.keys()):
+        if name not in ordered_names:
+            ordered_names.append(name)
+
     items = []
 
-    for pdf in pdfs:
-        slug_name = pdf.name
+    for slug_name in ordered_names:
+        pdf = pdfs_by_name[slug_name]
         slug_stem = pdf.stem
         preview_webp = CERTS_DIR / f"{slug_stem}.preview.webp"
         preview_png = CERTS_DIR / f"{slug_stem}.preview.png"
@@ -218,11 +235,12 @@ def update_manifest(log_fn=print) -> None:
         elif preview_png.exists():
             preview_url = f"certificados/{preview_png.name}"
         else:
-            preview_url = f"certificados/{slug_name}"
+            # Mantem null quando nao ha miniatura de imagem gerada (evita passar PDF para <img>)
+            preview_url = None
 
-        # Obtem titulo existente ou gera um titulo legivel
-        if existing_titles.get(slug_name):
-            title = existing_titles[slug_name]
+        saved = existing_meta.get(slug_name, {})
+        if saved.get("title"):
+            title = saved["title"]
         else:
             clean_title = (
                 slug_stem.replace("-", " ")
@@ -235,11 +253,15 @@ def update_manifest(log_fn=print) -> None:
                 clean_title = slug_stem
             title = " ".join(w.capitalize() for w in clean_title.split())
 
-        cat = existing_cats.get(slug_name) or detect_category(slug_name.lower())
+        cat = saved.get("category") or detect_category(slug_name.lower())
+        issuer = saved.get("issuer", "")
+        hours = saved.get("hours", "")
 
         items.append({
             "name": slug_name,
             "title": title,
+            "issuer": issuer,
+            "hours": hours,
             "category": cat,
             "url": f"certificados/{slug_name}",
             "previewUrl": preview_url,
@@ -247,7 +269,7 @@ def update_manifest(log_fn=print) -> None:
         })
 
     try:
-        MANIFEST.write_text(json.dumps(items, ensure_ascii=False, indent=2), encoding="utf-8")
+        MANIFEST.write_text(json.dumps(items, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         log_fn(f"[JSON] certificados.json atualizado com sucesso ({len(items)} certificados).")
     except Exception as e:
         log_fn(f"[ERRO] Falha ao escrever {MANIFEST}: {e}")
@@ -328,8 +350,8 @@ class FileWatcher:
             try:
                 self._observer.stop()
                 self._observer.join(timeout=2)
-            except Exception:
-                pass
+            except Exception as exc:
+                self.log_fn(f"[AVISO] Falha ao encerrar watchdog: {exc}")
             self._observer = None
         if self._poll_thread:
             self._poll_thread.join(timeout=2)
@@ -386,8 +408,8 @@ class FileWatcher:
                         elif mtime > self._known_mtimes[str(f)]:
                             self._known_mtimes[str(f)] = mtime
                             process_single_file(f, log_fn=self.log_fn)
-                except Exception:
-                    pass
+                except Exception as exc:
+                    self.log_fn(f"[AVISO] Erro no ciclo de polling: {exc}")
                 time.sleep(2)
 
         self._poll_thread = threading.Thread(target=_loop, daemon=True)
@@ -500,8 +522,8 @@ class AppGUI(tk.Tk if HAS_TK else object):
                 self.log_widget.insert("end", f"[{ts}] {msg}\n", tag or "")
                 self.log_widget.see("end")
                 self.log_widget.config(state="disabled")
-            except Exception:
-                pass
+            except Exception as exc:
+                print(f"[AVISO] Falha ao atualizar widget de log: {msg} ({exc})")
 
         if HAS_TK:
             try:
@@ -537,8 +559,8 @@ class AppGUI(tk.Tk if HAS_TK else object):
             finally:
                 try:
                     self.btn_process.config(state="normal")
-                except Exception:
-                    pass
+                except Exception as exc:
+                    print(f"[AVISO] Nao foi possivel reativar botao apos encerramento: {exc}")
         threading.Thread(target=_worker, daemon=True).start()
 
     def on_close(self):
