@@ -158,5 +158,15 @@
     "url": "certificados/claude-academy-badge-claude-101.pdf",
     "previewUrl": "",
     "isPdf": true
+  },
+  {
+    "name": "claude-academy-badge-ai-capabilities-and-limitations.pdf",
+    "title": "Claude Academy Badge Ai Capabilities And Limitations",
+    "issuer": "",
+    "hours": "",
+    "category": "dev",
+    "url": "certificados/claude-academy-badge-ai-capabilities-and-limitations.pdf",
+    "previewUrl": "certificados/claude-academy-badge-ai-capabilities-and-limitations.preview.png",
+    "isPdf": true
   }
 ]
