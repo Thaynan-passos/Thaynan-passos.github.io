@@ -9,6 +9,7 @@ const JS_FILES = [
   'script.js',
   'scripts/validate.mjs',
   'scripts/build-check.mjs',
+  'scripts/generate-resume.mjs',
   'tests/portfolio.test.mjs'
 ];
 const CRITICAL_ASSETS = [

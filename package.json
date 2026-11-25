@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "node scripts/validate.mjs",
     "test": "node --test tests/portfolio.test.mjs",
-    "build": "node scripts/build-check.mjs"
+    "build": "node scripts/build-check.mjs",
+    "resume:pdf": "node scripts/generate-resume.mjs"
   },
   "engines": {
     "node": ">=20.0.0"

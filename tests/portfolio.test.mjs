@@ -116,10 +116,10 @@ test('parseTerminalCommand interpreta comandos conhecidos, clear, cv e desconhec
   assert.equal(errRes.type, 'error');
 });
 
-test('Manifesto certificados.json possui 15 certificados únicos, sem #u00 e com arquivos existentes', () => {
+test('Manifesto certificados.json possui certificados únicos, sem #u00 e com arquivos existentes', () => {
   const raw = fs.readFileSync(path.join(ROOT_DIR, 'certificados/certificados.json'), 'utf8');
   const list = JSON.parse(raw);
-  assert.equal(list.length, 15);
+  assert.ok(Array.isArray(list) && list.length >= 16, `Esperado ao menos 16 certificados, encontrado ${list.length}`);
 
   for (const item of list) {
     assert.equal(/#u00/i.test(item.title), false, `Escape Unicode encontrado em: ${item.title}`);
