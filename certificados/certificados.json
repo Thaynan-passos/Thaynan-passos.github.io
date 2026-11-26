@@ -6,7 +6,7 @@
     "hours": "45h",
     "category": "dev",
     "url": "certificados/Itau-Java-com-Inteligencia-Artificial.pdf",
-    "previewUrl": "certificados/Itau-Java-com-Inteligencia-Artificial.preview.jpg",
+    "previewUrl": "certificados/Itau-Java-com-Inteligencia-Artificial.preview.png",
     "isPdf": true
   },
   {
@@ -16,7 +16,7 @@
     "hours": "8,5h",
     "category": "dev",
     "url": "certificados/IAparaDevs.pdf",
-    "previewUrl": "certificados/IAparaDevs.preview.jpg",
+    "previewUrl": "certificados/IAparaDevs.preview.png",
     "isPdf": true
   },
   {
@@ -26,7 +26,7 @@
     "hours": "5h",
     "category": "dev",
     "url": "certificados/Antigravity-IDE-Guia-Pratico-de-Desenvolvimento-com-IA.pdf",
-    "previewUrl": "certificados/Antigravity-IDE-Guia-Pratico-de-Desenvolvimento-com-IA.preview.jpg",
+    "previewUrl": "certificados/Antigravity-IDE-Guia-Pratico-de-Desenvolvimento-com-IA.preview.png",
     "isPdf": true
   },
   {
@@ -36,7 +36,7 @@
     "hours": "",
     "category": "dev",
     "url": "certificados/claude-academy-badge-claude-code-101.pdf",
-    "previewUrl": "certificados/claude-academy-badge-claude-code-101.preview.jpg",
+    "previewUrl": "certificados/claude-academy-badge-claude-code-101.preview.png",
     "isPdf": true
   },
   {
@@ -156,7 +156,7 @@
     "hours": "",
     "category": "dev",
     "url": "certificados/claude-academy-badge-claude-101.pdf",
-    "previewUrl": "",
+    "previewUrl": "certificados/claude-academy-badge-claude-101.preview.png",
     "isPdf": true
   },
   {
@@ -167,6 +167,16 @@
     "category": "dev",
     "url": "certificados/claude-academy-badge-ai-capabilities-and-limitations.pdf",
     "previewUrl": "certificados/claude-academy-badge-ai-capabilities-and-limitations.preview.png",
+    "isPdf": true
+  },
+  {
+    "name": "claude-academy-badge-claude-code-in-action.pdf",
+    "title": "Claude Academy Badge Claude Code In Action",
+    "issuer": "",
+    "hours": "",
+    "category": "dev",
+    "url": "certificados/claude-academy-badge-claude-code-in-action.pdf",
+    "previewUrl": "certificados/claude-academy-badge-claude-code-in-action.preview.png",
     "isPdf": true
   }
 ]
