@@ -297,7 +297,7 @@
     function getBootLines() {
       return [
         { kind: 'prompt', text: 'whoami' },
-        { kind: 'ok', text: `Thaynan Passos — ${translate('terminal.subtitle', 'Análise e Desenvolvimento de Sistemas')}` },
+        { kind: 'ok', text: `Thaynan Passos — ${translate('terminal.subtitle', 'Desenvolvedor Full-Stack & Web | Engenharia de IA & Agentes Autônomos')}` },
         { kind: 'prompt', text: 'cat perfil.json' },
         { kind: 'out', text: '{' },
         { kind: 'key', text: `  "${translate('terminal.cargoKey', 'cargo')}": "${translate('terminal.cargoVal', 'Estagiário em Tecnologia / Análise de Sistemas')}",` },
